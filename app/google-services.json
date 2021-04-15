@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "873199227934",
+    "firebase_url": "https://bondhu-2021-default-rtdb.firebaseio.com",
+    "project_id": "bondhu-2021",
+    "storage_bucket": "bondhu-2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873199227934:android:cebfb2ff6aa6dd87ff4a0f",
+        "android_client_info": {
+          "package_name": "com.example.bondhu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873199227934-r19kll55bdter62u989qn3g6vfejedta.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bondhu",
+            "certificate_hash": "31dfee8e20c386feea2713a5b43668bd8f7c5ebe"
+          }
+        },
+        {
+          "client_id": "873199227934-q6oi3q1f05v5i8r2gduj4kvu7g4e6vos.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo7451ttXxmjoQ_041eqAS4iFFo2vaouY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873199227934-q6oi3q1f05v5i8r2gduj4kvu7g4e6vos.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
