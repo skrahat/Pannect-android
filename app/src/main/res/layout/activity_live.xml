@@ -9,16 +9,42 @@
     tools:context="com.example.bondhu.Users"
     tools:viewBindingIgnore="true">
 
+    <TextView
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="83dp"
+        android:layout_height="15dp"
+        android:background="#edf2fa"
+        android:text="Friends"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/usersList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87" />
+
+    <TextView
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="83dp"
+        android:layout_height="15dp"
+        android:background="#edf2fa"
+        android:text="Status"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/usersList2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.353"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87" />
 
     <TextView
         android:id="@+id/noUsersText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:text="@string/no_users_found"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,50 +53,52 @@
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:src="@drawable/profile"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.687" />
+        app:layout_constraintVertical_bias="0.022" />
 
-    <TextView
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:text="Live states of users"
-        app:layout_constraintBottom_toTopOf="@+id/usersList"
-        app:layout_constraintEnd_toEndOf="@+id/usersList"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/usersList"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/usersList"
-        android:layout_width="200dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="87dp"
+        android:layout_height="261dp"
+        android:layout_marginTop="92dp"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/usersList2"
+        android:layout_width="84dp"
+        android:layout_height="261dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.354"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </ListView>
 
     <EditText
         android:id="@+id/etLiveStatus"
-        android:layout_width="91dp"
-        android:layout_height="38dp"
-        android:hint="add live"
+        android:layout_width="86dp"
+        android:layout_height="40dp"
+        android:hint="add new Status!"
         android:text=""
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.19"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintHorizontal_bias="0.844"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.072" />
+        app:layout_constraintVertical_bias="0.118" />
 
     <Spinner
         android:id="@+id/spinnerStatus"
@@ -78,73 +106,80 @@
         android:layout_height="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toEndOf="@+id/usersList"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.682" />
+        app:layout_constraintVertical_bias="0.976" />
 
     <Button
         android:id="@+id/btnLiveStatusData"
-        android:layout_width="65dp"
-        android:layout_height="39dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="43dp"
+        android:layout_height="41dp"
         android:text="Button"
         android:textSize="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintHorizontal_bias="0.989"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.072" />
-
-
+        app:layout_constraintVertical_bias="0.269" />
 
     <TextView
         android:id="@+id/currentUser"
         android:layout_width="100dp"
         android:layout_height="33dp"
-        android:text="TextView"
         android:cursorVisible="false"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        android:text="TextView"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/usersList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintHorizontal_bias="0.167"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.647" />
+        app:layout_constraintVertical_bias="0.044" />
 
     <Button
         android:id="@+id/btnLiveStatusData2"
-        android:layout_width="110dp"
-        android:layout_height="41dp"
-        android:text="addStatus"
+        android:layout_width="36dp"
+        android:layout_height="38dp"
+        android:background="#82868c"
+        android:text="add Status"
+        android:textSize="8sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintHorizontal_bias="0.983"
         app:layout_constraintStart_toEndOf="@+id/usersList"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintVertical_bias="0.118" />
 
     <TextView
-        android:id="@+id/currentStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/currentStatusView"
+        android:layout_width="102dp"
+        android:layout_height="34dp"
+        android:gravity="center"
         android:text=""
+        android:backgroundTint="#ece3ff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="99dp"
+        android:layout_height="34dp"
         android:text="Current Status :"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:background="#ece3ff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintHorizontal_bias="0.617"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />

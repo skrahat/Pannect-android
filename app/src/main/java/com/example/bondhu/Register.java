@@ -1,22 +1,22 @@
 package com.example.bondhu;
 
-        import android.app.ProgressDialog;
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Toast;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import com.android.volley.Request;
-        import com.android.volley.RequestQueue;
-        import com.android.volley.toolbox.StringRequest;
-        import com.android.volley.toolbox.Volley;
-        import com.firebase.client.Firebase;
-        import com.example.bondhu.databinding.ActivityRegisterBinding;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.firebase.client.Firebase;
+import com.example.bondhu.databinding.ActivityRegisterBinding;
 
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Register extends AppCompatActivity {
 
@@ -61,6 +61,7 @@ public class Register extends AppCompatActivity {
 
                     if (response.equals("null")) {
                         reference.child(user).child("password").setValue(pass);
+                        reference.child(user).child("currentStatus").setValue("");
                         Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
                     } else {
                         try {
@@ -68,6 +69,7 @@ public class Register extends AppCompatActivity {
 
                             if (!obj.has(user)) {
                                 reference.child(user).child("password").setValue(pass);
+                                reference.child(user).child("currentStatus").setValue("");
                                 Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
 
                                 startActivity(new Intent(getApplicationContext(), Login.class));
