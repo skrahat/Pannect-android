@@ -23,12 +23,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:src="@drawable/userimage"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.687" />
 
     <TextView
         android:id="@+id/editTextTextPersonName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:text="Live states of users"
         app:layout_constraintBottom_toTopOf="@+id/usersList"
@@ -57,10 +67,10 @@
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021" />
+        app:layout_constraintVertical_bias="0.072" />
 
     <Spinner
         android:id="@+id/spinnerStatus"
@@ -68,10 +78,10 @@
         android:layout_height="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintHorizontal_bias="0.296"
         app:layout_constraintStart_toEndOf="@+id/usersList"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
+        app:layout_constraintVertical_bias="0.164" />
 
     <Button
         android:id="@+id/btnLiveStatusData"
@@ -85,7 +95,22 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.072" />
+
+
+    <TextView
+        android:id="@+id/currentUser"
+        android:layout_width="100dp"
+        android:layout_height="33dp"
+        android:text="TextView"
+        android:cursorVisible="false"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.647" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

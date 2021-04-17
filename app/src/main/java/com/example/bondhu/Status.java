@@ -4,10 +4,12 @@ public class Status {
 
     String liveStatus;
     String user;
+    String currentStatus;
 
-    public Status(String liveStatus, String user) {
+    public Status(String liveStatus, String user, String currentStatus) {
         this.liveStatus = liveStatus;
         this.user = user;
+        this.currentStatus = currentStatus;
     }
 
     public String getLiveStatus() {
@@ -16,5 +18,8 @@ public class Status {
 
     public String getUser() {
         return user;
+    }
+    public String getcurrentStatus() {
+        return currentStatus;
     }
 }
