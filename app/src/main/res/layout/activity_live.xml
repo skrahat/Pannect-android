@@ -26,7 +26,7 @@
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="34dp"
         android:layout_height="34dp"
-        android:src="@drawable/userimage"
+        android:src="@drawable/profile"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.296"
         app:layout_constraintStart_toEndOf="@+id/usersList"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.682" />
 
     <Button
         android:id="@+id/btnLiveStatusData"
@@ -115,13 +115,39 @@
 
     <Button
         android:id="@+id/btnLiveStatusData2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="addStatusCurrentUser"
+        android:layout_width="110dp"
+        android:layout_height="41dp"
+        android:text="addStatus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
         app:layout_constraintStart_toEndOf="@+id/usersList"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.155" />
+
+    <TextView
+        android:id="@+id/currentStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Status :"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

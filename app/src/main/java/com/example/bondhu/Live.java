@@ -34,6 +34,7 @@ public class Live extends AppCompatActivity {
     ListView usersList;
     TextView noUsersText;
     TextView currentUser;
+    TextView currentStatus;
     ArrayList<String> al = new ArrayList<>();
     int totalUsers = 0;
     ProgressDialog pd;
@@ -44,7 +45,7 @@ public class Live extends AppCompatActivity {
     Spinner spinnerStatus;
     DatabaseReference statusDbRef2;
     String userT;
-    String currentStatus;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,56 +60,29 @@ public class Live extends AppCompatActivity {
         btnLiveStatusData = findViewById(R.id.btnLiveStatusData);
         btnLiveStatusData2 = findViewById(R.id.btnLiveStatusData2);
         spinnerStatus = findViewById(R.id.spinnerStatus);
+        currentStatus = (TextView)findViewById(R.id.currentStatus);
         userT = UserDetails.username;
-        currentStatus = "sample status";
+
 
         statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
         statusDbRef2 = FirebaseDatabase.getInstance().getReference().child("users");
         //displaying current username
         currentUser.setText(UserDetails.username);
 
-        ////////////temp////
+        ////////////update Current Status////
         btnLiveStatusData2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
+                String liveStatus = etLiveStatus.getText().toString();
 
-                reference2.child(userT).child("currentStatus").setValue(currentStatus);
+                reference2.child(userT).child("currentStatus").setValue(liveStatus);
+                String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
+
+                currentStatus.setText(UserDetails.currentStatus);
                 Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
 
 
-                String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
-
-                StringRequest request2 = new StringRequest(Request.Method.GET, url2, response2 -> {
-
-
-
-                    if (response2.equals("null")) {
-                        reference2.child(userT).child("currentStatus").setValue(currentStatus);
-                        Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
-                    } else {
-                        try {
-                            JSONObject obj = new JSONObject(response2);
-
-                            if (!obj.has(userT)) {
-                                reference2.child(userT).child("currentStatus").setValue(currentStatus);
-                                Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
-
-                            } else {
-                                Toast.makeText(Live.this, "Status already exists", Toast.LENGTH_LONG).show();
-
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    pd.dismiss();
-                }, volleyError -> {
-                    System.out.println("" + volleyError);
-                    pd.dismiss();
-                });
             }});
 
 
