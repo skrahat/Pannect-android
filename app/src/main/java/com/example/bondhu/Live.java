@@ -1,14 +1,17 @@
 package com.example.bondhu;
+
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -17,30 +20,52 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.firebase.client.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-public class Users extends AppCompatActivity {
+public class Live extends AppCompatActivity {
     ListView usersList;
     TextView noUsersText;
     ArrayList<String> al = new ArrayList<>();
     int totalUsers = 0;
     ProgressDialog pd;
-    Button button;
+    Button btnLiveStatusData;
+    EditText etLiveStatus;
+    DatabaseReference statusDbRef;
+    Spinner spinnerStatus;
+    DatabaseReference statusDbRef2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_users);
+        setContentView(R.layout.activity_live);
 
         usersList = (ListView)findViewById(R.id.usersList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
+        etLiveStatus = findViewById(R.id.etLiveStatus);
+        btnLiveStatusData = findViewById(R.id.btnLiveStatusData);
+        spinnerStatus = findViewById(R.id.spinnerStatus);
 
-        pd = new ProgressDialog(Users.this);
+        statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
+
+
+        btnLiveStatusData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertStatusData();
+            }
+        });
+        pd = new ProgressDialog(Live.this);
         pd.setMessage("Loading...");
         pd.show();
 
@@ -58,28 +83,13 @@ public class Users extends AppCompatActivity {
             }
         });
 
-        RequestQueue rQueue = Volley.newRequestQueue(Users.this);
+        RequestQueue rQueue = Volley.newRequestQueue(Live.this);
         rQueue.add(request);
 
-        usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserDetails.chatWith = al.get(position);
-                startActivity(new Intent(Users.this, Chat.class));
-            }
-        });
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openNewActivity();
-            }
-        });
+
+
     }
-    public void openNewActivity(){
-        Intent intent = new Intent(this, Live.class);
-        startActivity(intent);
-    }
+
     public void doOnSuccess(String s){
         try {
             JSONObject obj = new JSONObject(s);
@@ -112,5 +122,14 @@ public class Users extends AppCompatActivity {
         }
 
         pd.dismiss();
+    }
+
+    private void insertStatusData(){
+        String liveStatus = etLiveStatus.getText().toString();
+        String statuses =spinnerStatus.getSelectedItem().toString();
+        Status status = new Status(liveStatus,UserDetails.username);
+        statusDbRef.push().setValue(status);
+
+        Toast.makeText(Live.this,"status updated",Toast.LENGTH_SHORT).show();
     }
 }

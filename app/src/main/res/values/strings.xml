@@ -8,4 +8,8 @@
     <string name="click_here_to_login">Click here to login</string>
     <string name="enter_password">enter password</string>
     <string name="register">Register</string>
+    <array name="statuses">
+        <item>status 1</item>
+        <item>status 2</item>
+    </array>
 </resources>
