@@ -57,6 +57,7 @@ public class Live extends AppCompatActivity {
         currentUser = (TextView)findViewById(R.id.currentUser);
         etLiveStatus = findViewById(R.id.etLiveStatus);
         btnLiveStatusData = findViewById(R.id.btnLiveStatusData);
+        btnLiveStatusData2 = findViewById(R.id.btnLiveStatusData2);
         spinnerStatus = findViewById(R.id.spinnerStatus);
         userT = UserDetails.username;
         currentStatus = "sample status";
@@ -68,38 +69,47 @@ public class Live extends AppCompatActivity {
 
         ////////////temp////
         btnLiveStatusData2.setOnClickListener(new View.OnClickListener() {
-                             String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
-                             StringRequest request2 = new StringRequest(Request.Method.GET, url2, response2 -> {
-                                 Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
+            @Override
+            public void onClick(View v) {
+                Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
+
+                reference2.child(userT).child("currentStatus").setValue(currentStatus);
+                Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
 
 
-                                 if (response2.equals("null")) {
-                                     reference2.child(userT).child("currentStatus").setValue(currentStatus);
-                                     Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
-                                 } else {
-                                     try {
-                                         JSONObject obj = new JSONObject(response2);
+                String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
 
-                                         if (!obj.has(userT)) {
-                                             reference2.child(userT).child("currentStatus").setValue(currentStatus);
-                                             Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
+                StringRequest request2 = new StringRequest(Request.Method.GET, url2, response2 -> {
 
-                                         } else {
-                                             Toast.makeText(Live.this, "Status already exists", Toast.LENGTH_LONG).show();
 
-                                         }
 
-                                     } catch (JSONException e) {
-                                         e.printStackTrace();
-                                     }
-                                 }
+                    if (response2.equals("null")) {
+                        reference2.child(userT).child("currentStatus").setValue(currentStatus);
+                        Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
+                    } else {
+                        try {
+                            JSONObject obj = new JSONObject(response2);
 
-                                 pd.dismiss();
-                             }, volleyError -> {
-                                 System.out.println("" + volleyError);
-                                 pd.dismiss();
-                             });
-                         });
+                            if (!obj.has(userT)) {
+                                reference2.child(userT).child("currentStatus").setValue(currentStatus);
+                                Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
+
+                            } else {
+                                Toast.makeText(Live.this, "Status already exists", Toast.LENGTH_LONG).show();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    pd.dismiss();
+                }, volleyError -> {
+                    System.out.println("" + volleyError);
+                    pd.dismiss();
+                });
+            }});
 
 
 
