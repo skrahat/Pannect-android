@@ -32,14 +32,17 @@ import java.util.Iterator;
 public class Users extends AppCompatActivity {
     ListView usersList;
     ListView friendRequestList;
+    ListView friendsList;
     TextView noUsersText;
     TextView searchResult;
     EditText searchUsers;
     String searchUsersByName;
     ArrayList<String> al = new ArrayList<>();
     ArrayList<String> requestArray = new ArrayList<>();
+    ArrayList<String> friendsArray = new ArrayList<>();
     int totalUsers = 0;
     int totalRequests = 0;
+    int totalFriends = 0;
     String TAB = "TESTING____-----_____";
     boolean userFound=false;
     ProgressDialog pd;
@@ -55,6 +58,7 @@ public class Users extends AppCompatActivity {
 
         usersList = (ListView)findViewById(R.id.usersList);
         friendRequestList = (ListView)findViewById(R.id.friendRequestList);
+        friendsList = (ListView)findViewById(R.id.friendsList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         searchResult = (TextView)findViewById(R.id.searchResult);
         searchUsers = findViewById(R.id.searchUsers);
@@ -85,6 +89,7 @@ public class Users extends AppCompatActivity {
         RequestQueue rQueue = Volley.newRequestQueue(Users.this);
         rQueue.add(request);
 
+        //display users list
         usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -153,6 +158,7 @@ public class Users extends AppCompatActivity {
 
             }
         });
+        // accept friend request
         friendRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -164,6 +170,7 @@ public class Users extends AppCompatActivity {
                         Log.i(TAB, requestArray.get(position));
                         Firebase reference3 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
                         reference3.child(UserDetails.username).child("friends").child(requestArray.get(position)).setValue(true);
+                        reference3.child(requestArray.get(position)).child("friends").child(UserDetails.username).setValue(true);
                         reference3.child(UserDetails.username).child("friendRequest").child(requestArray.get(position)).removeValue();
                         Toast.makeText(Users.this, "Friend Request Accepted!", Toast.LENGTH_LONG).show();
                         btnAccept.setVisibility(View.GONE);
@@ -172,8 +179,23 @@ public class Users extends AppCompatActivity {
 
             }
         });
-        // accept friend request
+        // display friends
+        String urlF = "https://bondhu-2021-default-rtdb.firebaseio.com/users/"+UserDetails.username+"/friends.json";
 
+        StringRequest requestF = new StringRequest(Request.Method.GET, urlF, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String s) {
+                doOnSuccessF(s);
+            }
+        },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                System.out.println("" + volleyError);
+            }
+        });
+
+        RequestQueue rQueueF = Volley.newRequestQueue(Users.this);
+        rQueueF.add(requestF);
         //////*********add friend under construction *******///////////////////////////////////////////
     }
 
@@ -286,6 +308,40 @@ public class Users extends AppCompatActivity {
 
             friendRequestList.setVisibility(View.VISIBLE);
             friendRequestList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, requestArray));
+        }
+
+        pd.dismiss();
+    }
+    //generating array of friend
+    public void doOnSuccessF(String s){
+        try {
+            JSONObject obj = new JSONObject(s);
+
+            Iterator i = obj.keys();
+            String key = "";
+
+            while(i.hasNext()){
+                key = i.next().toString();
+
+                if(!key.equals("123123")) {
+                    friendsArray.add(key);
+                }
+
+                totalFriends++;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if(totalFriends <1){
+
+            friendsList.setVisibility(View.GONE);
+        }
+        else{
+
+            friendsList.setVisibility(View.VISIBLE);
+            friendsList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friendsArray));
         }
 
         pd.dismiss();
