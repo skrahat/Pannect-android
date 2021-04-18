@@ -1,20 +1,17 @@
 package com.example.bondhu;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -24,13 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.firebase.client.Firebase;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,8 +48,12 @@ public class Live extends AppCompatActivity {
     Spinner spinnerStatus;
     DatabaseReference statusDbRef2;
     String userT;
-
-
+    FloatingActionButton floatingActionButton;
+    FloatingActionButton floatingActionButton2;
+    FloatingActionButton floatingActionButton3;
+    FloatingActionButton floatingActionButton4;
+    FloatingActionButton floatingActionButton5;
+    Boolean clicked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +69,13 @@ public class Live extends AppCompatActivity {
         btnLiveStatusData2 = findViewById(R.id.btnLiveStatusData2);
         spinnerStatus = findViewById(R.id.spinnerStatus);
         currentStatusView = (TextView)findViewById(R.id.currentStatusView);
+        floatingActionButton = findViewById(R.id.floatingActionButton);
+        floatingActionButton2 = findViewById(R.id.floatingActionButton2);
+        floatingActionButton3 = findViewById(R.id.floatingActionButton3);
+        floatingActionButton4 = findViewById(R.id.floatingActionButton4);
+        floatingActionButton5 = findViewById(R.id.floatingActionButton5);
         userT = UserDetails.username;
-
+        clicked = false;
 
         statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
         statusDbRef2 = FirebaseDatabase.getInstance().getReference().child("users");
@@ -92,6 +94,25 @@ public class Live extends AppCompatActivity {
         spinnerStatus.setAdapter(adapter);
 
 
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!clicked){
+                    floatingActionButton2.show();
+                    floatingActionButton3.show();
+                    floatingActionButton4.show();
+                    floatingActionButton5.show();
+                    clicked=true;
+                }else{
+                    floatingActionButton2.hide();
+                    floatingActionButton3.hide();
+                    floatingActionButton4.hide();
+                    floatingActionButton5.hide();
+                    clicked=false;
+                }
+
+            }
+        });
 
 
         //update Current Status

@@ -104,7 +104,8 @@ public class Users extends AppCompatActivity {
                 openNewActivity();
             }
         });
-        //////*********add friend under construction *******///////////////////////////////////////////
+
+        //////add friend ///
         //generate friend requests
         String urlR = "https://bondhu-2021-default-rtdb.firebaseio.com/users/"+UserDetails.username+"/friendRequest.json";
 
@@ -196,7 +197,7 @@ public class Users extends AppCompatActivity {
 
         RequestQueue rQueueF = Volley.newRequestQueue(Users.this);
         rQueueF.add(requestF);
-        //////*********add friend under construction *******///////////////////////////////////////////
+
     }
 
 
