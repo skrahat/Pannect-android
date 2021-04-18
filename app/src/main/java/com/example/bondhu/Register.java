@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Register extends AppCompatActivity {
+
     private ActivityRegisterBinding binding;
     private String user, pass;
 
@@ -57,8 +58,10 @@ public class Register extends AppCompatActivity {
                 StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
                     Firebase reference = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
 
+
                     if (response.equals("null")) {
                         reference.child(user).child("password").setValue(pass);
+                        reference.child(user).child("currentStatus").setValue("");
                         Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
                     } else {
                         try {
@@ -66,6 +69,9 @@ public class Register extends AppCompatActivity {
 
                             if (!obj.has(user)) {
                                 reference.child(user).child("password").setValue(pass);
+                                reference.child(user).child("currentStatus").setValue("");
+                                reference.child(user).child("friends").setValue("");
+                                reference.child(user).child("friendRequest").setValue("");
                                 Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
 
                                 startActivity(new Intent(getApplicationContext(), Login.class));

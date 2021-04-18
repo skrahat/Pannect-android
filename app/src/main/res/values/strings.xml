@@ -8,4 +8,17 @@
     <string name="click_here_to_login">Click here to login</string>
     <string name="enter_password">enter password</string>
     <string name="register">Register</string>
+    <array name="statuses">
+        <item>sleep</item>
+        <item>breakfast</item>
+        <item>gym</item>
+        <item>walk</item>
+        <item>gaming</item>
+        <item>chilling</item>
+        <item>meeting</item>
+        <item>buzy</item>
+        <item>shower</item>
+        <item>lunch</item>
+
+    </array>
 </resources>
