@@ -24,6 +24,32 @@
         android:id="@+id/noUsersText"
         android:visibility="gone"/>
 
+    <EditText
+        android:id="@+id/searchUsers"
+        android:layout_width="199dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnSearchUsers"
+        android:layout_width="201dp"
+        android:layout_height="wrap_content"
+        android:text="Search" />
+
+    <TextView
+        android:id="@+id/searchResult"
+        android:layout_width="199dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="search result"/>
+
+    <Button
+        android:id="@+id/btnSendRequest"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Send Request"
+        android:visibility="gone"/>
+
     <Button
         android:id="@+id/button"
         android:layout_width="199dp"
@@ -34,18 +60,17 @@
         android:textSize="32dp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="199dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Message!!!!" />
-
     <ListView
         android:id="@+id/usersList"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content" >
+        android:layout_width="198dp"
+        android:layout_height="132dp">
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/friendList"
+        android:layout_width="199dp"
+        android:layout_height="127dp">
 
     </ListView>
 

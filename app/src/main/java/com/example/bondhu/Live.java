@@ -81,26 +81,19 @@ public class Live extends AppCompatActivity {
         currentUser.setText(UserDetails.username);
         currentStatusView.setText(UserDetails.currentStatus);
 
+        //////spinner values added from array
 
-        // /////////Attach a listener to read the data at our posts reference////////***********construction*****
-        Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.statuses, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinnerStatus.setAdapter(adapter);
 
-        String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users/"+UserDetails.username;
-        // Read from the database
 
-        StringRequest request2 = new StringRequest(Request.Method.GET, url2, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String s) {
-                Toast.makeText(Live.this, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", Toast.LENGTH_LONG).show();
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                System.out.println("" + volleyError);
-            }
-        });
 
-        ////////***********construction*****
+
         //update Current Status
         btnLiveStatusData2.setOnClickListener(new View.OnClickListener() {
             @Override

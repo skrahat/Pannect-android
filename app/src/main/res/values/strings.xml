@@ -9,7 +9,16 @@
     <string name="enter_password">enter password</string>
     <string name="register">Register</string>
     <array name="statuses">
-        <item>status 1</item>
-        <item>status 2</item>
+        <item>sleep</item>
+        <item>breakfast</item>
+        <item>gym</item>
+        <item>walk</item>
+        <item>gaming</item>
+        <item>chilling</item>
+        <item>meeting</item>
+        <item>buzy</item>
+        <item>shower</item>
+        <item>lunch</item>
+
     </array>
 </resources>
