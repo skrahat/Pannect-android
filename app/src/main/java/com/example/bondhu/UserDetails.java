@@ -5,4 +5,5 @@ public class UserDetails {
     static String password = "";
     static String chatWith = "";
     static String currentStatus = "";
+    static String friends = "";
 }
