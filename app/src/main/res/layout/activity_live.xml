@@ -9,33 +9,9 @@
     tools:context="com.example.bondhu.Users"
     tools:viewBindingIgnore="true">
 
-    <TextView
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="83dp"
-        android:layout_height="15dp"
-        android:background="#edf2fa"
-        android:text="Friends"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toTopOf="@+id/usersList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.088"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87" />
 
-    <TextView
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="83dp"
-        android:layout_height="15dp"
-        android:background="#edf2fa"
-        android:text="Status"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toTopOf="@+id/usersList2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.353"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87" />
+
+
 
     <TextView
         android:id="@+id/noUsersText"
@@ -61,30 +37,9 @@
         app:layout_constraintVertical_bias="0.022" />
 
 
-    <ListView
-        android:id="@+id/usersList"
-        android:layout_width="87dp"
-        android:layout_height="261dp"
-        android:layout_marginTop="92dp"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-    </ListView>
 
-    <ListView
-        android:id="@+id/usersList2"
-        android:layout_width="84dp"
-        android:layout_height="261dp"
-        android:layout_marginTop="92dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.354"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-    </ListView>
 
     <EditText
         android:id="@+id/etLiveStatus"
@@ -111,47 +66,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
-    <Button
-        android:id="@+id/btnLiveStatusData"
-        android:layout_width="43dp"
-        android:layout_height="41dp"
-        android:text="Button"
-        android:textSize="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.989"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.269" />
-
     <TextView
         android:id="@+id/currentUser"
         android:layout_width="100dp"
         android:layout_height="33dp"
+        android:layout_marginTop="12dp"
         android:cursorVisible="false"
         android:gravity="center"
         android:text="TextView"
+
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/usersList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.167"
+        app:layout_constraintHorizontal_bias="0.218"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnLiveStatusData2"
         android:layout_width="36dp"
         android:layout_height="38dp"
+        android:layout_marginEnd="8dp"
         android:background="#82868c"
         android:text="add Status"
-        android:textSize="8sp"
         android:textColor="#ffffff"
+        android:textSize="8sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.983"
-        app:layout_constraintStart_toEndOf="@+id/usersList"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.118" />
 
@@ -192,69 +134,90 @@
         android:clickable="true"
         android:text="asd"
         android:textColor="@color/colorPrimary"
-        app:backgroundTint="#ece3ff"
+        app:backgroundTint="#9ce3ff"
         app:fabSize="normal"
-        app:srcCompat="@drawable/texting"
-        app:maxImageSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.707"
-        />
+        app:layout_constraintVertical_bias="0.499"
+        app:maxImageSize="50dp"
+        app:srcCompat="@drawable/icon" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginBottom="56dp"
-            android:clickable="true"
-            android:visibility="invisible"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
-            app:layout_constraintStart_toStartOf="@+id/floatingActionButton"
-            app:srcCompat="@drawable/gym" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView2"
+        android:layout_width="40dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="72dp"
+        android:src="@drawable/gym"
         android:visibility="invisible"
-        app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
         app:layout_constraintEnd_toEndOf="@+id/floatingActionButton"
-        app:srcCompat="@drawable/gym" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/floatingActionButton" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="80dp"
-        android:clickable="true"
+    <TextView
+        android:id="@+id/friend1"
+        android:layout_width="67dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="40dp"
+        android:hint="friend1"
+        android:textSize="15dp"
         android:visibility="invisible"
-        app:fabSize="mini"
+
+        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton" />
+
+    <TextView
+        android:id="@+id/friend2"
+        android:layout_width="63dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="88dp"
+        android:hint="friend2"
+        android:textSize="15dp"
+        android:visibility="invisible"
+
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButton" />
+
+    <TextView
+        android:id="@+id/friend3"
+        android:layout_width="93dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="88dp"
+        android:text="friend3"
+        android:visibility="invisible"
+
+        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton"
+        app:layout_constraintStart_toEndOf="@+id/floatingActionButton" />
+
+    <TextView
+        android:id="@+id/friend4"
+        android:layout_width="73dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="72dp"
+        android:hint="friend4"
+        android:textSize="15dp"
+        android:visibility="invisible"
+
+        app:layout_constraintStart_toEndOf="@+id/floatingActionButton"
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButton" />
+
+    <TextView
+        android:id="@+id/friend5"
+        android:layout_width="70dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="44dp"
+        android:hint="friend5"
+        android:textSize="15dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/floatingActionButton"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
-        app:srcCompat="@drawable/gym" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:visibility="invisible"
-        app:fabSize="mini"
-        app:layout_constraintStart_toStartOf="@+id/floatingActionButton"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
-        app:srcCompat="@drawable/gym" />
-
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
