@@ -1,4 +1,5 @@
 package com.example.bondhu;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.firebase.client.Firebase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Users extends AppCompatActivity {
-    ListView usersList;
     ListView friendRequestList;
     ListView friendsList;
     TextView noUsersText;
@@ -43,29 +48,33 @@ public class Users extends AppCompatActivity {
     int totalUsers = 0;
     int totalRequests = 0;
     int totalFriends = 0;
-    String TAB = "TESTING____-----_____";
+    String TAG = "TESTING____-----_____";
     boolean userFound=false;
     ProgressDialog pd;
-    Button button;
+    Button btnLive;
     Button btnSearchUsers;
     Button btnSendRequest;
     Button btnAccept;
+    Button btnCancel;
+    Button btnRemove;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
 
-        usersList = (ListView)findViewById(R.id.usersList);
         friendRequestList = (ListView)findViewById(R.id.friendRequestList);
         friendsList = (ListView)findViewById(R.id.friendsList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         searchResult = (TextView)findViewById(R.id.searchResult);
         searchUsers = findViewById(R.id.searchUsers);
-        button = (Button) findViewById(R.id.button);
+        btnLive = (Button) findViewById(R.id.btnLive);
         btnSearchUsers = (Button) findViewById(R.id.btnSearchUsers);
         btnSendRequest = (Button) findViewById(R.id.btnSendRequest);
         btnAccept = (Button) findViewById(R.id.btnAccept);
+        btnCancel = (Button) findViewById(R.id.btnCancel);
+        btnRemove = (Button) findViewById(R.id.btnRemove);
 
 
         pd = new ProgressDialog(Users.this);
@@ -89,29 +98,29 @@ public class Users extends AppCompatActivity {
         RequestQueue rQueue = Volley.newRequestQueue(Users.this);
         rQueue.add(request);
 
-        //display users list
-        usersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserDetails.chatWith = al.get(position);
-                startActivity(new Intent(Users.this, Chat.class));
-            }
-        });
-
-        button.setOnClickListener(new View.OnClickListener() {
+        //open live activity
+        btnLive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openNewActivity();
             }
         });
-
-        //////add friend ///
         //generate friend requests
+        //update in realtime
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+        myRef.addValueEventListener(new ValueEventListener() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                requestArray.clear();
         String urlR = "https://bondhu-2021-default-rtdb.firebaseio.com/users/"+UserDetails.username+"/friendRequest.json";
 
         StringRequest requestR = new StringRequest(Request.Method.GET, urlR, new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
+                requestArray.clear();
                 doOnSuccessR(s);
             }
         },new Response.ErrorListener(){
@@ -123,6 +132,14 @@ public class Users extends AppCompatActivity {
 
         RequestQueue rQueueR = Volley.newRequestQueue(Users.this);
         rQueueR.add(requestR);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
         ///search users
         btnSearchUsers.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -159,33 +176,73 @@ public class Users extends AppCompatActivity {
 
             }
         });
-        // accept friend request
+        // accept/cancel friend request
         friendRequestList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 btnAccept.setVisibility(View.VISIBLE);
+                btnCancel.setVisibility(View.VISIBLE);
                 btnAccept.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.i(TAB, requestArray.get(position));
                         Firebase reference3 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
                         reference3.child(UserDetails.username).child("friends").child(requestArray.get(position)).setValue(true);
                         reference3.child(requestArray.get(position)).child("friends").child(UserDetails.username).setValue(true);
                         reference3.child(UserDetails.username).child("friendRequest").child(requestArray.get(position)).removeValue();
                         Toast.makeText(Users.this, "Friend Request Accepted!", Toast.LENGTH_LONG).show();
                         btnAccept.setVisibility(View.GONE);
+                        btnCancel.setVisibility(View.GONE);
+
+                    }
+                });
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Firebase reference3 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
+                        reference3.child(UserDetails.username).child("friendRequest").child(requestArray.get(position)).removeValue();
+                        Toast.makeText(Users.this, "Friend Request Accepted!", Toast.LENGTH_LONG).show();
+                        btnCancel.setVisibility(View.GONE);
+                        btnAccept.setVisibility(View.GONE);
+                    }
+                });
+
+            }
+        });
+        //remove friend
+        friendsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                btnRemove.setVisibility(View.VISIBLE);
+                btnRemove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Firebase reference3 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
+                        reference3.child(UserDetails.username).child("friends").child(friendsArray.get(position)).removeValue();
+                        reference3.child(friendsArray.get(position)).child("friends").child(UserDetails.username).removeValue();
+                        Toast.makeText(Users.this, "Friend Removed!", Toast.LENGTH_LONG).show();
+                        btnRemove.setVisibility(View.GONE);
                     }
                 });
 
             }
         });
         // display friends
+        //update in realtime
+
+        myRef.addValueEventListener(new ValueEventListener() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                friendsArray.clear();
         String urlF = "https://bondhu-2021-default-rtdb.firebaseio.com/users/"+UserDetails.username+"/friends.json";
 
         StringRequest requestF = new StringRequest(Request.Method.GET, urlF, new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
+                friendsArray.clear();
                 doOnSuccessF(s);
             }
         },new Response.ErrorListener(){
@@ -197,6 +254,16 @@ public class Users extends AppCompatActivity {
 
         RequestQueue rQueueF = Volley.newRequestQueue(Users.this);
         rQueueF.add(requestF);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
 
     }
 
@@ -269,12 +336,10 @@ public class Users extends AppCompatActivity {
 
         if(totalUsers <=1){
             noUsersText.setVisibility(View.VISIBLE);
-            usersList.setVisibility(View.GONE);
+
         }
         else{
             noUsersText.setVisibility(View.GONE);
-            usersList.setVisibility(View.VISIBLE);
-            usersList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, al));
         }
 
         pd.dismiss();

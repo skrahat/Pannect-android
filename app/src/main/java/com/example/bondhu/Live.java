@@ -61,6 +61,12 @@ public class Live extends AppCompatActivity {
     Spinner spinnerStatus;
     DatabaseReference statusDbRef2;
     String userT;
+    GifImageView gifImageView2;
+    GifImageView friend1Gif;
+    GifImageView friend2Gif;
+    GifImageView friend3Gif;
+    GifImageView friend4Gif;
+    GifImageView friend5Gif;
     FloatingActionButton floatingActionButton;
     //FloatingActionButton floatingActionButton2;
     //FloatingActionButton floatingActionButton3;
@@ -94,13 +100,14 @@ public class Live extends AppCompatActivity {
         spinnerStatus = findViewById(R.id.spinnerStatus);
         currentStatusView = (TextView)findViewById(R.id.currentStatusView);
         floatingActionButton = findViewById(R.id.floatingActionButton);
-        //floatingActionButton2 = findViewById(R.id.floatingActionButton2);
-        //floatingActionButton3 = findViewById(R.id.floatingActionButton3);
-        //floatingActionButton4 = findViewById(R.id.floatingActionButton4);
-        //floatingActionButton5 = findViewById(R.id.floatingActionButton5);
         userT = UserDetails.username;
         clicked = false;
-        GifImageView gifImageView2 = (GifImageView) findViewById(R.id.gifImageView2);
+        gifImageView2 = (GifImageView) findViewById(R.id.gifImageView2);
+        friend1Gif = (GifImageView) findViewById(R.id.friend1Gif);
+        friend2Gif = (GifImageView) findViewById(R.id.friend2Gif);
+        friend3Gif = (GifImageView) findViewById(R.id.friend3Gif);
+        friend4Gif = (GifImageView) findViewById(R.id.friend4Gif);
+        friend5Gif = (GifImageView) findViewById(R.id.friend5Gif);
 
 
         statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
@@ -181,22 +188,27 @@ public class Live extends AppCompatActivity {
                         case 1:
                             friend1.setText(friendsArray.get(0)+":\n"+friendsStatusArray.get(0));
                             friend1.setVisibility(View.VISIBLE);
+                            friend1Gif.setVisibility(View.VISIBLE);
                             break;
                         case 2:
                             friend2.setText(friendsArray.get(1)+":\n"+friendsStatusArray.get(1));
                             friend2.setVisibility(View.VISIBLE);
+                            friend2Gif.setVisibility(View.VISIBLE);
                             break;
                         case 3:
                             friend3.setText(friendsArray.get(2)+":\n"+friendsStatusArray.get(2));
                             friend3.setVisibility(View.VISIBLE);
+                            friend3Gif.setVisibility(View.VISIBLE);
                             break;
                         case 4:
                             friend4.setText(friendsArray.get(3)+":\n"+friendsStatusArray.get(3));
                             friend4.setVisibility(View.VISIBLE);
+                            friend4Gif.setVisibility(View.VISIBLE);
                             break;
                         case 5:
                             friend5.setText(friendsArray.get(4)+":\n"+friendsStatusArray.get(4));
                             friend5.setVisibility(View.VISIBLE);
+                            friend5Gif.setVisibility(View.VISIBLE);
                             break;
                     }
                     count++;
@@ -238,7 +250,7 @@ public class Live extends AppCompatActivity {
         pd = new ProgressDialog(Live.this);
         pd.setMessage("Loading...");
         pd.show();
-
+        //generates all users in list
         String url = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
 
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
@@ -293,15 +305,7 @@ public class Live extends AppCompatActivity {
 
         pd.dismiss();
     }
-    //adding liveStatus in database
-    private void insertStatusData(){
-        String liveStatus = etLiveStatus.getText().toString();
 
-        Status status = new Status(liveStatus,UserDetails.username, UserDetails.currentStatus);
-        statusDbRef.push().setValue(status);
-
-        Toast.makeText(Live.this,"status updated",Toast.LENGTH_SHORT).show();
-    }
     //generating array of friend
     public void doOnSuccessF(String s){
         try {
@@ -325,13 +329,10 @@ public class Live extends AppCompatActivity {
         }
 
         if(totalFriends <1){
-
-            //friendsList.setVisibility(View.GONE);
         }
         else{
 
-            //friendsList.setVisibility(View.VISIBLE);
-            //friendsList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friendsArray));
+
         }
         // fetching current status from the friendsArray List
         try{
@@ -344,15 +345,11 @@ public class Live extends AppCompatActivity {
                 int countX = 0;
                 while (friendsArray.size() > countX) {
 
-                    //String w =String.valueOf(friendsArray.size());
-                    //Log.i(TAG,w);
+
                     if(key.equals(friendsArray.get(countX))) {
                         String key2 = obj.getJSONObject(key).getString("currentStatus");
                         friendsStatusArray.add(key2);
 
-                        //Log.i(TAG,friendsStatusArray.get(countX));
-                        //String z =String.valueOf(countX);
-                        //Log.i(TAG,z);
                 }
                     countX++;
                 }
@@ -362,22 +359,27 @@ public class Live extends AppCompatActivity {
                 case 1:
                     friend1.setText(friendsArray.get(0)+":\n"+friendsStatusArray.get(0));
                     friend1.setVisibility(View.VISIBLE);
+                    friend1Gif.setVisibility(View.VISIBLE);
                     break;
                 case 2:
                     friend2.setText(friendsArray.get(1)+":\n"+friendsStatusArray.get(1));
                     friend2.setVisibility(View.VISIBLE);
+                    friend2Gif.setVisibility(View.VISIBLE);
                     break;
                 case 3:
                     friend3.setText(friendsArray.get(2)+":\n"+friendsStatusArray.get(2));
                     friend3.setVisibility(View.VISIBLE);
+                    friend3Gif.setVisibility(View.VISIBLE);
                     break;
                 case 4:
                     friend4.setText(friendsArray.get(3)+":\n"+friendsStatusArray.get(3));
                     friend4.setVisibility(View.VISIBLE);
+                    friend4Gif.setVisibility(View.VISIBLE);
                     break;
                 case 5:
                     friend5.setText(friendsArray.get(4)+":\n"+friendsStatusArray.get(4));
                     friend5.setVisibility(View.VISIBLE);
+                    friend5Gif.setVisibility(View.VISIBLE);
                     break;
             }
         } catch (JSONException e) {
