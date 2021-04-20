@@ -33,7 +33,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
@@ -52,10 +54,12 @@ public class Live extends AppCompatActivity {
     ArrayList<String> al2 = new ArrayList<>();
     ArrayList<String> friendsArray = new ArrayList<>();
     ArrayList<String> friendsStatusArray = new ArrayList<>();
+    ArrayList<String> gifListArray = new ArrayList<>();
     int totalFriends = 0;
     int totalUsers = 0;
     ProgressDialog pd;
     Button btnLiveStatusData2;
+    Button btnLiveStatusSelectAdd;
     EditText etLiveStatus;
     DatabaseReference statusDbRef;
     Spinner spinnerStatus;
@@ -67,6 +71,7 @@ public class Live extends AppCompatActivity {
     GifImageView friend3Gif;
     GifImageView friend4Gif;
     GifImageView friend5Gif;
+    GifImageView currentStatusGif;
     FloatingActionButton floatingActionButton;
     //FloatingActionButton floatingActionButton2;
     //FloatingActionButton floatingActionButton3;
@@ -97,6 +102,7 @@ public class Live extends AppCompatActivity {
         friend5 = (TextView)findViewById(R.id.friend5);
         etLiveStatus = findViewById(R.id.etLiveStatus);
         btnLiveStatusData2 = findViewById(R.id.btnLiveStatusData2);
+        btnLiveStatusSelectAdd = findViewById(R.id.btnLiveStatusSelectAdd);
         spinnerStatus = findViewById(R.id.spinnerStatus);
         currentStatusView = (TextView)findViewById(R.id.currentStatusView);
         floatingActionButton = findViewById(R.id.floatingActionButton);
@@ -108,13 +114,19 @@ public class Live extends AppCompatActivity {
         friend3Gif = (GifImageView) findViewById(R.id.friend3Gif);
         friend4Gif = (GifImageView) findViewById(R.id.friend4Gif);
         friend5Gif = (GifImageView) findViewById(R.id.friend5Gif);
+        currentStatusGif = (GifImageView) findViewById(R.id.currentStatusGif);
 
 
         statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
         statusDbRef2 = FirebaseDatabase.getInstance().getReference().child("users");
-        //displaying current username
+        //displaying current username and display gif
         currentUser.setText(UserDetails.username);
         currentStatusView.setText(UserDetails.currentStatus);
+        int idX = getResources().getIdentifier("com.example.bondhu:drawable/" + UserDetails.currentStatus, null, null);
+        currentStatusGif.setImageResource(idX);
+
+        //add gifs in array from array in xml
+        List<String> gifListArray= Arrays.asList(getResources().getStringArray(R.array.statuses));
 
         //////spinner values added from array
 
@@ -126,7 +138,6 @@ public class Live extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinnerStatus.setAdapter(adapter);
 
-///////////////////---------------------construction for status displays--//////////////////////
 
 
         ////fab button for animation testing... temp////////***construction*****////
@@ -187,26 +198,37 @@ public class Live extends AppCompatActivity {
                     switch(count+1) {
                         case 1:
                             friend1.setText(friendsArray.get(0)+":\n"+friendsStatusArray.get(0));
+                            int id = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(0), null, null);
+                            friend1Gif.setImageResource(id);
                             friend1.setVisibility(View.VISIBLE);
                             friend1Gif.setVisibility(View.VISIBLE);
+
                             break;
                         case 2:
                             friend2.setText(friendsArray.get(1)+":\n"+friendsStatusArray.get(1));
+                            int id2 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(1), null, null);
+                            friend2Gif.setImageResource(id2);
                             friend2.setVisibility(View.VISIBLE);
                             friend2Gif.setVisibility(View.VISIBLE);
                             break;
                         case 3:
                             friend3.setText(friendsArray.get(2)+":\n"+friendsStatusArray.get(2));
+                            int id3 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(2), null, null);
+                            friend3Gif.setImageResource(id3);
                             friend3.setVisibility(View.VISIBLE);
                             friend3Gif.setVisibility(View.VISIBLE);
                             break;
                         case 4:
                             friend4.setText(friendsArray.get(3)+":\n"+friendsStatusArray.get(3));
+                            int id4 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(3), null, null);
+                            friend4Gif.setImageResource(id4);
                             friend4.setVisibility(View.VISIBLE);
                             friend4Gif.setVisibility(View.VISIBLE);
                             break;
                         case 5:
                             friend5.setText(friendsArray.get(4)+":\n"+friendsStatusArray.get(4));
+                            int id5 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(4), null, null);
+                            friend5Gif.setImageResource(id5);
                             friend5.setVisibility(View.VISIBLE);
                             friend5Gif.setVisibility(View.VISIBLE);
                             break;
@@ -225,9 +247,8 @@ public class Live extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-///////////////////---------------------construction for status displays--//////////////////////
 
-        //update Current Status
+        //create and update new Current Status
         btnLiveStatusData2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,6 +262,24 @@ public class Live extends AppCompatActivity {
                 UserDetails.currentStatus= liveStatus;
                 Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
                 etLiveStatus.setText("");
+
+
+            }});
+        // update status from spinner list
+        btnLiveStatusSelectAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
+                String updateLiveStatus = spinnerStatus.getSelectedItem().toString();
+
+                reference2.child(userT).child("currentStatus").setValue(updateLiveStatus);
+                String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
+                int idX = getResources().getIdentifier("com.example.bondhu:drawable/" + updateLiveStatus, null, null);
+                currentStatusGif.setImageResource(idX);
+                currentStatusView.setText(updateLiveStatus);
+                UserDetails.currentStatus= updateLiveStatus;
+                Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
+
 
 
             }});
@@ -358,26 +397,37 @@ public class Live extends AppCompatActivity {
             switch(z) {
                 case 1:
                     friend1.setText(friendsArray.get(0)+":\n"+friendsStatusArray.get(0));
+                    int id = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(0), null, null);
+                    friend1Gif.setImageResource(id);
                     friend1.setVisibility(View.VISIBLE);
                     friend1Gif.setVisibility(View.VISIBLE);
+
                     break;
                 case 2:
                     friend2.setText(friendsArray.get(1)+":\n"+friendsStatusArray.get(1));
+                    int id2 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(1), null, null);
+                    friend2Gif.setImageResource(id2);
                     friend2.setVisibility(View.VISIBLE);
                     friend2Gif.setVisibility(View.VISIBLE);
                     break;
                 case 3:
                     friend3.setText(friendsArray.get(2)+":\n"+friendsStatusArray.get(2));
+                    int id3 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(2), null, null);
+                    friend3Gif.setImageResource(id3);
                     friend3.setVisibility(View.VISIBLE);
                     friend3Gif.setVisibility(View.VISIBLE);
                     break;
                 case 4:
                     friend4.setText(friendsArray.get(3)+":\n"+friendsStatusArray.get(3));
+                    int id4 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(3), null, null);
+                    friend4Gif.setImageResource(id4);
                     friend4.setVisibility(View.VISIBLE);
                     friend4Gif.setVisibility(View.VISIBLE);
                     break;
                 case 5:
                     friend5.setText(friendsArray.get(4)+":\n"+friendsStatusArray.get(4));
+                    int id5 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(4), null, null);
+                    friend5Gif.setImageResource(id5);
                     friend5.setVisibility(View.VISIBLE);
                     friend5Gif.setVisibility(View.VISIBLE);
                     break;

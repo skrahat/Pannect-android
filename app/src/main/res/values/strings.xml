@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lets Chat</string>
+    <string name="app_name">Pannect</string>
     <string name="no_users_found">No users found!</string>
     <string name="login">Login</string>
     <string name="enter_username">enter username</string>
@@ -9,16 +9,51 @@
     <string name="enter_password">enter password</string>
     <string name="register">Register</string>
     <array name="statuses">
-        <item>sleep</item>
-        <item>breakfast</item>
+        <item>bath</item>
+        <item>bored</item>
         <item>gym</item>
-        <item>walk</item>
+        <item>browsing</item>
         <item>gaming</item>
-        <item>chilling</item>
-        <item>meeting</item>
-        <item>buzy</item>
-        <item>shower</item>
-        <item>lunch</item>
+        <item>movie</item>
+        <item>cycling</item>
+        <item>gaming</item>
+        <item>eating</item>
+        <item>sleeping</item>
+        <item>cooking</item>
+        <item>withfamily</item>
+
+
+
+        <item>happy</item>
+        <item>sad</item>
+        <item>angry</item>
+        <item>lonely</item>
+        <item>disgust</item>
+        <item>romantic</item>
+
+
+
+        <item>music</item>
+        <item>walking</item>
+        <item>reading</item>
+        <item>yoga</item>
+        <item>swimming</item>
+        <item>singing</item>
+        <item>painting</item>
+        <item>playingguitar</item>
+        <item>playingfootball</item>
+        <item>sporting</item>
+        <item>outoftown</item>
+        <item>travelling</item>
+
+
+
+
+
+
+
+
+
 
     </array>
 </resources>
