@@ -32,10 +32,14 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.SimpleTimeZone;
 
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
@@ -117,6 +121,8 @@ public class Live extends AppCompatActivity {
         currentStatusGif = (GifImageView) findViewById(R.id.currentStatusGif);
 
 
+        //String currentDateandTime = new SimpleDateFormat("MM-dd HH:mm").format(new Date());
+
         statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
         statusDbRef2 = FirebaseDatabase.getInstance().getReference().child("users");
         //displaying current username and display gif
@@ -125,8 +131,7 @@ public class Live extends AppCompatActivity {
         int idX = getResources().getIdentifier("com.example.bondhu:drawable/" + UserDetails.currentStatus, null, null);
         currentStatusGif.setImageResource(idX);
 
-        //add gifs in array from array in xml
-        List<String> gifListArray= Arrays.asList(getResources().getStringArray(R.array.statuses));
+
 
         //////spinner values added from array
 
@@ -258,6 +263,9 @@ public class Live extends AppCompatActivity {
                 reference2.child(userT).child("currentStatus").setValue(liveStatus);
                 String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
 
+                String currentDateandTime = new SimpleDateFormat("HH:mm MM-dd").format(new Date());
+                reference2.child(userT).child("currentStatus").child("updateTime").setValue(currentDateandTime);
+
                 currentStatusView.setText(liveStatus);
                 UserDetails.currentStatus= liveStatus;
                 Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
@@ -271,12 +279,16 @@ public class Live extends AppCompatActivity {
             public void onClick(View v) {
                 Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
                 String updateLiveStatus = spinnerStatus.getSelectedItem().toString();
-
                 reference2.child(userT).child("currentStatus").setValue(updateLiveStatus);
+
+                String currentDateandTime = new SimpleDateFormat("HH:mm MM-dd").format(new Date());
+                reference2.child(userT).child("currentStatus").child("updateTime").setValue(currentDateandTime);
+
                 String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
                 int idX = getResources().getIdentifier("com.example.bondhu:drawable/" + updateLiveStatus, null, null);
                 currentStatusGif.setImageResource(idX);
-                currentStatusView.setText(updateLiveStatus);
+
+                currentStatusView.setText(updateLiveStatus +"\n"+ currentDateandTime);
                 UserDetails.currentStatus= updateLiveStatus;
                 Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
 
