@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.firebase.client.Firebase;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -53,7 +54,7 @@ public class Live extends AppCompatActivity {
     TextView noUsersText;
     TextView currentUser;
     TextView currentStatusView;
-    TextView friend1;
+    ExtendedFloatingActionButton friend1;
     TextView friend2;
     TextView friend3;
     TextView friend4;
@@ -82,7 +83,7 @@ public class Live extends AppCompatActivity {
     GifImageView friend4Gif;
     GifImageView friend5Gif;
     GifImageView currentStatusGif;
-    FloatingActionButton floatingActionButton;
+    ExtendedFloatingActionButton floatingActionButton;
     //FloatingActionButton floatingActionButton2;
     //FloatingActionButton floatingActionButton3;
     //FloatingActionButton floatingActionButton4;
@@ -106,7 +107,7 @@ public class Live extends AppCompatActivity {
         totalStatusList = (ListView)findViewById(R.id.totalStatusList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         currentUser = (TextView)findViewById(R.id.currentUser);
-        friend1 = (TextView)findViewById(R.id.friend1);
+        friend1 = (ExtendedFloatingActionButton )findViewById(R.id.friend1);
         friend2 = (TextView)findViewById(R.id.friend2);
         friend3 = (TextView)findViewById(R.id.friend3);
         friend4 = (TextView)findViewById(R.id.friend4);
@@ -156,17 +157,7 @@ public class Live extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!clicked){
-                    gifImageView2.setVisibility(View.VISIBLE);
-                    gifImageView2.setImageResource(R.drawable.texting);
-                    clicked=true;
-                }else{
 
-                    gifImageView2.setVisibility(View.VISIBLE);
-                    gifImageView2.setImageResource(R.drawable.gym);
-
-                    clicked=false;
-                }
 
             }
         });
@@ -174,28 +165,163 @@ public class Live extends AppCompatActivity {
         //-------construction total status display----
 
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("users");
-        Query query=databaseReference.child(userT).child("totalStatus").orderByChild("time").limitToLast(2);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        /*Query query=databaseReference.child(userT).child("totalStatus").orderByChild("time").limitToLast(5);
+        query.addValueEventListener(new ValueEventListener() {
             @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            totalStatus.clear();
-            if (dataSnapshot.exists()) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    TotalStatus statusT = snapshot.getValue(TotalStatus.class);
-                    totalStatus.add(statusT.status);
-                    Log.i("status checking", statusT.status);
-                }
-                adapter.notifyDataSetChanged();
-            }
-            totalStatusList.setVisibility(View.VISIBLE);
 
-            totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, totalStatus));
+            getSingleUserOldStatus(dataSnapshot);
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });*/
+        //click fab friend1 button to show total status list
+        friend1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Query query=databaseReference.child(friendsArray.get(0)).child("totalStatus").orderByChild("time").limitToLast(5);
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            getSingleUserOldStatus(dataSnapshot);
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    if(!clicked){
+                        totalStatusList.setVisibility(View.VISIBLE);
+                        clicked=true;
+                    }else{
+
+                        totalStatusList.setVisibility(View.INVISIBLE);
+
+                        clicked=false;
+                    }
+                }
+            });
+        //click fab friend1 button to show total status list
+        friend2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Query query=databaseReference.child(friendsArray.get(1)).child("totalStatus").orderByChild("time").limitToLast(5);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        getSingleUserOldStatus(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                if(!clicked){
+                    totalStatusList.setVisibility(View.VISIBLE);
+                    clicked=true;
+                }else{
+
+                    totalStatusList.setVisibility(View.INVISIBLE);
+
+                    clicked=false;
+                }
+            }
+        });
+        //click fab friend1 button to show total status list
+        friend3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Query query=databaseReference.child(friendsArray.get(2)).child("totalStatus").orderByChild("time").limitToLast(5);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        getSingleUserOldStatus(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                if(!clicked){
+                    totalStatusList.setVisibility(View.VISIBLE);
+                    clicked=true;
+                }else{
+
+                    totalStatusList.setVisibility(View.INVISIBLE);
+
+                    clicked=false;
+                }
+            }
+        });
+        //click fab friend1 button to show total status list
+        friend4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Query query=databaseReference.child(friendsArray.get(3)).child("totalStatus").orderByChild("time").limitToLast(5);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        getSingleUserOldStatus(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                if(!clicked){
+                    totalStatusList.setVisibility(View.VISIBLE);
+                    clicked=true;
+                }else{
+
+                    totalStatusList.setVisibility(View.INVISIBLE);
+
+                    clicked=false;
+                }
+            }
+        });
+        //click fab friend1 button to show total status list
+        friend5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Query query=databaseReference.child(friendsArray.get(4)).child("totalStatus").orderByChild("time").limitToLast(5);
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        getSingleUserOldStatus(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                if(!clicked){
+                    totalStatusList.setVisibility(View.VISIBLE);
+                    clicked=true;
+                }else{
+
+                    totalStatusList.setVisibility(View.INVISIBLE);
+
+                    clicked=false;
+                }
             }
         });
         //-------construction total status display----
@@ -239,7 +365,7 @@ public class Live extends AppCompatActivity {
 
                     switch(count+1) {
                         case 1:
-                            friend1.setText(friendsArray.get(0)+":\n"+friendsStatusArray.get(0));
+                            friend1.setText(friendsArray.get(0)+":"+friendsStatusArray.get(0));
                             int id = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(0), null, null);
                             friend1Gif.setImageResource(id);
                             friend1.setVisibility(View.VISIBLE);
@@ -247,28 +373,28 @@ public class Live extends AppCompatActivity {
 
                             break;
                         case 2:
-                            friend2.setText(friendsArray.get(1)+":\n"+friendsStatusArray.get(1));
+                            friend2.setText(friendsArray.get(1)+":"+friendsStatusArray.get(1));
                             int id2 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(1), null, null);
                             friend2Gif.setImageResource(id2);
                             friend2.setVisibility(View.VISIBLE);
                             friend2Gif.setVisibility(View.VISIBLE);
                             break;
                         case 3:
-                            friend3.setText(friendsArray.get(2)+":\n"+friendsStatusArray.get(2));
+                            friend3.setText(friendsArray.get(2)+":"+friendsStatusArray.get(2));
                             int id3 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(2), null, null);
                             friend3Gif.setImageResource(id3);
                             friend3.setVisibility(View.VISIBLE);
                             friend3Gif.setVisibility(View.VISIBLE);
                             break;
                         case 4:
-                            friend4.setText(friendsArray.get(3)+":\n"+friendsStatusArray.get(3));
+                            friend4.setText(friendsArray.get(3)+":"+friendsStatusArray.get(3));
                             int id4 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(3), null, null);
                             friend4Gif.setImageResource(id4);
                             friend4.setVisibility(View.VISIBLE);
                             friend4Gif.setVisibility(View.VISIBLE);
                             break;
                         case 5:
-                            friend5.setText(friendsArray.get(4)+":\n"+friendsStatusArray.get(4));
+                            friend5.setText(friendsArray.get(4)+":"+friendsStatusArray.get(4));
                             int id5 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(4), null, null);
                             friend5Gif.setImageResource(id5);
                             friend5.setVisibility(View.VISIBLE);
@@ -400,7 +526,22 @@ public class Live extends AppCompatActivity {
         pd.dismiss();
     }
     //get 10 most recent status
+    public void getSingleUserOldStatus(DataSnapshot dataSnapshot){
 
+        totalStatus.clear();
+        if (dataSnapshot.exists()) {
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                TotalStatus statusT = snapshot.getValue(TotalStatus.class);
+                totalStatus.add(statusT.status);
+                Log.i("status checking", statusT.status);
+            }
+
+        }
+
+        totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, totalStatus));
+
+
+    }
 
     //generating array of friend
     public void doOnSuccessF(String s){
@@ -453,7 +594,7 @@ public class Live extends AppCompatActivity {
             for(int z =1;friendsArray.size() +1 >z;z++)
             switch(z) {
                 case 1:
-                    friend1.setText(friendsArray.get(0)+":\n"+friendsStatusArray.get(0));
+                    friend1.setText(friendsArray.get(0)+":"+friendsStatusArray.get(0));
                     int id = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(0), null, null);
                     friend1Gif.setImageResource(id);
                     friend1.setVisibility(View.VISIBLE);
@@ -461,28 +602,28 @@ public class Live extends AppCompatActivity {
 
                     break;
                 case 2:
-                    friend2.setText(friendsArray.get(1)+":\n"+friendsStatusArray.get(1));
+                    friend2.setText(friendsArray.get(1)+":"+friendsStatusArray.get(1));
                     int id2 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(1), null, null);
                     friend2Gif.setImageResource(id2);
                     friend2.setVisibility(View.VISIBLE);
                     friend2Gif.setVisibility(View.VISIBLE);
                     break;
                 case 3:
-                    friend3.setText(friendsArray.get(2)+":\n"+friendsStatusArray.get(2));
+                    friend3.setText(friendsArray.get(2)+":"+friendsStatusArray.get(2));
                     int id3 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(2), null, null);
                     friend3Gif.setImageResource(id3);
                     friend3.setVisibility(View.VISIBLE);
                     friend3Gif.setVisibility(View.VISIBLE);
                     break;
                 case 4:
-                    friend4.setText(friendsArray.get(3)+":\n"+friendsStatusArray.get(3));
+                    friend4.setText(friendsArray.get(3)+":"+friendsStatusArray.get(3));
                     int id4 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(3), null, null);
                     friend4Gif.setImageResource(id4);
                     friend4.setVisibility(View.VISIBLE);
                     friend4Gif.setVisibility(View.VISIBLE);
                     break;
                 case 5:
-                    friend5.setText(friendsArray.get(4)+":\n"+friendsStatusArray.get(4));
+                    friend5.setText(friendsArray.get(4)+":"+friendsStatusArray.get(4));
                     int id5 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(4), null, null);
                     friend5Gif.setImageResource(id5);
                     friend5.setVisibility(View.VISIBLE);
