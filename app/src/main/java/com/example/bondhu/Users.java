@@ -173,7 +173,7 @@ public class Users extends AppCompatActivity {
 
                 String searchUsersByName = searchResult.getText().toString();
                 sendRequest(searchUsersByName);
-
+                Toast.makeText(Users.this, "Friend Request Sent!", Toast.LENGTH_LONG).show();
             }
         });
         // accept/cancel friend request
@@ -304,7 +304,6 @@ public class Users extends AppCompatActivity {
     public void sendRequest(String searchUsersByName){
         Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
         reference2.child(searchUsersByName).child("friendRequest").child(UserDetails.username).setValue(true);
-        Toast.makeText(Users.this, "Friend Request Sent!", Toast.LENGTH_LONG).show();
     }
 
     //////*********add friend under construction *******///////////////////////////////////////////

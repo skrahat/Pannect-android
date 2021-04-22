@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
@@ -37,15 +39,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.SimpleTimeZone;
 
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 
 public class Live extends AppCompatActivity {
-    ListView usersList;
+    ListView totalStatusList;
     TextView noUsersText;
     TextView currentUser;
     TextView currentStatusView;
@@ -59,6 +63,8 @@ public class Live extends AppCompatActivity {
     ArrayList<String> friendsArray = new ArrayList<>();
     ArrayList<String> friendsStatusArray = new ArrayList<>();
     ArrayList<String> gifListArray = new ArrayList<>();
+    ArrayList<String> totalStatus = new ArrayList<>();
+
     int totalFriends = 0;
     int totalUsers = 0;
     ProgressDialog pd;
@@ -97,6 +103,7 @@ public class Live extends AppCompatActivity {
         setContentView(R.layout.activity_live);
 
         //getting UI IDS
+        totalStatusList = (ListView)findViewById(R.id.totalStatusList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         currentUser = (TextView)findViewById(R.id.currentUser);
         friend1 = (TextView)findViewById(R.id.friend1);
@@ -163,6 +170,36 @@ public class Live extends AppCompatActivity {
 
             }
         });
+
+        //-------construction total status display----
+
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("users");
+        Query query=databaseReference.child(userT).child("totalStatus").orderByChild("time").limitToLast(2);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            totalStatus.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    TotalStatus statusT = snapshot.getValue(TotalStatus.class);
+                    totalStatus.add(statusT.status);
+                    Log.i("status checking", statusT.status);
+                }
+                adapter.notifyDataSetChanged();
+            }
+            totalStatusList.setVisibility(View.VISIBLE);
+
+            totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, totalStatus));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        //-------construction total status display----
+
         //gathers friend list
         // display friends
         String urlF = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
@@ -281,8 +318,14 @@ public class Live extends AppCompatActivity {
                 String updateLiveStatus = spinnerStatus.getSelectedItem().toString();
                 reference2.child(userT).child("currentStatus").setValue(updateLiveStatus);
 
-                String currentDateandTime = new SimpleDateFormat("HH:mm MM-dd").format(new Date());
-                reference2.child(userT).child("currentStatus").child("updateTime").setValue(currentDateandTime);
+                String currentDateandTime = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
+                //reference2.child(userT).child("totalStatus").child("updateTime").setValue(currentDateandTime);
+
+                //adding it to totalStatus list with timestamp
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("time", currentDateandTime);
+                map.put("status",updateLiveStatus);
+                reference2.child(userT).child("totalStatus").push().setValue(map);
 
                 String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
                 int idX = getResources().getIdentifier("com.example.bondhu:drawable/" + updateLiveStatus, null, null);
@@ -356,6 +399,8 @@ public class Live extends AppCompatActivity {
 
         pd.dismiss();
     }
+    //get 10 most recent status
+
 
     //generating array of friend
     public void doOnSuccessF(String s){
@@ -450,5 +495,7 @@ public class Live extends AppCompatActivity {
 
         pd.dismiss();
     }
+    //add status to TotalStatuslist
+
 
 }
