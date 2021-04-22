@@ -5,5 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="primary_text_color">#212121</color>
     <color name="text_hint_color">#4169E1</color>
+    <color name="red">#f55b5b</color>
+    <color name="light_blue">#9ce3ff</color>
 
 </resources>

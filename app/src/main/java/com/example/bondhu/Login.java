@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
                                 UserDetails.username = user;
                                 UserDetails.password = pass;
                                 UserDetails.currentStatus= obj.getJSONObject(user).getString("currentStatus");
-                                startActivity(new Intent(Login.this, Users.class));
+                                startActivity(new Intent(Login.this, Live.class));
                             } else {
                                 Toast.makeText(Login.this, "incorrect password", Toast.LENGTH_LONG).show();
                             }

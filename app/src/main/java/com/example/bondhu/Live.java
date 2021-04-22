@@ -2,7 +2,9 @@ package com.example.bondhu;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -55,10 +58,11 @@ public class Live extends AppCompatActivity {
     TextView currentUser;
     TextView currentStatusView;
     ExtendedFloatingActionButton friend1;
-    TextView friend2;
-    TextView friend3;
-    TextView friend4;
-    TextView friend5;
+    ExtendedFloatingActionButton friend2;
+    ExtendedFloatingActionButton friend3;
+    ExtendedFloatingActionButton friend4;
+    ExtendedFloatingActionButton friend5;
+    ExtendedFloatingActionButton friend6;
     ArrayList<String> al = new ArrayList<>();
     ArrayList<String> al2 = new ArrayList<>();
     ArrayList<String> friendsArray = new ArrayList<>();
@@ -66,11 +70,15 @@ public class Live extends AppCompatActivity {
     ArrayList<String> gifListArray = new ArrayList<>();
     ArrayList<String> totalStatus = new ArrayList<>();
 
+    CountDownTimer timer;
+
     int totalFriends = 0;
     int totalUsers = 0;
+    int counter;
     ProgressDialog pd;
     Button btnLiveStatusData2;
     Button btnLiveStatusSelectAdd;
+    Button btnFriends;
     EditText etLiveStatus;
     DatabaseReference statusDbRef;
     Spinner spinnerStatus;
@@ -82,8 +90,9 @@ public class Live extends AppCompatActivity {
     GifImageView friend3Gif;
     GifImageView friend4Gif;
     GifImageView friend5Gif;
+    GifImageView friend6Gif;
     GifImageView currentStatusGif;
-    ExtendedFloatingActionButton floatingActionButton;
+    ExtendedFloatingActionButton btncurrentUser;
     //FloatingActionButton floatingActionButton2;
     //FloatingActionButton floatingActionButton3;
     //FloatingActionButton floatingActionButton4;
@@ -108,24 +117,28 @@ public class Live extends AppCompatActivity {
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         currentUser = (TextView)findViewById(R.id.currentUser);
         friend1 = (ExtendedFloatingActionButton )findViewById(R.id.friend1);
-        friend2 = (TextView)findViewById(R.id.friend2);
-        friend3 = (TextView)findViewById(R.id.friend3);
-        friend4 = (TextView)findViewById(R.id.friend4);
-        friend5 = (TextView)findViewById(R.id.friend5);
+        friend2 = (ExtendedFloatingActionButton)findViewById(R.id.friend2);
+        friend3 = (ExtendedFloatingActionButton)findViewById(R.id.friend3);
+        friend4 = (ExtendedFloatingActionButton)findViewById(R.id.friend4);
+        friend5 = (ExtendedFloatingActionButton)findViewById(R.id.friend5);
+        friend6 = (ExtendedFloatingActionButton)findViewById(R.id.friend6);
         etLiveStatus = findViewById(R.id.etLiveStatus);
         btnLiveStatusData2 = findViewById(R.id.btnLiveStatusData2);
         btnLiveStatusSelectAdd = findViewById(R.id.btnLiveStatusSelectAdd);
+        btnFriends = findViewById(R.id.btnFriends);
         spinnerStatus = findViewById(R.id.spinnerStatus);
         currentStatusView = (TextView)findViewById(R.id.currentStatusView);
-        floatingActionButton = findViewById(R.id.floatingActionButton);
+        btncurrentUser = findViewById(R.id.btncurrentUser);
         userT = UserDetails.username;
         clicked = false;
+
         gifImageView2 = (GifImageView) findViewById(R.id.gifImageView2);
         friend1Gif = (GifImageView) findViewById(R.id.friend1Gif);
         friend2Gif = (GifImageView) findViewById(R.id.friend2Gif);
         friend3Gif = (GifImageView) findViewById(R.id.friend3Gif);
         friend4Gif = (GifImageView) findViewById(R.id.friend4Gif);
         friend5Gif = (GifImageView) findViewById(R.id.friend5Gif);
+        friend6Gif = (GifImageView) findViewById(R.id.friend6Gif);
         currentStatusGif = (GifImageView) findViewById(R.id.currentStatusGif);
 
 
@@ -153,37 +166,75 @@ public class Live extends AppCompatActivity {
 
 
 
-        ////fab button for animation testing... temp////////***construction*****////
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+
+
+        //view user's own status history
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("users");
+        btncurrentUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Query query=databaseReference.child(UserDetails.username).child("totalStatus").orderByChild("time").limitToLast(5);
+                //resets tiimer and starts a new timer of 5 seconds with 1 second interval
+                if (timer != null){
+                    timer.cancel();
+                }
 
+                timer = new CountDownTimer(5000, 1000){
+                    public void onTick(long millisUntilFinished){
 
+                    }
+                    public  void onFinish(){
+                        totalStatusList.setVisibility(View.INVISIBLE);
+                        clicked=false;
+
+                    }
+                }.start();
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        getSingleUserOldStatus(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                if(!clicked){
+                    totalStatusList.setVisibility(View.VISIBLE);
+                    clicked=true;
+                }else{
+
+                    totalStatusList.setVisibility(View.INVISIBLE);
+
+                    clicked=false;
+                }
             }
         });
-
-        //-------construction total status display----
-
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("users");
-        /*Query query=databaseReference.child(userT).child("totalStatus").orderByChild("time").limitToLast(5);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-
-            getSingleUserOldStatus(dataSnapshot);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
         //click fab friend1 button to show total status list
         friend1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Query query=databaseReference.child(friendsArray.get(0)).child("totalStatus").orderByChild("time").limitToLast(5);
+                    //resets tiimer and starts a new timer of 5 seconds with 1 second interval
+                    if (timer != null){
+                        timer.cancel();
+                    }
+
+                    timer = new CountDownTimer(5000, 1000){
+                        public void onTick(long millisUntilFinished){
+
+                        }
+                        public  void onFinish(){
+                            totalStatusList.setVisibility(View.INVISIBLE);
+                            clicked=false;
+
+                        }
+                    }.start();
+
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -208,11 +259,27 @@ public class Live extends AppCompatActivity {
                     }
                 }
             });
-        //click fab friend1 button to show total status list
+        //click fab friend2 button to show total status list
         friend2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Query query=databaseReference.child(friendsArray.get(1)).child("totalStatus").orderByChild("time").limitToLast(5);
+                //resets tiimer and starts a new timer of 5 seconds with 1 second interval
+                if (timer != null){
+                    timer.cancel();
+                }
+
+                timer = new CountDownTimer(5000, 1000){
+                    public void onTick(long millisUntilFinished){
+
+                    }
+                    public  void onFinish(){
+                        totalStatusList.setVisibility(View.INVISIBLE);
+                        clicked=false;
+
+                    }
+                }.start();
+
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -237,11 +304,27 @@ public class Live extends AppCompatActivity {
                 }
             }
         });
-        //click fab friend1 button to show total status list
+        //click fab friend3 button to show total status list
         friend3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Query query=databaseReference.child(friendsArray.get(2)).child("totalStatus").orderByChild("time").limitToLast(5);
+                //resets tiimer and starts a new timer of 5 seconds with 1 second interval
+                if (timer != null){
+                    timer.cancel();
+                }
+
+                timer = new CountDownTimer(5000, 1000){
+                    public void onTick(long millisUntilFinished){
+
+                    }
+                    public  void onFinish(){
+                        totalStatusList.setVisibility(View.INVISIBLE);
+                        clicked=false;
+
+                    }
+                }.start();
+
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -266,11 +349,27 @@ public class Live extends AppCompatActivity {
                 }
             }
         });
-        //click fab friend1 button to show total status list
+        //click fab friend4 button to show total status list
         friend4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Query query=databaseReference.child(friendsArray.get(3)).child("totalStatus").orderByChild("time").limitToLast(5);
+                //resets tiimer and starts a new timer of 5 seconds with 1 second interval
+                if (timer != null){
+                    timer.cancel();
+                }
+
+                timer = new CountDownTimer(5000, 1000){
+                    public void onTick(long millisUntilFinished){
+
+                    }
+                    public  void onFinish(){
+                        totalStatusList.setVisibility(View.INVISIBLE);
+                        clicked=false;
+
+                    }
+                }.start();
+
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -295,11 +394,27 @@ public class Live extends AppCompatActivity {
                 }
             }
         });
-        //click fab friend1 button to show total status list
+        //click fab friend5 button to show total status list
         friend5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Query query=databaseReference.child(friendsArray.get(4)).child("totalStatus").orderByChild("time").limitToLast(5);
+                //resets tiimer and starts a new timer of 5 seconds with 1 second interval
+                if (timer != null){
+                    timer.cancel();
+                }
+
+                timer = new CountDownTimer(5000, 1000){
+                    public void onTick(long millisUntilFinished){
+
+                    }
+                    public  void onFinish(){
+                        totalStatusList.setVisibility(View.INVISIBLE);
+                        clicked=false;
+
+                    }
+                }.start();
+
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -324,7 +439,14 @@ public class Live extends AppCompatActivity {
                 }
             }
         });
-        //-------construction total status display----
+
+        //open live activity
+        btnFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewActivity();
+            }
+        });
 
         //gathers friend list
         // display friends
@@ -345,9 +467,28 @@ public class Live extends AppCompatActivity {
         RequestQueue rQueueF = Volley.newRequestQueue(Live.this);
         rQueueF.add(requestF);
 
-        //realtime updating friends name and status
+
+        //realtime updating colours of friends if linked
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
+        myRef.addValueEventListener(new ValueEventListener() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        //realtime updating friends name and status
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myRef = database.getReference("users");
         myRef.addValueEventListener(new ValueEventListener() {
 
             @SuppressLint("SetTextI18n")
@@ -370,6 +511,11 @@ public class Live extends AppCompatActivity {
                             friend1Gif.setImageResource(id);
                             friend1.setVisibility(View.VISIBLE);
                             friend1Gif.setVisibility(View.VISIBLE);
+                            if(friendsStatusArray.get(0).equals(UserDetails.currentStatus)){
+                                friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                            }else{
+                                friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                            }
 
                             break;
                         case 2:
@@ -378,6 +524,11 @@ public class Live extends AppCompatActivity {
                             friend2Gif.setImageResource(id2);
                             friend2.setVisibility(View.VISIBLE);
                             friend2Gif.setVisibility(View.VISIBLE);
+                            if(friendsStatusArray.get(1).equals(UserDetails.currentStatus)){
+                                friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                            }else{
+                                friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                            }
                             break;
                         case 3:
                             friend3.setText(friendsArray.get(2)+":"+friendsStatusArray.get(2));
@@ -385,6 +536,11 @@ public class Live extends AppCompatActivity {
                             friend3Gif.setImageResource(id3);
                             friend3.setVisibility(View.VISIBLE);
                             friend3Gif.setVisibility(View.VISIBLE);
+                            if(friendsStatusArray.get(2).equals(UserDetails.currentStatus)){
+                                friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                            }else{
+                                friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                            }
                             break;
                         case 4:
                             friend4.setText(friendsArray.get(3)+":"+friendsStatusArray.get(3));
@@ -392,6 +548,11 @@ public class Live extends AppCompatActivity {
                             friend4Gif.setImageResource(id4);
                             friend4.setVisibility(View.VISIBLE);
                             friend4Gif.setVisibility(View.VISIBLE);
+                            if(friendsStatusArray.get(3).equals(UserDetails.currentStatus)){
+                                friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                            }else{
+                                friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                            }
                             break;
                         case 5:
                             friend5.setText(friendsArray.get(4)+":"+friendsStatusArray.get(4));
@@ -399,6 +560,23 @@ public class Live extends AppCompatActivity {
                             friend5Gif.setImageResource(id5);
                             friend5.setVisibility(View.VISIBLE);
                             friend5Gif.setVisibility(View.VISIBLE);
+                            if(friendsStatusArray.get(4).equals(UserDetails.currentStatus)){
+                                friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                            }else{
+                                friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                            }
+                            break;
+                        case 6:
+                            friend6.setText(friendsArray.get(5)+":"+friendsStatusArray.get(5));
+                            int id6 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(5), null, null);
+                            friend6Gif.setImageResource(id6);
+                            friend6.setVisibility(View.VISIBLE);
+                            friend6Gif.setVisibility(View.VISIBLE);
+                            if(friendsStatusArray.get(5).equals(UserDetails.currentStatus)){
+                                friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                            }else{
+                                friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                            }
                             break;
                     }
                     count++;
@@ -424,12 +602,19 @@ public class Live extends AppCompatActivity {
                 String liveStatus = etLiveStatus.getText().toString();
 
                 reference2.child(userT).child("currentStatus").setValue(liveStatus);
+                String currentDateandTime = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
+
+                //adding it to totalStatus list with timestamp
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("time", currentDateandTime);
+                map.put("status",liveStatus);
+                reference2.child(userT).child("totalStatus").push().setValue(map);
+
                 String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
+                int idX = getResources().getIdentifier("com.example.bondhu:drawable/" + liveStatus, null, null);
+                currentStatusGif.setImageResource(idX);
 
-                String currentDateandTime = new SimpleDateFormat("HH:mm MM-dd").format(new Date());
-                reference2.child(userT).child("currentStatus").child("updateTime").setValue(currentDateandTime);
-
-                currentStatusView.setText(liveStatus);
+                currentStatusView.setText(liveStatus +"\n"+ currentDateandTime);
                 UserDetails.currentStatus= liveStatus;
                 Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
                 etLiveStatus.setText("");
@@ -445,7 +630,6 @@ public class Live extends AppCompatActivity {
                 reference2.child(userT).child("currentStatus").setValue(updateLiveStatus);
 
                 String currentDateandTime = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
-                //reference2.child(userT).child("totalStatus").child("updateTime").setValue(currentDateandTime);
 
                 //adding it to totalStatus list with timestamp
                 Map<String, String> map = new HashMap<String, String>();
@@ -516,7 +700,7 @@ public class Live extends AppCompatActivity {
         }
 
         if(totalUsers <=1){
-            noUsersText.setVisibility(View.VISIBLE);
+            //noUsersText.setVisibility(View.VISIBLE);
         }
         else{
             noUsersText.setVisibility(View.GONE);
@@ -599,6 +783,11 @@ public class Live extends AppCompatActivity {
                     friend1Gif.setImageResource(id);
                     friend1.setVisibility(View.VISIBLE);
                     friend1Gif.setVisibility(View.VISIBLE);
+                    if(friendsStatusArray.get(0).equals(UserDetails.currentStatus)){
+                        friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                    }else{
+                        friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                    }
 
                     break;
                 case 2:
@@ -607,6 +796,11 @@ public class Live extends AppCompatActivity {
                     friend2Gif.setImageResource(id2);
                     friend2.setVisibility(View.VISIBLE);
                     friend2Gif.setVisibility(View.VISIBLE);
+                    if(friendsStatusArray.get(1).equals(UserDetails.currentStatus)){
+                        friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                    }else{
+                        friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                    }
                     break;
                 case 3:
                     friend3.setText(friendsArray.get(2)+":"+friendsStatusArray.get(2));
@@ -614,6 +808,11 @@ public class Live extends AppCompatActivity {
                     friend3Gif.setImageResource(id3);
                     friend3.setVisibility(View.VISIBLE);
                     friend3Gif.setVisibility(View.VISIBLE);
+                    if(friendsStatusArray.get(2).equals(UserDetails.currentStatus)){
+                        friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                    }else{
+                        friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                    }
                     break;
                 case 4:
                     friend4.setText(friendsArray.get(3)+":"+friendsStatusArray.get(3));
@@ -621,6 +820,11 @@ public class Live extends AppCompatActivity {
                     friend4Gif.setImageResource(id4);
                     friend4.setVisibility(View.VISIBLE);
                     friend4Gif.setVisibility(View.VISIBLE);
+                    if(friendsStatusArray.get(3).equals(UserDetails.currentStatus)){
+                        friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                    }else{
+                        friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                    }
                     break;
                 case 5:
                     friend5.setText(friendsArray.get(4)+":"+friendsStatusArray.get(4));
@@ -628,6 +832,23 @@ public class Live extends AppCompatActivity {
                     friend5Gif.setImageResource(id5);
                     friend5.setVisibility(View.VISIBLE);
                     friend5Gif.setVisibility(View.VISIBLE);
+                    if(friendsStatusArray.get(4).equals(UserDetails.currentStatus)){
+                        friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                    }else{
+                        friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                    }
+                    break;
+                case 6:
+                    friend6.setText(friendsArray.get(5)+":"+friendsStatusArray.get(5));
+                    int id6 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(5), null, null);
+                    friend6Gif.setImageResource(id6);
+                    friend6.setVisibility(View.VISIBLE);
+                    friend6Gif.setVisibility(View.VISIBLE);
+                    if(friendsStatusArray.get(5).equals(UserDetails.currentStatus)){
+                        friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                    }else{
+                        friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                    }
                     break;
             }
         } catch (JSONException e) {
@@ -636,7 +857,11 @@ public class Live extends AppCompatActivity {
 
         pd.dismiss();
     }
-    //add status to TotalStatuslist
+    //redirects to friends setting activity
+    public void openNewActivity(){
+        Intent intent = new Intent(Live.this, Users.class);
+        startActivity(intent);
+    }
 
 
 }

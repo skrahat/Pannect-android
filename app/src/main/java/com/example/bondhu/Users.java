@@ -309,7 +309,7 @@ public class Users extends AppCompatActivity {
     //////*********add friend under construction *******///////////////////////////////////////////
 
     public void openNewActivity(){
-        Intent intent = new Intent(this, Live.class);
+        Intent intent = new Intent(Users.this, Live.class);
         startActivity(intent);
     }
     public void doOnSuccess(String s){
@@ -333,7 +333,7 @@ public class Users extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(totalUsers <=1){
+        if(totalUsers <1){
             noUsersText.setVisibility(View.VISIBLE);
 
         }
@@ -345,6 +345,7 @@ public class Users extends AppCompatActivity {
     }
     //generating array of friend requests
     public void doOnSuccessR(String s){
+
         try {
             JSONObject obj = new JSONObject(s);
 
