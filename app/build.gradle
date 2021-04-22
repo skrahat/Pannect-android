@@ -72,5 +72,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     //gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
-
+    //notification
+    //noinspection GradleCompatible
+    implementation "com.android.support:support-compat:28.0.0"
 }

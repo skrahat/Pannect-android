@@ -1,8 +1,11 @@
 package com.example.bondhu;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -17,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
@@ -93,10 +98,7 @@ public class Live extends AppCompatActivity {
     GifImageView friend6Gif;
     GifImageView currentStatusGif;
     ExtendedFloatingActionButton btncurrentUser;
-    //FloatingActionButton floatingActionButton2;
-    //FloatingActionButton floatingActionButton3;
-    //FloatingActionButton floatingActionButton4;
-    //FloatingActionButton floatingActionButton5;
+
     Boolean clicked;
     String status1;
     String status2;
@@ -142,7 +144,8 @@ public class Live extends AppCompatActivity {
         currentStatusGif = (GifImageView) findViewById(R.id.currentStatusGif);
 
 
-        //String currentDateandTime = new SimpleDateFormat("MM-dd HH:mm").format(new Date());
+        String currentDateandTimeGeneral = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
+
 
         statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
         statusDbRef2 = FirebaseDatabase.getInstance().getReference().child("users");
@@ -164,10 +167,20 @@ public class Live extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinnerStatus.setAdapter(adapter);
 
+        ////////////////////-----------------construction notification----------------------------------------------------------
+        //notification update for status update
+        createNotificationChannel();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, userT)
+                .setSmallIcon(R.drawable.ic_baseline_connect_without_contact_24)
+                .setContentTitle("Pannect")
+                .setContentText("New Status")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(currentDateandTimeGeneral))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-
-
-
+        //create and send notification
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        ////////////////////-----------------construction notification----------------------------------------------------------
 
         //view user's own status history
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("users");
@@ -219,7 +232,7 @@ public class Live extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Query query=databaseReference.child(friendsArray.get(0)).child("totalStatus").orderByChild("time").limitToLast(5);
-                    //resets tiimer and starts a new timer of 5 seconds with 1 second interval
+                    //resets timer and starts a new timer of 5 seconds with 1 second interval
                     if (timer != null){
                         timer.cancel();
                     }
@@ -439,8 +452,53 @@ public class Live extends AppCompatActivity {
                 }
             }
         });
+        //click fab friend6 button to show total status list
+        friend6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Query query=databaseReference.child(friendsArray.get(5)).child("totalStatus").orderByChild("time").limitToLast(5);
+                //resets tiimer and starts a new timer of 5 seconds with 1 second interval
+                if (timer != null){
+                    timer.cancel();
+                }
 
-        //open live activity
+                timer = new CountDownTimer(5000, 1000){
+                    public void onTick(long millisUntilFinished){
+
+                    }
+                    public  void onFinish(){
+                        totalStatusList.setVisibility(View.INVISIBLE);
+                        clicked=false;
+
+                    }
+                }.start();
+
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        getSingleUserOldStatus(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                if(!clicked){
+                    totalStatusList.setVisibility(View.VISIBLE);
+                    clicked=true;
+                }else{
+
+                    totalStatusList.setVisibility(View.INVISIBLE);
+
+                    clicked=false;
+                }
+            }
+        });
+
+        //open users activity
         btnFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -485,6 +543,28 @@ public class Live extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+        ////////////////////-----------------construction notification----------------------------------------------------------
+
+        //create realtime notification for status update
+        DatabaseReference statusRef = database.getReference("status");
+        Query query=databaseReference.orderByChild("time").limitToLast(1);
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+            // notificationId is a unique int for each notification that you must define
+                int random_int = (int)Math.floor(Math.random()*(1000-1+1)+1);
+                //notificationManager.notify(random_int, builder.build());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        ////////////////////-----------------construction notification----------------------------------------------------------
 
         //realtime updating friends name and status
         //FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -496,13 +576,16 @@ public class Live extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
+
+
+
                 friendsStatusArray.clear();
                 int count = 0;
                 while (friendsArray.size() > count) {
                     String value = dataSnapshot.child(friendsArray.get(count)).child("currentStatus").getValue(String.class);
                     friendsStatusArray.add(value);
                     String w =String.valueOf(count);
-                    Log.i(TAG,w);
+
 
                     switch(count+1) {
                         case 1:
@@ -599,15 +682,26 @@ public class Live extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
+                Firebase statusRef = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/status");
                 String liveStatus = etLiveStatus.getText().toString();
-
-                reference2.child(userT).child("currentStatus").setValue(liveStatus);
                 String currentDateandTime = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
 
-                //adding it to totalStatus list with timestamp
+                //inserting status seperately under status
+                Map<String, String> mapStatus = new HashMap<String, String>();
+                mapStatus.put("user", UserDetails.username);
+                mapStatus.put("status", liveStatus);
+                mapStatus.put("time", currentDateandTime);
+                statusRef.push().setValue(mapStatus);
+
+                //adding currentstatus under user
+                reference2.child(userT).child("currentStatus").setValue(liveStatus);
+
+
+                //adding it to totalStatus list with timestamp under users
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("time", currentDateandTime);
                 map.put("status",liveStatus);
+                map.put("newNotification","true");
                 reference2.child(userT).child("totalStatus").push().setValue(map);
 
                 String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
@@ -635,6 +729,7 @@ public class Live extends AppCompatActivity {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("time", currentDateandTime);
                 map.put("status",updateLiveStatus);
+                map.put("newNotification","true");
                 reference2.child(userT).child("totalStatus").push().setValue(map);
 
                 String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
@@ -645,6 +740,10 @@ public class Live extends AppCompatActivity {
                 UserDetails.currentStatus= updateLiveStatus;
                 Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
 
+
+
+                // notificationId is a unique int for each notification that you must define
+                notificationManager.notify(100, builder.build());
 
 
             }});
@@ -717,7 +816,7 @@ public class Live extends AppCompatActivity {
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                 TotalStatus statusT = snapshot.getValue(TotalStatus.class);
                 totalStatus.add(statusT.status);
-                Log.i("status checking", statusT.status);
+
             }
 
         }
@@ -863,5 +962,23 @@ public class Live extends AppCompatActivity {
         startActivity(intent);
     }
 
+    ////////////////////-----------------construction notification----------------------------------------------------------
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(userT, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    Log.i("notification ", "checking");
+    }
 
 }
