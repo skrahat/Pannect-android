@@ -34,6 +34,7 @@ public class Register extends AppCompatActivity {
 
         binding.login.setOnClickListener(v ->
                 startActivity(new Intent(Register.this, Login.class)));
+                Register.this.finish();
 
         binding.registerButton.setOnClickListener(v -> {
             user = binding.username.getText().toString();
@@ -75,7 +76,7 @@ public class Register extends AppCompatActivity {
                                 Toast.makeText(Register.this, "registration successful", Toast.LENGTH_LONG).show();
 
                                 startActivity(new Intent(getApplicationContext(), Login.class));
-                                finish();
+                                Register.this.finish();
                             } else {
                                 Toast.makeText(Register.this, "username already exists", Toast.LENGTH_LONG).show();
 

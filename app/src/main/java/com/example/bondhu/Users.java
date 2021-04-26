@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,12 +45,16 @@ public class Users extends AppCompatActivity {
     String searchUsersByName;
     ArrayList<String> al = new ArrayList<>();
     ArrayList<String> requestArray = new ArrayList<>();
+    ArrayList<String> requestArrayID = new ArrayList<>();
     ArrayList<String> friendsArray = new ArrayList<>();
+    ArrayList<String> friendsArrayID = new ArrayList<>();
+
     int totalUsers = 0;
     int totalRequests = 0;
     int totalFriends = 0;
     String TAG = "TESTING____-----_____";
-    boolean userFound=false;
+    String userFoundID="";
+    Boolean userFound=false;
     ProgressDialog pd;
     Button btnLive;
     Button btnSearchUsers;
@@ -82,7 +87,7 @@ public class Users extends AppCompatActivity {
         pd.show();
 
         String url = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
-
+        //generate userlist--not very neccessary but includes very important current user name update
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
@@ -115,12 +120,14 @@ public class Users extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 requestArray.clear();
-        String urlR = "https://bondhu-2021-default-rtdb.firebaseio.com/users/"+UserDetails.username+"/friendRequest.json";
+                requestArrayID.clear();
+                String urlR = "https://bondhu-2021-default-rtdb.firebaseio.com/users/"+UserDetails.id+"/friendRequest.json";
 
         StringRequest requestR = new StringRequest(Request.Method.GET, urlR, new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
                 requestArray.clear();
+                requestArrayID.clear();
                 doOnSuccessR(s);
             }
         },new Response.ErrorListener(){
@@ -172,7 +179,7 @@ public class Users extends AppCompatActivity {
                 String urlF = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
 
                 String searchUsersByName = searchResult.getText().toString();
-                sendRequest(searchUsersByName);
+                sendRequest(searchUsersByName,userFoundID);
                 Toast.makeText(Users.this, "Friend Request Sent!", Toast.LENGTH_LONG).show();
             }
         });
@@ -187,9 +194,9 @@ public class Users extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Firebase reference3 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
-                        reference3.child(UserDetails.username).child("friends").child(requestArray.get(position)).setValue(true);
-                        reference3.child(requestArray.get(position)).child("friends").child(UserDetails.username).setValue(true);
-                        reference3.child(UserDetails.username).child("friendRequest").child(requestArray.get(position)).removeValue();
+                        reference3.child(UserDetails.id).child("friends").child(requestArray.get(position)).setValue(requestArrayID.get(position));
+                        reference3.child(requestArrayID.get(position)).child("friends").child(UserDetails.username).setValue(UserDetails.id);
+                        reference3.child(UserDetails.id).child("friendRequest").child(requestArray.get(position)).removeValue();
                         Toast.makeText(Users.this, "Friend Request Accepted!", Toast.LENGTH_LONG).show();
                         btnAccept.setVisibility(View.GONE);
                         btnCancel.setVisibility(View.GONE);
@@ -200,7 +207,7 @@ public class Users extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Firebase reference3 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
-                        reference3.child(UserDetails.username).child("friendRequest").child(requestArray.get(position)).removeValue();
+                        reference3.child(UserDetails.id).child("friendRequest").child(requestArray.get(position)).removeValue();
                         Toast.makeText(Users.this, "Friend Request Accepted!", Toast.LENGTH_LONG).show();
                         btnCancel.setVisibility(View.GONE);
                         btnAccept.setVisibility(View.GONE);
@@ -219,7 +226,7 @@ public class Users extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Firebase reference3 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
-                        reference3.child(UserDetails.username).child("friends").child(friendsArray.get(position)).removeValue();
+                        reference3.child(UserDetails.id).child("friends").child(friendsArray.get(position)).removeValue();
                         reference3.child(friendsArray.get(position)).child("friends").child(UserDetails.username).removeValue();
                         Toast.makeText(Users.this, "Friend Removed!", Toast.LENGTH_LONG).show();
                         btnRemove.setVisibility(View.GONE);
@@ -237,12 +244,14 @@ public class Users extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 friendsArray.clear();
-        String urlF = "https://bondhu-2021-default-rtdb.firebaseio.com/users/"+UserDetails.username+"/friends.json";
+                friendsArrayID.clear();
+        String urlF = "https://bondhu-2021-default-rtdb.firebaseio.com/users/"+UserDetails.id+"/friends.json";
 
         StringRequest requestF = new StringRequest(Request.Method.GET, urlF, new Response.Listener<String>(){
             @Override
             public void onResponse(String s) {
                 friendsArray.clear();
+                friendsArrayID.clear();
                 doOnSuccessF(s);
             }
         },new Response.ErrorListener(){
@@ -279,8 +288,10 @@ public class Users extends AppCompatActivity {
 
             while(i.hasNext()){
                 key = i.next().toString();
-                if(key.equals(searchUsersByName)) {
-                    userFound = true;
+                String key2 = obj.getJSONObject(key).getString("userName");
+                if(key2.equals(searchUsersByName)) {
+                    userFoundID = obj.getJSONObject(key).getString("id");
+                    userFound =true;
                     btnSendRequest.setVisibility(View.VISIBLE);
 
                 }
@@ -301,16 +312,16 @@ public class Users extends AppCompatActivity {
         pd.dismiss();
     }
 
-    public void sendRequest(String searchUsersByName){
+    public void sendRequest(String searchUsersByName,String userFoundID){
         Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
-        reference2.child(searchUsersByName).child("friendRequest").child(UserDetails.username).setValue(true);
+        reference2.child(userFoundID).child("friendRequest").child(UserDetails.username).setValue(UserDetails.id);
     }
 
-    //////*********add friend under construction *******///////////////////////////////////////////
 
     public void openNewActivity(){
         Intent intent = new Intent(Users.this, Live.class);
         startActivity(intent);
+
     }
     public void doOnSuccess(String s){
         try {
@@ -321,9 +332,12 @@ public class Users extends AppCompatActivity {
 
             while(i.hasNext()){
                 key = i.next().toString();
-
-                if(!key.equals(UserDetails.username)) {
-                    al.add(key);
+                String key2 = obj.getJSONObject(key).getString("userName");
+                if(!key2.equals(UserDetails.id)) {
+                    al.add(key2);
+                }
+                if(key2.equals(UserDetails.id)) {
+                    UserDetails.username=obj.getJSONObject(key).getString("userName");
                 }
                 totalUsers++;
 
@@ -354,9 +368,10 @@ public class Users extends AppCompatActivity {
 
             while(i.hasNext()){
                 key = i.next().toString();
-
+                String key2 =obj.getString(key);
                 if(!key.equals("123123")) {
                     requestArray.add(key);
+                    requestArrayID.add(key2);
                 }
 
                 totalRequests++;
@@ -388,9 +403,10 @@ public class Users extends AppCompatActivity {
 
             while(i.hasNext()){
                 key = i.next().toString();
-
+                String key2 =obj.getString(key);
                 if(!key.equals("123123")) {
                     friendsArray.add(key);
+                    friendsArrayID.add(key2);
                 }
 
                 totalFriends++;

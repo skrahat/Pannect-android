@@ -3,6 +3,7 @@ package com.example.bondhu;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -61,6 +62,7 @@ public class Login extends AppCompatActivity {
                                 UserDetails.password = pass;
                                 UserDetails.currentStatus= obj.getJSONObject(user).getString("currentStatus");
                                 startActivity(new Intent(Login.this, Live.class));
+                                Login.this.finish();
                             } else {
                                 Toast.makeText(Login.this, "incorrect password", Toast.LENGTH_LONG).show();
                             }
