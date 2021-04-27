@@ -10,6 +10,9 @@
     <string name="register">Register</string>
     <string name="channel_name">channel name put here</string>
     <string name="channel_description">channel description name put here</string>
+    <string name="nav_close">nav_close</string>
+    <string name="nav_open">nav_open</string>
+
 
     <array name="statuses">
         <item>bath</item>

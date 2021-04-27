@@ -1,6 +1,7 @@
 package com.example.bondhu;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,14 +20,16 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -68,7 +72,7 @@ import java.util.SimpleTimeZone;
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 
-public class Live extends AppCompatActivity {
+public class Live extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ListView totalStatusList;
     TextView noUsersText;
     TextView currentUser;
@@ -115,7 +119,7 @@ public class Live extends AppCompatActivity {
     FloatingActionButton logout;
 
     DrawerLayout drawerLayout;
-    NavigationView navigationView;
+    NavigationView nav_view;
     Toolbar toolbar;
 
     Boolean clicked;
@@ -174,7 +178,7 @@ public class Live extends AppCompatActivity {
 
         //navbar tools
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        nav_view = findViewById(R.id.nav_view);
         toolbar =  findViewById(R.id.toolbar);
 
         String currentDateandTimeGeneral = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
@@ -185,7 +189,14 @@ public class Live extends AppCompatActivity {
 
 
         //navbar tools
+        nav_view.bringToFront();
+        setSupportActionBar(toolbar);
 
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        nav_view.setNavigationItemSelectedListener(this);
 
         //////spinner values added from array
 
@@ -1228,6 +1239,16 @@ public class Live extends AppCompatActivity {
 
     }
 
+    //nav toolbar
+    @Override
+    public void onBackPressed(){
+
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else{
+            super.onBackPressed();
+        }
+    }
     ////////////////////-----------------construction notification----------------------------------------------------------
 
     private void createNotificationChannel() {
@@ -1247,4 +1268,16 @@ public class Live extends AppCompatActivity {
     Log.i("notification ", "checking");
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_home:
+                break;
+            case R.id.nav_friends:
+                Intent intent = new Intent(Live.this, Users.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
 }

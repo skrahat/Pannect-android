@@ -6,6 +6,10 @@
         <item name="colorPrimary">#000000</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+
     </style>
 
     <style name="MyMaterialTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
