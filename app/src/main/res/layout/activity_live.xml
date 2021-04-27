@@ -1,357 +1,384 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp">
+    tools:context=".Live"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-    android:theme="@style/MyMaterialTheme"
-    android:id="@+id/linearLayout4"
-    android:layout_width="match_parent"
-    android:layout_height="500dp"
-    android:background="#F0F8FF"
-    tools:context="com.example.bondhu.Users"
-    tools:viewBindingIgnore="true">
-
-    <TextView
-        android:id="@+id/noUsersText"
+    <com.google.android.material.navigation.NavigationBarView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_users_found"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        android:layout_gravity="start" />
 
 
-        <Button
-            android:id="@+id/btnFriends"
-            android:layout_width="76dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="572dp"
-            android:text="Freiends"
-            android:textColor="@color/colorPrimary"
-            android:textSize="5dp"
-            android:textStyle="bold"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+        android:theme="@style/MyMaterialTheme"
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="#F0F8FF"
+        tools:context="com.example.bondhu.Users"
+        tools:viewBindingIgnore="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="46dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/app_icon">
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <TextView
+            android:id="@+id/noUsersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_users_found"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.94"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/currentStatusGif"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.641"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/friend1Gif"
-            android:layout_width="52dp"
-            android:layout_height="55dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/friend1"
-            app:layout_constraintEnd_toEndOf="@+id/friend1"
-            app:layout_constraintHorizontal_bias="0.481"
-            app:layout_constraintStart_toStartOf="@+id/friend1" />
+            <Button
+                android:id="@+id/btnFriends"
+                android:layout_width="76dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="572dp"
+                android:text="Freiends"
+                android:textColor="@color/colorPrimary"
+                android:textSize="5dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.94"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/friend2Gif"
-            android:layout_width="59dp"
-            android:layout_height="56dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/friend2"
-            app:layout_constraintEnd_toEndOf="@+id/friend2"
-            app:layout_constraintHorizontal_bias="0.431"
-            app:layout_constraintStart_toStartOf="@+id/friend2" />
-
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/friend5Gif"
-            android:layout_width="71dp"
-            android:layout_height="63dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/friend5"
-            app:layout_constraintEnd_toEndOf="@+id/friend5"
-            app:layout_constraintStart_toStartOf="@+id/friend5" />
-
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/friend6Gif"
-            android:layout_width="77dp"
-            android:layout_height="61dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/friend6"
-            app:layout_constraintEnd_toEndOf="@+id/friend6"
-            app:layout_constraintStart_toStartOf="@+id/friend6" />
-
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/friend4Gif"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/friend4"
-            app:layout_constraintEnd_toEndOf="@+id/friend4"
-            app:layout_constraintHorizontal_bias="0.468"
-            app:layout_constraintStart_toStartOf="@+id/friend4" />
-
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/friend3Gif"
-        android:layout_width="61dp"
-        android:layout_height="56dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/friend3"
-        app:layout_constraintEnd_toEndOf="@+id/friend3"
-        app:layout_constraintHorizontal_bias="0.535"
-        app:layout_constraintStart_toStartOf="@+id/friend3" />
-
-        <EditText
-            android:id="@+id/etLiveStatus"
-            android:layout_width="83dp"
-            android:layout_height="33dp"
-            android:layout_marginTop="636dp"
-            android:hint="add new Status!"
-            android:text=""
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.048"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/spinnerStatus"
-            android:layout_width="150dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="636dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.758"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnLiveStatusSelectAdd"
-            android:layout_width="36dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="636dp"
-            android:layout_marginEnd="8dp"
-            android:background="#82868c"
-            android:text="update"
-            android:textColor="#ffffff"
-            android:textSize="8sp"
-
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-        android:id="@+id/currentUser"
-        android:layout_width="100dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="16dp"
-        android:cursorVisible="false"
-        android:gravity="center"
-        android:text="TextView"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnLiveStatusData2"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="4dp"
-            android:background="#82868c"
-            android:text="add Status"
-
-            android:textColor="#ffffff"
-            android:textSize="8sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/etLiveStatus"
-            app:layout_constraintTop_toTopOf="@+id/etLiveStatus" />
-
-
-        <TextView
-            android:id="@+id/currentStatusView"
-            android:layout_width="102dp"
+            <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/currentStatusGif"
+            android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="#ece3ff"
-            android:gravity="center"
-            android:text=""
+            android:src="@drawable/profile"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.893"
+            app:layout_constraintHorizontal_bias="0.641"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-        android:id="@+id/textView4"
-        android:layout_width="99dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        android:background="#ece3ff"
-        android:gravity="center"
-        android:text="Current Status :"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.413"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/friend1Gif"
+                android:layout_width="52dp"
+                android:layout_height="55dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/friend1"
+                app:layout_constraintEnd_toEndOf="@+id/friend1"
+                app:layout_constraintHorizontal_bias="0.481"
+                app:layout_constraintStart_toStartOf="@+id/friend1" />
 
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/friend2Gif"
+                android:layout_width="59dp"
+                android:layout_height="56dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/friend2"
+                app:layout_constraintEnd_toEndOf="@+id/friend2"
+                app:layout_constraintHorizontal_bias="0.431"
+                app:layout_constraintStart_toStartOf="@+id/friend2" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btncurrentUser"
-        android:layout_width="50dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="312dp"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:text="Me"
-        android:textColor="#ffffff"
-        android:textSize="8dp"
-        app:backgroundTint="#eb5834"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#ffffff"
-        app:strokeWidth="1dp"
-        app:useCompatPadding="true" />
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/friend5Gif"
+                android:layout_width="71dp"
+                android:layout_height="63dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/friend5"
+                app:layout_constraintEnd_toEndOf="@+id/friend5"
+                app:layout_constraintStart_toStartOf="@+id/friend5" />
 
-    <ListView
-        android:id="@+id/totalStatusList"
-        android:layout_width="108dp"
-        android:layout_height="156dp"
-        android:layout_marginBottom="56dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
-        app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="@+id/btncurrentUser">
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/friend6Gif"
+                android:layout_width="77dp"
+                android:layout_height="61dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/friend6"
+                app:layout_constraintEnd_toEndOf="@+id/friend6"
+                app:layout_constraintStart_toStartOf="@+id/friend6" />
 
-    </ListView>
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/friend4Gif"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/friend4"
+                app:layout_constraintEnd_toEndOf="@+id/friend4"
+                app:layout_constraintHorizontal_bias="0.468"
+                app:layout_constraintStart_toStartOf="@+id/friend4" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/friend1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
-            android:layout_marginBottom="84dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:hint="friend1"
-            android:textAppearance="?attr/buttonStyleSmall"
-            android:textSize="10dp"
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/friend3Gif"
+            android:layout_width="61dp"
+            android:layout_height="56dp"
             android:visibility="invisible"
-            app:backgroundTint="#9ce3ff"
-            app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
-            app:layout_constraintEnd_toStartOf="@+id/btncurrentUser" />
+            app:layout_constraintBottom_toTopOf="@+id/friend3"
+            app:layout_constraintEnd_toEndOf="@+id/friend3"
+            app:layout_constraintHorizontal_bias="0.535"
+            app:layout_constraintStart_toStartOf="@+id/friend3" />
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/friend2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="52dp"
+            <EditText
+                android:id="@+id/etLiveStatus"
+                android:layout_width="83dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="636dp"
+                android:hint="add new Status!"
+                android:text=""
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.048"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinnerStatus"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="636dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.758"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnLiveStatusSelectAdd"
+                android:layout_width="36dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="636dp"
+                android:layout_marginEnd="8dp"
+                android:background="#82868c"
+                android:text="update"
+                android:textColor="#ffffff"
+                android:textSize="8sp"
+
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/currentUser"
+                android:layout_width="100dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="60dp"
+                android:cursorVisible="false"
+                android:gravity="center"
+                android:text="TextView"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.212"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnLiveStatusData2"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:background="#82868c"
+                android:text="add Status"
+
+                android:textColor="#ffffff"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/etLiveStatus"
+                app:layout_constraintTop_toTopOf="@+id/etLiveStatus" />
+
+
+            <TextView
+                android:id="@+id/currentStatusView"
+                android:layout_width="102dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#ece3ff"
+                android:gravity="center"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.893"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="99dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="60dp"
+                android:background="#ece3ff"
+                android:gravity="center"
+                android:text="Current Status :"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.56"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/btncurrentUser"
+            android:layout_width="50dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="312dp"
             android:clickable="true"
-            android:gravity="center"
-            android:hint="friend2"
-            android:textAppearance="?attr/buttonStyleSmall"
-            android:textSize="10dp"
-            android:visibility="invisible"
-            app:backgroundTint="#9ce3ff"
-            app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
-            app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-
-            android:id="@+id/friend3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginBottom="84dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:hint="friend3"
-            android:textAppearance="?attr/buttonStyleSmall"
-            android:textSize="10dp"
-            android:visibility="invisible"
-            app:backgroundTint="#9ce3ff"
-            app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
-            app:layout_constraintStart_toEndOf="@+id/btncurrentUser" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-
-            android:id="@+id/friend4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="32dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:hint="friend4"
-            android:textAppearance="?attr/buttonStyleSmall"
-            android:textSize="10dp"
-            android:visibility="invisible"
-            app:backgroundTint="#9ce3ff"
-            app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
-            app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-
-            android:id="@+id/friend5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="168dp"
-            android:layout_marginEnd="32dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:hint="friend5"
-            android:textAppearance="?attr/buttonStyleSmall"
-            android:textSize="10dp"
-            android:visibility="invisible"
-            app:backgroundTint="#9ce3ff"
-            app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
-            app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-
-            android:id="@+id/friend6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="128dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:hint="friend6"
-            android:textAppearance="?attr/buttonStyleSmall"
-            android:textSize="10dp"
-            android:visibility="invisible"
-            app:backgroundTint="#9ce3ff"
-            app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
-            app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            app:backgroundTint="#eb5839"
-            app:fabCustomSize="25dp"
+            android:gravity="center_vertical"
+            android:text="Me"
+            android:textColor="#ffffff"
+            android:textSize="8dp"
+            app:backgroundTint="#eb5834"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/btn_dialog" />
+            app:strokeColor="#ffffff"
+            app:strokeWidth="1dp"
+            app:useCompatPadding="true" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ListView
+            android:id="@+id/totalStatusList"
+            android:layout_width="108dp"
+            android:layout_height="156dp"
+            android:layout_marginBottom="56dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
+            app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="@+id/btncurrentUser">
 
-</ScrollView>
+        </ListView>
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/friend1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="84dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:hint="friend1"
+                android:textAppearance="?attr/buttonStyleSmall"
+                android:textSize="10dp"
+                android:visibility="invisible"
+                app:backgroundTint="#9ce3ff"
+                app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
+                app:layout_constraintEnd_toStartOf="@+id/btncurrentUser" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/friend2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="52dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:hint="friend2"
+                android:textAppearance="?attr/buttonStyleSmall"
+                android:textSize="10dp"
+                android:visibility="invisible"
+                app:backgroundTint="#9ce3ff"
+                app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
+                app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+
+                android:id="@+id/friend3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginBottom="84dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:hint="friend3"
+                android:textAppearance="?attr/buttonStyleSmall"
+                android:textSize="10dp"
+                android:visibility="invisible"
+                app:backgroundTint="#9ce3ff"
+                app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
+                app:layout_constraintStart_toEndOf="@+id/btncurrentUser" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+
+                android:id="@+id/friend4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="32dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:hint="friend4"
+                android:textAppearance="?attr/buttonStyleSmall"
+                android:textSize="10dp"
+                android:visibility="invisible"
+                app:backgroundTint="#9ce3ff"
+                app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
+                app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+
+                android:id="@+id/friend5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="168dp"
+                android:layout_marginEnd="32dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:hint="friend5"
+                android:textAppearance="?attr/buttonStyleSmall"
+                android:textSize="10dp"
+                android:visibility="invisible"
+                app:backgroundTint="#9ce3ff"
+                app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+                app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+
+                android:id="@+id/friend6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="128dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:hint="friend6"
+                android:textAppearance="?attr/buttonStyleSmall"
+                android:textSize="10dp"
+                android:visibility="invisible"
+                app:backgroundTint="#9ce3ff"
+                app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
+                app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+                app:backgroundTint="#eb5839"
+                app:fabCustomSize="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/btn_dialog" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</androidx.drawerlayout.widget.DrawerLayout>

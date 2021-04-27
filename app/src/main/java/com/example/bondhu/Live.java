@@ -18,12 +18,14 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,6 +40,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,6 +49,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,6 +73,8 @@ public class Live extends AppCompatActivity {
     TextView noUsersText;
     TextView currentUser;
     TextView currentStatusView;
+    TextView testing;
+    TextView testing2;
     ExtendedFloatingActionButton friend1;
     ExtendedFloatingActionButton friend2;
     ExtendedFloatingActionButton friend3;
@@ -108,6 +114,10 @@ public class Live extends AppCompatActivity {
     ExtendedFloatingActionButton btncurrentUser;
     FloatingActionButton logout;
 
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+
     Boolean clicked;
     Boolean starter =false;
     String status1;
@@ -133,6 +143,8 @@ public class Live extends AppCompatActivity {
         totalStatusList = (ListView)findViewById(R.id.totalStatusList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         currentUser = (TextView)findViewById(R.id.currentUser);
+        //testing = (TextView)findViewById(R.id.testing);
+        //testing2 = (TextView)findViewById(R.id.testing2);
         friend1 = (ExtendedFloatingActionButton )findViewById(R.id.friend1);
         friend2 = (ExtendedFloatingActionButton)findViewById(R.id.friend2);
         friend3 = (ExtendedFloatingActionButton)findViewById(R.id.friend3);
@@ -160,6 +172,10 @@ public class Live extends AppCompatActivity {
         friend6Gif = (GifImageView) findViewById(R.id.friend6Gif);
         currentStatusGif = (GifImageView) findViewById(R.id.currentStatusGif);
 
+        //navbar tools
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar =  findViewById(R.id.toolbar);
 
         String currentDateandTimeGeneral = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
 
@@ -168,6 +184,7 @@ public class Live extends AppCompatActivity {
         statusDbRef2 = FirebaseDatabase.getInstance().getReference().child("users");
 
 
+        //navbar tools
 
 
         //////spinner values added from array
@@ -193,6 +210,35 @@ public class Live extends AppCompatActivity {
 
         //create and send notification
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        // Log and toast
+                        String msg = token;
+                        Log.d("----------------------", token);
+                        Toast.makeText(Live.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        if(getIntent().getExtras() != null){
+            for(String key : getIntent().getExtras().keySet()){
+                if (key.equals("title")){
+                    testing.setText((getIntent().getExtras().getString(key)));
+                }else if(key.equals("message")) {
+                    testing2.setText((getIntent().getExtras().getString(key)));
+                }
+            }
+        }
 
         */
         ////////////////////-----------------construction notification----------------------------------------------------------
