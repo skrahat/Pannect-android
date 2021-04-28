@@ -79,12 +79,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     TextView currentStatusView;
     TextView testing;
     TextView testing2;
-    ExtendedFloatingActionButton friend1;
-    ExtendedFloatingActionButton friend2;
-    ExtendedFloatingActionButton friend3;
-    ExtendedFloatingActionButton friend4;
-    ExtendedFloatingActionButton friend5;
-    ExtendedFloatingActionButton friend6;
+    Button friend1;
+    Button friend2;
+    Button friend3;
+    Button friend4;
+    Button friend5;
+    Button friend6;
     ArrayList<String> al = new ArrayList<>();
     ArrayList<String> al2 = new ArrayList<>();
     ArrayList<String> friendsArray = new ArrayList<>();
@@ -101,7 +101,6 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     ProgressDialog pd;
     Button btnLiveStatusData2;
     Button btnLiveStatusSelectAdd;
-    Button btnFriends;
     EditText etLiveStatus;
     DatabaseReference statusDbRef;
     Spinner spinnerStatus;
@@ -115,8 +114,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     GifImageView friend5Gif;
     GifImageView friend6Gif;
     GifImageView currentStatusGif;
-    ExtendedFloatingActionButton btncurrentUser;
-    FloatingActionButton logout;
+    Button btncurrentUser;
 
     DrawerLayout drawerLayout;
     NavigationView nav_view;
@@ -149,18 +147,16 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         currentUser = (TextView)findViewById(R.id.currentUser);
         //testing = (TextView)findViewById(R.id.testing);
         //testing2 = (TextView)findViewById(R.id.testing2);
-        friend1 = (ExtendedFloatingActionButton )findViewById(R.id.friend1);
-        friend2 = (ExtendedFloatingActionButton)findViewById(R.id.friend2);
-        friend3 = (ExtendedFloatingActionButton)findViewById(R.id.friend3);
-        friend4 = (ExtendedFloatingActionButton)findViewById(R.id.friend4);
-        friend5 = (ExtendedFloatingActionButton)findViewById(R.id.friend5);
-        friend6 = (ExtendedFloatingActionButton)findViewById(R.id.friend6);
-        logout = findViewById(R.id.logout);
+        friend1 = (Button )findViewById(R.id.friend1);
+        friend2 = (Button)findViewById(R.id.friend2);
+        friend3 = (Button)findViewById(R.id.friend3);
+        friend4 = (Button)findViewById(R.id.friend4);
+        friend5 = (Button)findViewById(R.id.friend5);
+        friend6 = (Button)findViewById(R.id.friend6);
 
         etLiveStatus = findViewById(R.id.etLiveStatus);
         btnLiveStatusData2 = findViewById(R.id.btnLiveStatusData2);
         btnLiveStatusSelectAdd = findViewById(R.id.btnLiveStatusSelectAdd);
-        btnFriends = findViewById(R.id.btnFriends);
         spinnerStatus = findViewById(R.id.spinnerStatus);
         currentStatusView = (TextView)findViewById(R.id.currentStatusView);
         btncurrentUser = findViewById(R.id.btncurrentUser);
@@ -897,13 +893,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
-        //open users activity
-        btnFriends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openNewActivity();
-            }
-        });
+
 
 
 
@@ -1004,18 +994,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
             }});
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(Live.this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
 
-            }
-        });
 
 
 
@@ -1280,6 +1259,14 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_friends:
                 Intent intent = new Intent(Live.this, Users.class);
                 startActivity(intent);
+                break;
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent2 = new Intent(Live.this, LoginActivity.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent2);
+                finish();
                 break;
         }
         return true;

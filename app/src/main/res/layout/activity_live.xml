@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Live"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:context=".Live"
+    tools:openDrawer="end">
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/nav_view"
+        android:layout_gravity="start"
         app:headerLayout="@layout/header"
-        app:menu="@menu/main_menu"
-        android:layout_gravity="start" />
+        app:menu="@menu/main_menu" />
 
 
     <ScrollView
@@ -23,13 +23,13 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-        android:theme="@style/MyMaterialTheme"
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:background="#F0F8FF"
-        tools:context="com.example.bondhu.Users"
-        tools:viewBindingIgnore="true">
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="#F0F8FF"
+            android:theme="@style/MyMaterialTheme"
+            tools:context="com.example.bondhu.Users"
+            tools:viewBindingIgnore="true">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -40,47 +40,32 @@
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/app_icon">
+                app:layout_constraintTop_toTopOf="parent">
 
             </androidx.appcompat.widget.Toolbar>
 
             <TextView
-            android:id="@+id/noUsersText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/no_users_found"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-            <Button
-                android:id="@+id/btnFriends"
-                android:layout_width="76dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="572dp"
-                android:text="Freiends"
-                android:textColor="@color/colorPrimary"
-                android:textSize="5dp"
-                android:textStyle="bold"
+                android:id="@+id/noUsersText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_users_found"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.94"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/currentStatusGif"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.641"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/currentStatusGif"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.737"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/friend1Gif"
@@ -130,15 +115,15 @@
                 app:layout_constraintHorizontal_bias="0.468"
                 app:layout_constraintStart_toStartOf="@+id/friend4" />
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/friend3Gif"
-            android:layout_width="61dp"
-            android:layout_height="56dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/friend3"
-            app:layout_constraintEnd_toEndOf="@+id/friend3"
-            app:layout_constraintHorizontal_bias="0.535"
-            app:layout_constraintStart_toStartOf="@+id/friend3" />
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/friend3Gif"
+                android:layout_width="61dp"
+                android:layout_height="56dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/friend3"
+                app:layout_constraintEnd_toEndOf="@+id/friend3"
+                app:layout_constraintHorizontal_bias="0.535"
+                app:layout_constraintStart_toStartOf="@+id/friend3" />
 
             <EditText
                 android:id="@+id/etLiveStatus"
@@ -182,13 +167,13 @@
                 android:id="@+id/currentUser"
                 android:layout_width="100dp"
                 android:layout_height="33dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="16dp"
                 android:cursorVisible="false"
                 android:gravity="center"
                 android:text="TextView"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.212"
+                app:layout_constraintHorizontal_bias="0.209"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -212,21 +197,20 @@
                 android:id="@+id/currentStatusView"
                 android:layout_width="102dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:backgroundTint="#ece3ff"
                 android:gravity="center"
                 android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.893"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="99dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="12dp"
                 android:background="#ece3ff"
                 android:gravity="center"
                 android:text="Current Status :"
@@ -236,43 +220,44 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/btncurrentUser"
-            android:layout_width="50dp"
-            android:layout_height="39dp"
-            android:layout_marginTop="312dp"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:text="Me"
-            android:textColor="#ffffff"
-            android:textSize="8dp"
-            app:backgroundTint="#eb5834"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="#ffffff"
-            app:strokeWidth="1dp"
-            app:useCompatPadding="true" />
+            <Button
+                android:id="@+id/btncurrentUser"
+                android:layout_width="50dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="312dp"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:text="Me"
+                android:textColor="#ffffff"
+                android:textSize="8dp"
+                app:backgroundTint="#eb5834"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#ffffff"
+                app:strokeWidth="1dp"
+                app:useCompatPadding="true" />
 
-        <ListView
-            android:id="@+id/totalStatusList"
-            android:layout_width="108dp"
-            android:layout_height="156dp"
-            android:layout_marginBottom="56dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
-            app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
-            app:layout_constraintHorizontal_bias="0.507"
-            app:layout_constraintStart_toStartOf="@+id/btncurrentUser">
+            <ListView
+                android:id="@+id/totalStatusList"
+                android:layout_width="108dp"
+                android:layout_height="156dp"
+                android:layout_marginBottom="56dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
+                app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintStart_toStartOf="@+id/btncurrentUser">
 
-        </ListView>
+            </ListView>
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <Button
                 android:id="@+id/friend1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="28dp"
                 android:layout_marginBottom="84dp"
+                android:background="@drawable/mybutton"
                 android:clickable="true"
                 android:gravity="center"
                 android:hint="friend1"
@@ -283,7 +268,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
                 app:layout_constraintEnd_toStartOf="@+id/btncurrentUser" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <Button
                 android:id="@+id/friend2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -296,10 +281,11 @@
                 android:textSize="10dp"
                 android:visibility="invisible"
                 app:backgroundTint="#9ce3ff"
+                android:background="@drawable/mybutton"
                 app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
                 app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <Button
 
                 android:id="@+id/friend3"
                 android:layout_width="wrap_content"
@@ -313,10 +299,11 @@
                 android:textSize="10dp"
                 android:visibility="invisible"
                 app:backgroundTint="#9ce3ff"
+                android:background="@drawable/mybutton"
                 app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
                 app:layout_constraintStart_toEndOf="@+id/btncurrentUser" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <Button
 
                 android:id="@+id/friend4"
                 android:layout_width="wrap_content"
@@ -330,10 +317,11 @@
                 android:textSize="10dp"
                 android:visibility="invisible"
                 app:backgroundTint="#9ce3ff"
+                android:background="@drawable/mybutton"
                 app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
                 app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <Button
 
                 android:id="@+id/friend5"
                 android:layout_width="wrap_content"
@@ -347,10 +335,11 @@
                 android:textSize="10dp"
                 android:visibility="invisible"
                 app:backgroundTint="#9ce3ff"
+                android:background="@drawable/mybutton"
                 app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
                 app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <Button
 
                 android:id="@+id/friend6"
                 android:layout_width="wrap_content"
@@ -364,21 +353,24 @@
                 android:textSize="10dp"
                 android:visibility="invisible"
                 app:backgroundTint="#9ce3ff"
+                android:background="@drawable/mybutton"
                 app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
                 app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
-                android:layout_marginEnd="8dp"
-                android:clickable="true"
-                app:backgroundTint="#eb5839"
-                app:fabCustomSize="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/btn_dialog" />
+            <Button
+                android:id="@+id/btnTesting"
+                android:layout_width="56dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/mybutton"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="Button"
+                android:textColor="#ffffff"
+                app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
+                app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
