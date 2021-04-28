@@ -1,5 +1,7 @@
 package com.example.bondhu;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.NotificationChannel;
@@ -22,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -95,6 +98,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
     CountDownTimer timer;
 
+    private boolean rotate = false;
     int totalFriends = 0;
     int totalUsers = 0;
     int counter;
@@ -114,7 +118,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     GifImageView friend5Gif;
     GifImageView friend6Gif;
     GifImageView currentStatusGif;
-    Button btncurrentUser;
+    FloatingActionButton btncurrentUser;
 
     DrawerLayout drawerLayout;
     NavigationView nav_view;
@@ -154,12 +158,16 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         friend5 = (Button)findViewById(R.id.friend5);
         friend6 = (Button)findViewById(R.id.friend6);
 
+        FloatingActionButton fabOption1 = findViewById(R.id.fabOption1);
+        FloatingActionButton fabOption2 = findViewById(R.id.fabOption2);
+        FloatingActionButton fabOption3 = findViewById(R.id.fabOption3);
+        FloatingActionButton btncurrentUser = findViewById(R.id.btncurrentUser);
+
         etLiveStatus = findViewById(R.id.etLiveStatus);
         btnLiveStatusData2 = findViewById(R.id.btnLiveStatusData2);
         btnLiveStatusSelectAdd = findViewById(R.id.btnLiveStatusSelectAdd);
         spinnerStatus = findViewById(R.id.spinnerStatus);
         currentStatusView = (TextView)findViewById(R.id.currentStatusView);
-        btncurrentUser = findViewById(R.id.btncurrentUser);
         userT = UserDetails.username;
         clicked = false;
 
@@ -250,6 +258,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         }
 
         */
+
         ////////////////////-----------------construction notification----------------------------------------------------------
 
         pd = new ProgressDialog(Live.this);
@@ -291,6 +300,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 doOnSuccessF(s);
 
                 statusDbRef2.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (!task.isSuccessful()) {
@@ -470,6 +480,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         //DatabaseReference myRef = database.getReference("users");
         myRef.addValueEventListener(new ValueEventListener() {
 
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -576,9 +587,49 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
+        //status button from center selection FAB
+        initShowOut(fabOption1);
+        initShowOut(fabOption2);
+        initShowOut(fabOption3);
+
+        btncurrentUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rotate = rotateFab(view, !rotate);
+                if (rotate) {
+                    showIn(fabOption1);
+                    showIn(fabOption2);
+                    showIn(fabOption3);
+                } else {
+                    showOut(fabOption1);
+                    showOut(fabOption2);
+                    showOut(fabOption3);
+                }
+            }
+        });
+
+        fabOption1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(Live.this, "option1 clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+        fabOption2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(Live.this, "option2 clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+        fabOption3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(Live.this, "option3 clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //view user's own status history
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("users");
+        /*
         btncurrentUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -622,6 +673,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 }
             }
         });
+        */
         //click fab friend1 button to show total status list
         friend1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1100,6 +1152,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         pd.dismiss();
     }
     //get every friends status
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void getAllFriendsStatus(String s){
         // fetching current status from the friendsArray List
         try{
@@ -1270,5 +1323,58 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
         }
         return true;
+    }
+
+    //FAB button selection functions
+    public static void initShowOut(final View v) {
+        v.setVisibility(View.GONE);
+        v.setTranslationY(v.getHeight());
+        v.setAlpha(0f);
+    }
+    //FAB button selection functions
+    public static boolean rotateFab(final View v, boolean rotate) {
+        v.animate().setDuration(200)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                    }
+                })
+                .rotation(rotate ? 135f : 0f);
+        return rotate;
+    }
+    //FAB button selection functions
+    public static void showIn(final View v) {
+        v.setVisibility(View.VISIBLE);
+        v.setAlpha(0f);
+        v.setTranslationY(v.getHeight());
+        v.animate()
+                .setDuration(200)
+                .translationY(0)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                    }
+                })
+                .alpha(1f)
+                .start();
+    }
+    //FAB button selection functions
+    public static void showOut(final View v) {
+        v.setVisibility(View.VISIBLE);
+        v.setAlpha(1f);
+        v.setTranslationY(0);
+        v.animate()
+                .setDuration(200)
+                .translationY(v.getHeight())
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        v.setVisibility(View.GONE);
+                        super.onAnimationEnd(animation);
+                    }
+                }).alpha(0f)
+                .start();
     }
 }
