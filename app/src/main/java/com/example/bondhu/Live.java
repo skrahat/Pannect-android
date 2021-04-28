@@ -198,6 +198,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
         nav_view.setNavigationItemSelectedListener(this);
 
+        //nav_view.setCheckedItem(R.id.nav_home);
+
         //////spinner values added from array
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -254,6 +256,9 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         */
         ////////////////////-----------------construction notification----------------------------------------------------------
 
+        pd = new ProgressDialog(Live.this);
+        pd.setMessage("Loading...");
+        pd.show();
 
         //generates all users in list
         String url = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
@@ -459,9 +464,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
-        pd = new ProgressDialog(Live.this);
-        pd.setMessage("Loading...");
-        pd.show();
+
 
 
 
@@ -1059,7 +1062,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
         }
 
-        pd.dismiss();
+
     }
     //get 10 most recent status
     public void getSingleUserOldStatus(DataSnapshot dataSnapshot){
@@ -1231,6 +1234,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        pd.dismiss();
     }
     //redirects to friends setting activity
     public void openNewActivity(){

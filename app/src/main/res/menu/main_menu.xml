@@ -6,10 +6,24 @@
         <item
             android:id="@+id/nav_home"
             android:title="Home"
-            android:icon="@drawable/app_icon"/>
+            android:background="#CCCCCC"
+            android:icon="@drawable/home_icon"/>
         <item
             android:id="@+id/nav_friends"
             android:title="Friends"
-            android:icon="@drawable/app_icon"/>
+            android:background="#CCCCCC"
+            android:icon="@drawable/friends_icon"/>
+
     </group>
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/logout"
+            android:title="Logout"
+            android:icon="@drawable/logout_icon"/>
+
+
+    </group>
+
 </menu>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:orientation="vertical"
-    android:background="@color/browser_actions_divider_color"
+    android:background="@drawable/menu_background"
     android:gravity="bottom"
     android:padding="20dp">
 
