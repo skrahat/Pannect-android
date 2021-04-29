@@ -408,6 +408,28 @@
                 app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
                 app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabCheckScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:clickable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.938"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/stat_notify_sync" />
+
+            <TextView
+                android:id="@+id/friend1Score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="score"
+                app:layout_constraintEnd_toEndOf="@+id/friend1"
+                app:layout_constraintStart_toStartOf="@+id/friend1"
+                app:layout_constraintTop_toBottomOf="@+id/friend1" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

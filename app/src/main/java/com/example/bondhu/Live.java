@@ -80,7 +80,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     TextView noUsersText;
     TextView currentUser;
     TextView currentStatusView;
-    TextView testing;
+    TextView friend1Score;
     TextView testing2;
     Button friend1;
     Button friend2;
@@ -94,6 +94,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     ArrayList<String> friendsStatusArray = new ArrayList<>();
     ArrayList<String> gifListArray = new ArrayList<>();
     ArrayList<String> totalStatus = new ArrayList<>();
+    ArrayList<String> currentUserTotalStatus = new ArrayList<>();
     ArrayList<String> friendsArrayID = new ArrayList<>();
 
     CountDownTimer timer;
@@ -118,7 +119,6 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     GifImageView friend5Gif;
     GifImageView friend6Gif;
     GifImageView currentStatusGif;
-    FloatingActionButton btncurrentUser;
 
     DrawerLayout drawerLayout;
     NavigationView nav_view;
@@ -149,7 +149,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         totalStatusList = (ListView)findViewById(R.id.totalStatusList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         currentUser = (TextView)findViewById(R.id.currentUser);
-        //testing = (TextView)findViewById(R.id.testing);
+        friend1Score = (TextView)findViewById(R.id.friend1Score);
         //testing2 = (TextView)findViewById(R.id.testing2);
         friend1 = (Button )findViewById(R.id.friend1);
         friend2 = (Button)findViewById(R.id.friend2);
@@ -162,6 +162,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         FloatingActionButton fabOption2 = findViewById(R.id.fabOption2);
         FloatingActionButton fabOption3 = findViewById(R.id.fabOption3);
         FloatingActionButton btncurrentUser = findViewById(R.id.btncurrentUser);
+        FloatingActionButton fabCheckScore = findViewById(R.id.fabCheckScore);
 
         etLiveStatus = findViewById(R.id.etLiveStatus);
         btnLiveStatusData2 = findViewById(R.id.btnLiveStatusData2);
@@ -190,7 +191,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
         statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
         statusDbRef2 = FirebaseDatabase.getInstance().getReference().child("users");
-
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("users");
 
         //navbar tools
         nav_view.bringToFront();
@@ -586,7 +587,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
+//////////------------working on center status buttons---------
         //status button from center selection FAB
         initShowOut(fabOption1);
         initShowOut(fabOption2);
@@ -626,9 +627,52 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 Toast.makeText(Live.this, "option3 clicked", Toast.LENGTH_SHORT).show();
             }
         });
+//////////------------working on center status buttons---------
+
+
+        //////////-----------/////check socre construction button------------------------------
+        fabCheckScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Query query=databaseReference.child(friendsArrayID.get(0)).child("totalStatus").orderByChild("time").limitToLast(5);
+                Query queryCurrentUser =databaseReference.child(UserDetails.id).child("totalStatus").orderByChild("time").limitToLast(5);
+
+                queryCurrentUser.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        getCurrentUserOldStatus(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        getSingleUserOldStatus(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                currentUserTotalStatus.retainAll(totalStatus);
+                friend1Score.setText("score:"+currentUserTotalStatus.size()+"/5");
+
+            }
+        });
+
+        //////////-----------/////check socre construction button------------------------------
 
         //view user's own status history
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("users");
+
         /*
         btncurrentUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1103,6 +1147,23 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                 TotalStatus statusT = snapshot.getValue(TotalStatus.class);
                 totalStatus.add(statusT.status);
+
+            }
+
+        }
+
+        totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, totalStatus));
+
+
+    }
+    //get 10 most recent status of current user
+    public void getCurrentUserOldStatus(DataSnapshot dataSnapshot){
+
+        currentUserTotalStatus.clear();
+        if (dataSnapshot.exists()) {
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                TotalStatus statusT = snapshot.getValue(TotalStatus.class);
+                currentUserTotalStatus.add(statusT.status);
 
             }
 
