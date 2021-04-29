@@ -377,8 +377,8 @@
                 android:id="@+id/friend5"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:layout_marginTop="196dp"
-                android:layout_marginEnd="92dp"
+                android:layout_marginTop="192dp"
+                android:layout_marginEnd="60dp"
                 android:background="@drawable/mybutton"
                 android:clickable="true"
                 android:gravity="center"
@@ -395,8 +395,8 @@
                 android:id="@+id/friend6"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:layout_marginStart="72dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="136dp"
                 android:background="@drawable/mybutton"
                 android:clickable="true"
                 android:gravity="center"
@@ -420,15 +420,77 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/stat_notify_sync" />
 
+
             <TextView
                 android:id="@+id/friend1Score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="28dp"
                 android:text="score"
+                app:layout_constraintEnd_toEndOf="@+id/friend1"
+                app:layout_constraintHorizontal_bias="0.452"
+                app:layout_constraintStart_toStartOf="@+id/friend1"
+                app:layout_constraintTop_toBottomOf="@+id/friend1" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+
                 app:layout_constraintEnd_toEndOf="@+id/friend1"
                 app:layout_constraintStart_toStartOf="@+id/friend1"
                 app:layout_constraintTop_toBottomOf="@+id/friend1" />
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="@+id/friend2"
+                app:layout_constraintStart_toStartOf="@+id/friend2"
+                app:layout_constraintTop_toBottomOf="@+id/friend2" />
+
+            <ProgressBar
+                android:id="@+id/progressBar3"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="@+id/friend3"
+                app:layout_constraintStart_toStartOf="@+id/friend3"
+                app:layout_constraintTop_toBottomOf="@+id/friend3" />
+
+            <ProgressBar
+                android:id="@+id/progressBar4"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="@+id/friend4"
+                app:layout_constraintStart_toStartOf="@+id/friend4"
+                app:layout_constraintTop_toBottomOf="@+id/friend4" />
+
+            <ProgressBar
+                android:id="@+id/progressBar5"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="@+id/friend5"
+                app:layout_constraintStart_toStartOf="@+id/friend5"
+                app:layout_constraintTop_toBottomOf="@+id/friend5" />
+
+            <ProgressBar
+                android:id="@+id/progressBar6"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                app:layout_constraintEnd_toEndOf="@+id/friend6"
+                app:layout_constraintStart_toStartOf="@+id/friend6"
+                app:layout_constraintTop_toBottomOf="@+id/friend6" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

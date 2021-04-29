@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,14 +95,26 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     Button friend4;
     Button friend5;
     Button friend6;
+    ProgressBar progressBar;
+    ProgressBar progressBar2;
+    ProgressBar progressBar3;
+    ProgressBar progressBar4;
+    ProgressBar progressBar5;
+    ProgressBar progressBar6;
     ArrayList<String> al = new ArrayList<>();
     ArrayList<String> al2 = new ArrayList<>();
     ArrayList<String> friendsArray = new ArrayList<>();
     ArrayList<String> friendsStatusArray = new ArrayList<>();
     ArrayList<String> gifListArray = new ArrayList<>();
     ArrayList<String> totalStatus = new ArrayList<>();
+    List<List<String>> totalStatusMultipleFriendsList = new ArrayList<List<String>>();
     ArrayList<String> currentUserTotalStatus = new ArrayList<>();
     ArrayList<String> friendsArrayID = new ArrayList<>();
+    List<Button> friendBtnList = new ArrayList<>();
+    List<ProgressBar> friendProgressList = new ArrayList<>();
+    List<GifImageView> friendGifList = new ArrayList<>();
+    List<TextView> friendScoreList = new ArrayList<>();
+
 
     CountDownTimer timer;
 
@@ -156,12 +169,14 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         currentUser = (TextView)findViewById(R.id.currentUser);
         friend1Score = (TextView)findViewById(R.id.friend1Score);
-        friend2Score = (TextView)findViewById(R.id.friend2Score);
+        /*friend2Score = (TextView)findViewById(R.id.friend2Score);
         friend3Score = (TextView)findViewById(R.id.friend3Score);
         friend4Score = (TextView)findViewById(R.id.friend4Score);
         friend5Score = (TextView)findViewById(R.id.friend5Score);
         friend6Score = (TextView)findViewById(R.id.friend6Score);
-        final List<TextView> friendScoreList = Arrays.asList(friend1Score, friend2Score, friend3Score, friend4Score, friend5Score,friend6Score);
+
+         */
+
 
         //testing2 = (TextView)findViewById(R.id.testing2);
         friend1 = (Button )findViewById(R.id.friend1);
@@ -170,7 +185,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         friend4 = (Button)findViewById(R.id.friend4);
         friend5 = (Button)findViewById(R.id.friend5);
         friend6 = (Button)findViewById(R.id.friend6);
-        final List<Button> friendBtnList = Arrays.asList(friend1, friend2, friend3, friend4, friend5,friend6);
+
 
         FloatingActionButton fabOption1 = findViewById(R.id.fabOption1);
         FloatingActionButton fabOption2 = findViewById(R.id.fabOption2);
@@ -194,6 +209,23 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         friend5Gif = (GifImageView) findViewById(R.id.friend5Gif);
         friend6Gif = (GifImageView) findViewById(R.id.friend6Gif);
         currentStatusGif = (GifImageView) findViewById(R.id.currentStatusGif);
+
+
+         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
+         progressBar3 = (ProgressBar) findViewById(R.id.progressBar3);
+         progressBar4 = (ProgressBar) findViewById(R.id.progressBar4);
+         progressBar5 = (ProgressBar) findViewById(R.id.progressBar5);
+         progressBar6 = (ProgressBar) findViewById(R.id.progressBar6);
+
+        List<ProgressBar> friendProgressList = Arrays.asList(progressBar, progressBar2, progressBar3, progressBar4, progressBar5,progressBar6);
+        List<GifImageView> friendGifList = Arrays.asList(friend1Gif, friend2Gif, friend3Gif, friend4Gif, friend5Gif,friend6Gif);
+        friendBtnList = Arrays.asList(friend1, friend2, friend3, friend4, friend5,friend6);
+        List<TextView> friendScoreList = Arrays.asList(friend1Score, friend2Score, friend3Score, friend4Score, friend5Score,friend6Score);
+
+        //progressBar.setSecondaryProgress(50);
+        //progressBar.setMax(100);
+
 
         //navbar tools
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -354,81 +386,17 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                                 String valuex = task.getResult().child(friendsArrayID.get(friendsArrayStatusCounter)).child("currentStatus").getValue(String.class);
                                 friendsStatusArray.add(valuex);
 
-                                switch(friendsArrayStatusCounter+1) {
-                                    case 1:
-                                        friend1.setText(friendsArray.get(0)+":"+friendsStatusArray.get(0));
-                                        int id1 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(0), null, null);
-                                        friend1Gif.setImageResource(id1);
-                                        friend1.setVisibility(View.VISIBLE);
-                                        friend1Gif.setVisibility(View.VISIBLE);
-                                        if(friendsStatusArray.get(0).equals(UserDetails.currentStatus)){
-                                            friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                        }else{
-                                            friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                        }
-
-                                        break;
-                                    case 2:
-                                        friend2.setText(friendsArray.get(1)+":"+friendsStatusArray.get(1));
-                                        int id2 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(1), null, null);
-                                        friend2Gif.setImageResource(id2);
-                                        friend2.setVisibility(View.VISIBLE);
-                                        friend2Gif.setVisibility(View.VISIBLE);
-                                        if(friendsStatusArray.get(1).equals(UserDetails.currentStatus)){
-                                            friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                        }else{
-                                            friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                        }
-                                        break;
-                                    case 3:
-                                        friend3.setText(friendsArray.get(2)+":"+friendsStatusArray.get(2));
-                                        int id3 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(2), null, null);
-                                        friend3Gif.setImageResource(id3);
-                                        friend3.setVisibility(View.VISIBLE);
-                                        friend3Gif.setVisibility(View.VISIBLE);
-                                        if(friendsStatusArray.get(2).equals(UserDetails.currentStatus)){
-                                            friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                        }else{
-                                            friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                        }
-                                        break;
-                                    case 4:
-                                        friend4.setText(friendsArray.get(3)+":"+friendsStatusArray.get(3));
-                                        int id4 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(3), null, null);
-                                        friend4Gif.setImageResource(id4);
-                                        friend4.setVisibility(View.VISIBLE);
-                                        friend4Gif.setVisibility(View.VISIBLE);
-                                        if(friendsStatusArray.get(3).equals(UserDetails.currentStatus)){
-                                            friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                        }else{
-                                            friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                        }
-                                        break;
-                                    case 5:
-                                        friend5.setText(friendsArray.get(4)+":"+friendsStatusArray.get(4));
-                                        int id5 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(4), null, null);
-                                        friend5Gif.setImageResource(id5);
-                                        friend5.setVisibility(View.VISIBLE);
-                                        friend5Gif.setVisibility(View.VISIBLE);
-                                        if(friendsStatusArray.get(4).equals(UserDetails.currentStatus)){
-                                            friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                        }else{
-                                            friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                        }
-                                        break;
-                                    case 6:
-                                        friend6.setText(friendsArray.get(5)+":"+friendsStatusArray.get(5));
-                                        int id6 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(5), null, null);
-                                        friend6Gif.setImageResource(id6);
-                                        friend6.setVisibility(View.VISIBLE);
-                                        friend6Gif.setVisibility(View.VISIBLE);
-                                        if(friendsStatusArray.get(5).equals(UserDetails.currentStatus)){
-                                            friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                        }else{
-                                            friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                        }
-                                        break;
+                                friendBtnList.get(friendsArrayStatusCounter).setText(friendsArray.get(friendsArrayStatusCounter) + ":" + friendsStatusArray.get(friendsArrayStatusCounter));
+                                int id1 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(friendsArrayStatusCounter), null, null);
+                                friendGifList.get(friendsArrayStatusCounter).setImageResource(id1);
+                                friendBtnList.get(friendsArrayStatusCounter).setVisibility(View.VISIBLE);
+                                friendGifList.get(friendsArrayStatusCounter).setVisibility(View.VISIBLE);
+                                if (friendsStatusArray.get(friendsArrayStatusCounter).equals(UserDetails.currentStatus)) {
+                                    friendBtnList.get(friendsArrayStatusCounter).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                                } else {
+                                    friendBtnList.get(friendsArrayStatusCounter).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
                                 }
+
                                 friendsArrayStatusCounter++;
                             }
 
@@ -509,84 +477,18 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                     while (friendsArray.size() > count) {
                         String value = dataSnapshot.child(friendsArrayID.get(count)).child("currentStatus").getValue(String.class);
                         friendsStatusArray.add(value);
-                        String w = String.valueOf(count);
-
-
-                        switch (count + 1) {
-                            case 1:
-                                friend1.setText(friendsArray.get(0) + ":" + friendsStatusArray.get(0));
-                                int id1 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(0), null, null);
-                                friend1Gif.setImageResource(id1);
-                                friend1.setVisibility(View.VISIBLE);
-                                friend1Gif.setVisibility(View.VISIBLE);
-                                if (friendsStatusArray.get(0).equals(UserDetails.currentStatus)) {
-                                    friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                } else {
-                                    friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                }
-
-                                break;
-                            case 2:
-                                friend2.setText(friendsArray.get(1) + ":" + friendsStatusArray.get(1));
-                                int id2 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(1), null, null);
-                                friend2Gif.setImageResource(id2);
-                                friend2.setVisibility(View.VISIBLE);
-                                friend2Gif.setVisibility(View.VISIBLE);
-                                if (friendsStatusArray.get(1).equals(UserDetails.currentStatus)) {
-                                    friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                } else {
-                                    friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                }
-                                break;
-                            case 3:
-                                friend3.setText(friendsArray.get(2) + ":" + friendsStatusArray.get(2));
-                                int id3 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(2), null, null);
-                                friend3Gif.setImageResource(id3);
-                                friend3.setVisibility(View.VISIBLE);
-                                friend3Gif.setVisibility(View.VISIBLE);
-                                if (friendsStatusArray.get(2).equals(UserDetails.currentStatus)) {
-                                    friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                } else {
-                                    friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                }
-                                break;
-                            case 4:
-                                friend4.setText(friendsArray.get(3) + ":" + friendsStatusArray.get(3));
-                                int id4 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(3), null, null);
-                                friend4Gif.setImageResource(id4);
-                                friend4.setVisibility(View.VISIBLE);
-                                friend4Gif.setVisibility(View.VISIBLE);
-                                if (friendsStatusArray.get(3).equals(UserDetails.currentStatus)) {
-                                    friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                } else {
-                                    friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                }
-                                break;
-                            case 5:
-                                friend5.setText(friendsArray.get(4) + ":" + friendsStatusArray.get(4));
-                                int id5 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(4), null, null);
-                                friend5Gif.setImageResource(id5);
-                                friend5.setVisibility(View.VISIBLE);
-                                friend5Gif.setVisibility(View.VISIBLE);
-                                if (friendsStatusArray.get(4).equals(UserDetails.currentStatus)) {
-                                    friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                } else {
-                                    friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                }
-                                break;
-                            case 6:
-                                friend6.setText(friendsArray.get(5) + ":" + friendsStatusArray.get(5));
-                                int id6 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(5), null, null);
-                                friend6Gif.setImageResource(id6);
-                                friend6.setVisibility(View.VISIBLE);
-                                friend6Gif.setVisibility(View.VISIBLE);
-                                if (friendsStatusArray.get(5).equals(UserDetails.currentStatus)) {
-                                    friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                } else {
-                                    friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                }
-                                break;
+                        Log.i( "xxxxxxx--btn test", String.valueOf(count));
+                        friendBtnList.get(count).setText(friendsArray.get(count) + ":" + friendsStatusArray.get(count));
+                        int id1 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(count), null, null);
+                        friendGifList.get(count).setImageResource(id1);
+                        friendBtnList.get(count).setVisibility(View.VISIBLE);
+                        friendGifList.get(count).setVisibility(View.VISIBLE);
+                        if (friendsStatusArray.get(count).equals(UserDetails.currentStatus)) {
+                            friendBtnList.get(count).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                        } else {
+                            friendBtnList.get(count).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
                         }
+
                         count++;
                     }
 
@@ -648,25 +550,27 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         fabCheckScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Query queryCurrentUser = databaseReference.child(UserDetails.id).child("totalStatus").orderByChild("time").limitToLast(5);
+                int x=0;
+                while (friendsArrayID.size() > x) {
+                    Query queryCurrentUser = databaseReference.child(UserDetails.id).child("totalStatus").orderByChild("time").limitToLast(10);
 
 
-                queryCurrentUser.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        getCurrentUserOldStatus(dataSnapshot);
-                    }
+                    queryCurrentUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            getCurrentUserOldStatus(dataSnapshot);
+                        }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
-                for(int z =1;friendsArrayID.size() +1 >z;z++) {
-                    Query query = databaseReference.child(friendsArrayID.get(z)).child("totalStatus").orderByChild("time").limitToLast(5);
+                        }
+                    });
 
+                    Query query = databaseReference.child(friendsArrayID.get(x)).child("totalStatus").orderByChild("time").limitToLast(10);
+                    //Log.i("testing Z valueXXXXXX",String.valueOf(z));
 
-                    query.addValueEventListener(new ValueEventListener() {
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -679,10 +583,21 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
                         }
                     });
-                    currentUserTotalStatus.retainAll(totalStatus);
 
-                    friendBtnList.get(z).setText("score:" + currentUserTotalStatus.size() + "/5");
+
+                    ArrayList<String> totalStatusTemp = totalStatus;
+                    Log.i("testing Z valueXXXXXX", String.valueOf(x));
+                    Log.i("testing Z value", String.valueOf(totalStatus.size()));
+                    Log.i("testing Z friendsAryID", String.valueOf(friendsArrayID.size()));
+
+                    totalStatusTemp.retainAll(currentUserTotalStatus);
+
+                    friendBtnList.get(x).setText("score:" + totalStatus.size() + "/10");
+                    friendProgressList.get(x).setProgress(totalStatus.size() * 10);
+                    //progressBar.setProgress(80);
+                    x++;
                 }
+
             }
         });
 
@@ -690,7 +605,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
         //view user's own status history
 
-        /*
+
         btncurrentUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -734,7 +649,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 }
             }
         });
-        */
+
         //click fab friend1 button to show total status list
         friend1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1171,6 +1086,21 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
         totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, totalStatus));
 
+    }
+    //get 10 most recent status
+    public void getSingleUserOldStatusTemp(DataSnapshot dataSnapshot,Integer i){
+
+        totalStatus.clear();
+        if (dataSnapshot.exists()) {
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                TotalStatus statusT = snapshot.getValue(TotalStatus.class);
+                totalStatus.add(statusT.status);
+
+            }
+
+        }
+
+        totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, totalStatus));
 
     }
     //get 10 most recent status of current user
@@ -1186,8 +1116,44 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
         }
 
-        totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, totalStatus));
+        //totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, totalStatus));
 
+    }
+    //temp total status listing
+    public void temp(String s){
+        totalStatus.clear();
+        try {
+            JSONObject obj = new JSONObject(s);
+            Iterator i = obj.keys();
+            String key = "";
+
+            while(i.hasNext()){
+                key = i.next().toString();
+                totalStatus.add(key);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+    //temp currentUserTotalStatus  listing
+
+    public void temp2(String s){
+        currentUserTotalStatus.clear();
+        try {
+            JSONObject obj = new JSONObject(s);
+            Iterator i = obj.keys();
+            String key = "";
+
+            while(i.hasNext()){
+                key = i.next().toString();
+                currentUserTotalStatus.add(key);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -1206,8 +1172,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
                 friendsArray.add(key);
                 //friendsArrayID.add(key2);
-                Log.i("testing friend array",key);
-                Log.i("testing friend array",key2);
+                //Log.i("testing friend array",key);
+                //Log.i("testing friend array",key2);
 
 
 
@@ -1247,8 +1213,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                     if(key.equals(friendsArrayID.get(countX))) {
                         String key2 = obj.getJSONObject(key).getString("currentStatus");
                         friendsStatusArray.add(key2);
-                        Log.i("friend stat testID", friendsArrayID.get(countX));
-                        Log.i("friend stat testStat", key2);
+                        //Log.i("friend stat testID", friendsArrayID.get(countX));
+                        //Log.i("friend stat testStat", key2);
                     }
                     if(key.equals(UserDetails.id)){
                         UserDetails.username=obj.getJSONObject(key).getString("userName");
@@ -1256,91 +1222,20 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                     countX++;
                 }
             }
-            for(int z =1;friendsArrayID.size() +1 >z;z++)
-                switch(z) {
-                    case 1:
-                        friend1.setText(friendsArray.get(0)+":"+friendsStatusArray.get(0));
-                        int id1 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(0), null, null);
-                        Log.i("friendsArray.get(0)--", friendsArray.get(0));
-                        Log.i("friendsStatAray.get(0)-", friendsStatusArray.get(0));
-                        Log.i("testing friend ID 1--", friendsArrayID.get(0));
-                        friend1Gif.setImageResource(id1);
-                        friend1.setVisibility(View.VISIBLE);
-                        friend1Gif.setVisibility(View.VISIBLE);
-                        if(friendsStatusArray.get(0).equals(UserDetails.currentStatus)){
-                            friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                        }else{
-                            friend1.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                        }
+            for(int z =0;friendsArrayID.size()  >z;z++){
 
-                        break;
-                    case 2:
-                        friend2.setText(friendsArray.get(1)+":"+friendsStatusArray.get(1));
-                        int id2 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(1), null, null);
-                        Log.i("friendsArray.get(1)--", friendsArray.get(1));
-                        Log.i("friendsStatAray.get(1)-", friendsStatusArray.get(1));
-                        Log.i("testing friend ID 1--", friendsArrayID.get(1));
-                        friend2Gif.setImageResource(id2);
-                        friend2.setVisibility(View.VISIBLE);
-                        friend2Gif.setVisibility(View.VISIBLE);
-                        if(friendsStatusArray.get(1).equals(UserDetails.currentStatus)){
-                            friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                        }else{
-                            friend2.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                        }
-                        break;
-                    case 3:
-                        friend3.setText(friendsArray.get(2)+":"+friendsStatusArray.get(2));
-                        int id3 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(2), null, null);
-                        Log.i("friendsArray.get(2)--", friendsArray.get(2));
-                        Log.i("friendsStatAray.get(2)-", friendsStatusArray.get(2));
-                        Log.i("testing friend ID 3--", friendsArrayID.get(2));
-                        friend3Gif.setImageResource(id3);
-                        friend3.setVisibility(View.VISIBLE);
-                        friend3Gif.setVisibility(View.VISIBLE);
-                        if(friendsStatusArray.get(2).equals(UserDetails.currentStatus)){
-                            friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                        }else{
-                            friend3.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                        }
-                        break;
-                    case 4:
-                        friend4.setText(friendsArray.get(3)+":"+friendsStatusArray.get(3));
-                        int id4 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(3), null, null);
-                        friend4Gif.setImageResource(id4);
-                        friend4.setVisibility(View.VISIBLE);
-                        friend4Gif.setVisibility(View.VISIBLE);
-                        if(friendsStatusArray.get(3).equals(UserDetails.currentStatus)){
-                            friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                        }else{
-                            friend4.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                        }
-                        break;
-                    case 5:
-                        friend5.setText(friendsArray.get(4)+":"+friendsStatusArray.get(4));
-                        int id5 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(4), null, null);
-                        friend5Gif.setImageResource(id5);
-                        friend5.setVisibility(View.VISIBLE);
-                        friend5Gif.setVisibility(View.VISIBLE);
-                        if(friendsStatusArray.get(4).equals(UserDetails.currentStatus)){
-                            friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                        }else{
-                            friend5.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                        }
-                        break;
-                    case 6:
-                        friend6.setText(friendsArray.get(5)+":"+friendsStatusArray.get(5));
-                        int id6 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(5), null, null);
-                        friend6Gif.setImageResource(id6);
-                        friend6.setVisibility(View.VISIBLE);
-                        friend6Gif.setVisibility(View.VISIBLE);
-                        if(friendsStatusArray.get(5).equals(UserDetails.currentStatus)){
-                            friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                        }else{
-                            friend6.setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                        }
-                        break;
+                friendBtnList.get(z).setText(friendsArray.get(z) + ":" + friendsStatusArray.get(z));
+                int id1 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(z), null, null);
+                friendGifList.get(z).setImageResource(id1);
+                friendBtnList.get(z).setVisibility(View.VISIBLE);
+                friendGifList.get(z).setVisibility(View.VISIBLE);
+                if (friendsStatusArray.get(z).equals(UserDetails.currentStatus)) {
+                    friendBtnList.get(z).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                } else {
+                    friendBtnList.get(z).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
                 }
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1379,7 +1274,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
-    Log.i("notification ", "checking");
+    //Log.i("notification ", "checking");
     }
 
     @Override
