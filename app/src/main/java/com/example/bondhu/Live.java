@@ -81,6 +81,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     TextView currentUser;
     TextView currentStatusView;
     TextView friend1Score;
+    TextView friend2Score;
+    TextView friend3Score;
+    TextView friend4Score;
+    TextView friend5Score;
+    TextView friend6Score;
+
     TextView testing2;
     Button friend1;
     Button friend2;
@@ -150,6 +156,13 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         currentUser = (TextView)findViewById(R.id.currentUser);
         friend1Score = (TextView)findViewById(R.id.friend1Score);
+        friend2Score = (TextView)findViewById(R.id.friend2Score);
+        friend3Score = (TextView)findViewById(R.id.friend3Score);
+        friend4Score = (TextView)findViewById(R.id.friend4Score);
+        friend5Score = (TextView)findViewById(R.id.friend5Score);
+        friend6Score = (TextView)findViewById(R.id.friend6Score);
+        final List<TextView> friendScoreList = Arrays.asList(friend1Score, friend2Score, friend3Score, friend4Score, friend5Score,friend6Score);
+
         //testing2 = (TextView)findViewById(R.id.testing2);
         friend1 = (Button )findViewById(R.id.friend1);
         friend2 = (Button)findViewById(R.id.friend2);
@@ -157,6 +170,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         friend4 = (Button)findViewById(R.id.friend4);
         friend5 = (Button)findViewById(R.id.friend5);
         friend6 = (Button)findViewById(R.id.friend6);
+        final List<Button> friendBtnList = Arrays.asList(friend1, friend2, friend3, friend4, friend5,friend6);
 
         FloatingActionButton fabOption1 = findViewById(R.id.fabOption1);
         FloatingActionButton fabOption2 = findViewById(R.id.fabOption2);
@@ -634,15 +648,13 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         fabCheckScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Query query=databaseReference.child(friendsArrayID.get(0)).child("totalStatus").orderByChild("time").limitToLast(5);
-                Query queryCurrentUser =databaseReference.child(UserDetails.id).child("totalStatus").orderByChild("time").limitToLast(5);
+                Query queryCurrentUser = databaseReference.child(UserDetails.id).child("totalStatus").orderByChild("time").limitToLast(5);
+
 
                 queryCurrentUser.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
                         getCurrentUserOldStatus(dataSnapshot);
-
                     }
 
                     @Override
@@ -650,22 +662,27 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
                     }
                 });
-                query.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                for(int z =1;friendsArrayID.size() +1 >z;z++) {
+                    Query query = databaseReference.child(friendsArrayID.get(z)).child("totalStatus").orderByChild("time").limitToLast(5);
 
-                        getSingleUserOldStatus(dataSnapshot);
 
-                    }
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                            getSingleUserOldStatus(dataSnapshot);
 
-                    }
-                });
-                currentUserTotalStatus.retainAll(totalStatus);
-                friend1Score.setText("score:"+currentUserTotalStatus.size()+"/5");
+                        }
 
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    currentUserTotalStatus.retainAll(totalStatus);
+
+                    friendBtnList.get(z).setText("score:" + currentUserTotalStatus.size() + "/5");
+                }
             }
         });
 
