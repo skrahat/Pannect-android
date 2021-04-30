@@ -436,9 +436,9 @@
                 android:id="@+id/progressBar"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="10dp"
                 android:indeterminate="false"
-
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/friend1"
                 app:layout_constraintStart_toStartOf="@+id/friend1"
                 app:layout_constraintTop_toBottomOf="@+id/friend1" />
@@ -446,8 +446,9 @@
                 android:id="@+id/progressBar2"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="10dp"
                 android:indeterminate="false"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/friend2"
                 app:layout_constraintStart_toStartOf="@+id/friend2"
                 app:layout_constraintTop_toBottomOf="@+id/friend2" />
@@ -456,8 +457,9 @@
                 android:id="@+id/progressBar3"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="10dp"
                 android:indeterminate="false"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/friend3"
                 app:layout_constraintStart_toStartOf="@+id/friend3"
                 app:layout_constraintTop_toBottomOf="@+id/friend3" />
@@ -466,8 +468,9 @@
                 android:id="@+id/progressBar4"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="10dp"
                 android:indeterminate="false"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/friend4"
                 app:layout_constraintStart_toStartOf="@+id/friend4"
                 app:layout_constraintTop_toBottomOf="@+id/friend4" />
@@ -476,8 +479,9 @@
                 android:id="@+id/progressBar5"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="10dp"
                 android:indeterminate="false"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/friend5"
                 app:layout_constraintStart_toStartOf="@+id/friend5"
                 app:layout_constraintTop_toBottomOf="@+id/friend5" />
@@ -486,8 +490,9 @@
                 android:id="@+id/progressBar6"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="10dp"
                 android:indeterminate="false"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/friend6"
                 app:layout_constraintStart_toStartOf="@+id/friend6"
                 app:layout_constraintTop_toBottomOf="@+id/friend6" />

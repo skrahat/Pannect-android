@@ -149,8 +149,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     String status5;
 
     String TAG= "Testing------------xxxx_-----------Testing";
-     FirebaseAuth firebaseAuth;
-     FirebaseUser firebaseUser;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +171,6 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         friend4Score = (TextView)findViewById(R.id.friend4Score);
         friend5Score = (TextView)findViewById(R.id.friend5Score);
         friend6Score = (TextView)findViewById(R.id.friend6Score);
-
          */
 
 
@@ -208,12 +207,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         currentStatusGif = (GifImageView) findViewById(R.id.currentStatusGif);
 
 
-         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-         progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
-         progressBar3 = (ProgressBar) findViewById(R.id.progressBar3);
-         progressBar4 = (ProgressBar) findViewById(R.id.progressBar4);
-         progressBar5 = (ProgressBar) findViewById(R.id.progressBar5);
-         progressBar6 = (ProgressBar) findViewById(R.id.progressBar6);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar2 = (ProgressBar) findViewById(R.id.progressBar2);
+        progressBar3 = (ProgressBar) findViewById(R.id.progressBar3);
+        progressBar4 = (ProgressBar) findViewById(R.id.progressBar4);
+        progressBar5 = (ProgressBar) findViewById(R.id.progressBar5);
+        progressBar6 = (ProgressBar) findViewById(R.id.progressBar6);
 
         List<ProgressBar> friendProgressList = Arrays.asList(progressBar, progressBar2, progressBar3, progressBar4, progressBar5,progressBar6);
         List<GifImageView> friendGifList = Arrays.asList(friend1Gif, friend2Gif, friend3Gif, friend4Gif, friend5Gif,friend6Gif);
@@ -268,11 +267,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(currentDateandTimeGeneral))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
         //create and send notification
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
-
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -281,10 +277,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                             Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                             return;
                         }
-
                         // Get new FCM registration token
                         String token = task.getResult();
-
                         // Log and toast
                         String msg = token;
                         Log.d("----------------------", token);
@@ -300,7 +294,6 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 }
             }
         }
-
         */
 
         ////////////////////-----------------construction notification----------------------------------------------------------
@@ -371,11 +364,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                             String statusT = snapshot.child("id").getValue(String.class);
                             //Log.i("$$$$$$$$$$$$$$$",statusT);
                             Log.i("xxx",statusT);
-
                         }
-
                     }
-
                      */
                             friendsStatusArray.clear();
                             int friendsArrayStatusCounter = 0;
@@ -388,6 +378,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                                 friendGifList.get(friendsArrayStatusCounter).setImageResource(id1);
                                 friendBtnList.get(friendsArrayStatusCounter).setVisibility(View.VISIBLE);
                                 friendGifList.get(friendsArrayStatusCounter).setVisibility(View.VISIBLE);
+                                friendProgressList.get(friendsArrayStatusCounter).setVisibility(View.VISIBLE);
                                 if (friendsStatusArray.get(friendsArrayStatusCounter).equals(UserDetails.currentStatus)) {
                                     friendBtnList.get(friendsArrayStatusCounter).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
                                 } else {
@@ -469,7 +460,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
                 //if condition to make sure friend array is obtained first
                 if (starter == true){
-                        friendsStatusArray.clear();
+                    friendsStatusArray.clear();
                     int count = 0;
                     while (friendsArray.size() > count) {
                         String value = dataSnapshot.child(friendsArrayID.get(count)).child("currentStatus").getValue(String.class);
@@ -480,6 +471,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                         friendGifList.get(count).setImageResource(id1);
                         friendBtnList.get(count).setVisibility(View.VISIBLE);
                         friendGifList.get(count).setVisibility(View.VISIBLE);
+                        friendProgressList.get(count).setVisibility(View.VISIBLE);
                         if (friendsStatusArray.get(count).equals(UserDetails.currentStatus)) {
                             friendBtnList.get(count).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
                         } else {
@@ -554,6 +546,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         getCurrentUserOldStatus(dataSnapshot);
+                        Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
+
                     }
 
                     @Override
@@ -563,28 +557,20 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 });
                 /*
                 Query query = databaseReference.child(friendsArrayID.get(0)).child("totalStatus").orderByChild("time").limitToLast(10);
-
                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
                             getSingleUserOldStatusTemp(dataSnapshot);
-
                         }
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
                         }
                     });
-
                 ArrayList<String> totalStatusTemp = totalStatus;
                 Log.i("testing Z valueXXXXXX", String.valueOf(0));
                 Log.i("testing Z value", String.valueOf(totalStatus.size()));
                 Log.i("testing Z friendsAryID", String.valueOf(friendsArrayID.size()));
-
                 totalStatusTemp.retainAll(currentUserTotalStatus);
-
                 friendBtnList.get(0).setText("score:" + totalStatus.size() + "/10");
                 friendProgressList.get(0).setProgress(totalStatus.size() * 10);
                  */
@@ -616,7 +602,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
                     }
                 }.start();
-                query.addValueEventListener(new ValueEventListener() {
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -643,60 +629,61 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
         //click fab friend1 button to show total status list
         friend1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Query query=databaseReference.child(friendsArrayID.get(0)).child("totalStatus").orderByChild("time").limitToLast(10);
-                    //totalStatus.clear();
-                    //resets timer and starts a new timer of 5 seconds with 1 second interval
-                    if (timer != null){
-                        timer.cancel();
+            @Override
+            public void onClick(View v) {
+                Query query=databaseReference.child(friendsArrayID.get(0)).child("totalStatus").orderByChild("time").limitToLast(10);
+                //totalStatus.clear();
+                //resets timer and starts a new timer of 5 seconds with 1 second interval
+                if (timer != null){
+                    timer.cancel();
+                }
+
+                timer = new CountDownTimer(5000, 1000){
+                    public void onTick(long millisUntilFinished){
+
                     }
-
-                    timer = new CountDownTimer(5000, 1000){
-                        public void onTick(long millisUntilFinished){
-
-                        }
-                        public  void onFinish(){
-                            totalStatusList.setVisibility(View.INVISIBLE);
-                            clicked=false;
-
-                        }
-                    }.start();
-
-                    query.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            getSingleUserOldStatus(dataSnapshot);
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                    if(!clicked){
-                        totalStatusList.setVisibility(View.VISIBLE);
-                        clicked=true;
-                    }else{
+                    public  void onFinish(){
                         totalStatusList.setVisibility(View.INVISIBLE);
                         clicked=false;
-                    }
-                    //update score for single friend
-                    if(currentUserTotalStatus != null) {
-                        ArrayList<String> totalStatusTemp = currentUserTotalStatus;
-                        //Log.i("testing Z valueXXXXXX", String.valueOf(0));
-                        Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                        Log.i("testing Z friendsAryID", String.valueOf(friendsArrayID.size()));
 
-                        totalStatusTemp.retainAll(totalStatus);
-
-                        //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
-                        friendProgressList.get(0).setProgress(totalStatusTemp.size() * 10);
                     }
+                }.start();
+
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        getSingleUserOldStatus(dataSnapshot);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                if(!clicked){
+                    totalStatusList.setVisibility(View.VISIBLE);
+                    clicked=true;
+                }else{
+                    totalStatusList.setVisibility(View.INVISIBLE);
+                    clicked=false;
                 }
-            });
+                //update score for single friend
+                    List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
+
+                    //Log.i("testing Z valueXXXXXX", String.valueOf(0));
+                    Log.i("testing Z value", String.valueOf(totalStatus.size()));
+                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
+
+                    totalStatusTemp.retainAll(totalStatus);
+
+                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
+                    //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
+                    friendProgressList.get(0).setProgress(totalStatusTemp.size() * 10);
+                    totalStatus.clear();
+            }
+        });
         //click fab friend2 button to show total status list
         friend2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -742,15 +729,17 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 //update score for single friend
                 if(currentUserTotalStatus != null) {
-                    ArrayList<String> totalStatusTemp = currentUserTotalStatus;
+                    List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
                     Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("testing Z friendsAryID", String.valueOf(currentUserTotalStatus.size()));
+                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
+                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(1).setProgress(totalStatusTemp.size() * 10);
+                    totalStatus.clear();
                 }
             }
         });
@@ -799,15 +788,17 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 //update score for single friend
                 if(currentUserTotalStatus != null) {
-                    ArrayList<String> totalStatusTemp = currentUserTotalStatus;
+                    List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
                     Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("testing Z friendsAryID", String.valueOf(friendsArrayID.size()));
+                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
+                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(2).setProgress(totalStatusTemp.size() * 10);
+                    totalStatus.clear();
                 }
             }
         });
@@ -856,15 +847,17 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 //update score for single friend
                 if(currentUserTotalStatus != null) {
-                    ArrayList<String> totalStatusTemp = currentUserTotalStatus;
+                    List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
                     Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("testing Z friendsAryID", String.valueOf(friendsArrayID.size()));
+                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
+                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(3).setProgress(totalStatusTemp.size() * 10);
+                    totalStatus.clear();
                 }
             }
         });
@@ -913,15 +906,17 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 //update score for single friend
                 if(currentUserTotalStatus != null) {
-                    ArrayList<String> totalStatusTemp = currentUserTotalStatus;
+                    List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
                     Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("testing Z friendsAryID", String.valueOf(friendsArrayID.size()));
+                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
+                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(4).setProgress(totalStatusTemp.size() * 10);
+                    totalStatus.clear();
                 }
             }
         });
@@ -970,15 +965,17 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 //update score for single friend
                 if(currentUserTotalStatus != null) {
-                    ArrayList<String> totalStatusTemp = currentUserTotalStatus;
+                    List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
                     Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("testing Z friendsAryID", String.valueOf(friendsArrayID.size()));
+                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
+                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(5).setProgress(totalStatusTemp.size() * 10);
+                    totalStatus.clear();
                 }
             }
         });
@@ -997,7 +994,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-            // notificationId is a unique int for each notification that you must define
+                // notificationId is a unique int for each notification that you must define
                 int random_int = (int)Math.floor(Math.random()*(1000-1+1)+1);
                 //notificationManager.notify(random_int, builder.build());
 
@@ -1153,16 +1150,16 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     public ArrayList<String> getSingleUserOldStatusTemp(DataSnapshot dataSnapshot){
         ArrayList<String> friend1StatusArray = new ArrayList<>();
 
-            totalStatus.clear();
-            if (dataSnapshot.exists()) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    TotalStatus statusT = snapshot.getValue(TotalStatus.class);
-                    totalStatus.add(statusT.status);
-                    friend1StatusArray.add(statusT.status);
-                }
-
+        totalStatus.clear();
+        if (dataSnapshot.exists()) {
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                TotalStatus statusT = snapshot.getValue(TotalStatus.class);
+                totalStatus.add(statusT.status);
+                friend1StatusArray.add(statusT.status);
             }
-            return friend1StatusArray;
+
+        }
+        return friend1StatusArray;
 
     }
     //get 10 most recent status of current user
@@ -1178,7 +1175,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
         }
 
-        //totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, totalStatus));
+        totalStatusList.setAdapter(new ArrayAdapter<String>(Live.this, android.R.layout.simple_list_item_1, currentUserTotalStatus));
 
     }
     //temp total status listing
@@ -1291,6 +1288,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 friendGifList.get(z).setImageResource(id1);
                 friendBtnList.get(z).setVisibility(View.VISIBLE);
                 friendGifList.get(z).setVisibility(View.VISIBLE);
+                friendProgressList.get(z).setVisibility(View.VISIBLE);
                 if (friendsStatusArray.get(z).equals(UserDetails.currentStatus)) {
                     friendBtnList.get(z).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
                 } else {
@@ -1336,7 +1334,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
-    //Log.i("notification ", "checking");
+        //Log.i("notification ", "checking");
     }
 
     @Override
