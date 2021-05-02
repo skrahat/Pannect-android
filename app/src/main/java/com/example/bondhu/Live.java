@@ -12,6 +12,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
@@ -34,6 +35,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -66,6 +68,7 @@ import com.nightonke.boommenu.Util;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,6 +77,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -161,6 +165,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     String status4;
     String status5;
 
+    SwipeRefreshLayout swiperefresh;
     private ArrayList<Pair> piecesAndButtons = new ArrayList<>();
 
     String TAG= "Testing------------xxxx_-----------Testing";
@@ -245,6 +250,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         BoomMenuButton bmb3 = (BoomMenuButton) findViewById(R.id.bmb3);
         BoomMenuButton bmb4 = (BoomMenuButton) findViewById(R.id.bmb4);
         BoomMenuButton bmb5 = (BoomMenuButton) findViewById(R.id.bmb5);
+
+        swiperefresh = findViewById(R.id.swiperefresh);
         //progressBar.setSecondaryProgress(50);
         //progressBar.setMax(100);
 
@@ -327,6 +334,18 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         pd = new ProgressDialog(Live.this);
         pd.setMessage("Loading...");
         pd.show();
+
+        //pull down refresh live page
+        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swiperefresh.setRefreshing(false);
+            }
+        });
+
+
+
+
 
         //generates all users in list
         String url = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
@@ -664,6 +683,17 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             public void onClick(View view) {
                 Query queryCurrentUser = databaseReference.child(UserDetails.id).child("totalStatus").orderByChild("time").limitToLast(10);
 
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                try {
+                    long time = sdf.parse("2021-05-02T16:00:00.000Z").getTime();
+                    long now = System.currentTimeMillis();
+                    CharSequence ago =
+                            DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+                    currentUser.setText(ago);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 queryCurrentUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

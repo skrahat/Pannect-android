@@ -235,6 +235,13 @@ public class Users extends AppCompatActivity {
 
             }
         });
+        friendsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                UserDetails.chatWith =friendsArray.get(position);
+                startActivity(new Intent(Users.this, Chat.class));
+            }
+        });
         // display friends
         //update in realtime
 

@@ -55,15 +55,15 @@
                 android:text="TextView"
                 android:textStyle="bold" />
 
+
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="99dp"
                 android:layout_height="34dp"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:text="Current Status :"
+                android:text="Status :"
                 android:textStyle="italic" />
-
 
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/currentStatusGif"
@@ -81,8 +81,13 @@
                 android:gravity="center"
                 android:text="" />
         </LinearLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swiperefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ScrollView
+            <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -187,7 +192,7 @@
                     android:layout_height="35dp"
                     android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.601"
+                    app:layout_constraintHorizontal_bias="0.812"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -244,7 +249,7 @@
                     android:layout_width="108dp"
                     android:layout_height="156dp"
                     android:layout_marginBottom="56dp"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
                     app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
                     app:layout_constraintHorizontal_bias="0.507"
@@ -453,16 +458,17 @@
                     android:id="@+id/fabStatusLevel1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="704dp"
                     android:clickable="true"
                     android:contentDescription="fabButton"
                     android:focusable="true"
                     android:gravity="center_vertical"
                     app:backgroundTint="#1b5285"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_bias="0.501"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.974"
                     app:maxImageSize="56dp"
                     app:srcCompat="@drawable/panda_paw_icon"
                     app:strokeColor="#ffffff"
@@ -486,8 +492,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/happy_icon" />
 
@@ -518,8 +524,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/sad_icon" />
 
@@ -552,10 +558,10 @@
                     app:layout_constraintStart_toStartOf="@+id/fabStatusLevel1">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/most_usage_icon" />
+                        app:srcCompat="@drawable/panda_paw_icon" />
 
                     <TextView
                         android:layout_width="40dp"
@@ -563,7 +569,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="15dp"
                         android:gravity="center"
-                        android:text="Commonly Used"
+                        android:text="Bamboo"
                         android:textColor="@android:color/white"
                         android:textSize="10sp" />
 
@@ -584,8 +590,8 @@
                     app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/normal_icon" />
 
@@ -617,11 +623,11 @@
                     app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/panda_paw_icon"
-                        app:tint="@android:color/white" />
+                        app:srcCompat="@drawable/activity_icon"
+                         />
 
                     <TextView
                         android:layout_width="40dp"
@@ -639,5 +645,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -14,7 +14,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="103dp"
-        android:src="@drawable/app_icon" />
+        android:src="@drawable/app_icon2" />
 
     <EditText
         android:layout_width="match_parent"

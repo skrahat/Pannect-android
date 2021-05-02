@@ -10,4 +10,5 @@ public class UserDetails {
     static String friends = "";
     static String id = "";
     static ArrayList<String> friendsArrayID;
+    static String time = "";
 }
