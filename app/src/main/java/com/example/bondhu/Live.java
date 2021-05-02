@@ -7,12 +7,16 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +54,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
+import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
+import com.nightonke.boommenu.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,6 +95,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     Button friend4;
     Button friend5;
     Button friend6;
+
     ProgressBar progressBar;
     ProgressBar progressBar2;
     ProgressBar progressBar3;
@@ -148,6 +160,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     String status4;
     String status5;
 
+    private ArrayList<Pair> piecesAndButtons = new ArrayList<>();
+
     String TAG= "Testing------------xxxx_-----------Testing";
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -165,7 +179,6 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         totalStatusList = (ListView)findViewById(R.id.totalStatusList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         currentUser = (TextView)findViewById(R.id.currentUser);
-        friend1Score = (TextView)findViewById(R.id.friend1Score);
         /*friend2Score = (TextView)findViewById(R.id.friend2Score);
         friend3Score = (TextView)findViewById(R.id.friend3Score);
         friend4Score = (TextView)findViewById(R.id.friend4Score);
@@ -183,11 +196,18 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         friend6 = (Button)findViewById(R.id.friend6);
 
 
-        FloatingActionButton fabOption1 = findViewById(R.id.fabOption1);
-        FloatingActionButton fabOption2 = findViewById(R.id.fabOption2);
-        FloatingActionButton fabOption3 = findViewById(R.id.fabOption3);
+
+        //FloatingActionButton fabOption1 = findViewById(R.id.fabOption1);
+        //FloatingActionButton fabOption2 = findViewById(R.id.fabOption2);
+        //FloatingActionButton fabOption3 = findViewById(R.id.fabOption3);
+        //FloatingActionButton fabOption4 = findViewById(R.id.fabOption4);
+        //FloatingActionButton fabOption5 = findViewById(R.id.fabOption5);
+        //FloatingActionButton fabOption6 = findViewById(R.id.fabOption6);
         FloatingActionButton btncurrentUser = findViewById(R.id.btncurrentUser);
         FloatingActionButton fabCheckScore = findViewById(R.id.fabCheckScore);
+        FloatingActionButton updateScore = (FloatingActionButton)findViewById(R.id.updateScore);
+        FloatingActionButton fabStatusLevel1 = (FloatingActionButton)findViewById(R.id.fabStatusLevel1);
+
 
         etLiveStatus = findViewById(R.id.etLiveStatus);
         btnLiveStatusData2 = findViewById(R.id.btnLiveStatusData2);
@@ -219,6 +239,11 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         friendBtnList = Arrays.asList(friend1, friend2, friend3, friend4, friend5,friend6);
         List<TextView> friendScoreList = Arrays.asList(friend1Score, friend2Score, friend3Score, friend4Score, friend5Score,friend6Score);
 
+        BoomMenuButton bmb1 = (BoomMenuButton) findViewById(R.id.bmb1);
+        BoomMenuButton bmb2 = (BoomMenuButton) findViewById(R.id.bmb2);
+        BoomMenuButton bmb3 = (BoomMenuButton) findViewById(R.id.bmb3);
+        BoomMenuButton bmb4 = (BoomMenuButton) findViewById(R.id.bmb4);
+        BoomMenuButton bmb5 = (BoomMenuButton) findViewById(R.id.bmb5);
         //progressBar.setSecondaryProgress(50);
         //progressBar.setMax(100);
 
@@ -493,27 +518,67 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 //////////------------working on center status buttons---------
-        //status button from center selection FAB
-        initShowOut(fabOption1);
-        initShowOut(fabOption2);
-        initShowOut(fabOption3);
+        //working on BMB button----------------------
+        assert bmb1 != null;
 
-        btncurrentUser.setOnClickListener(new View.OnClickListener() {
+        bmb1.setButtonEnum(ButtonEnum.TextInsideCircle);
+        bmb1.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
+        bmb1.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
+        for (int i = 0; i < bmb1.getPiecePlaceEnum().pieceNumber(); i++)
+            bmb1.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+
+        bmb2.setButtonEnum(ButtonEnum.TextInsideCircle);
+        bmb2.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
+        bmb2.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
+        for (int i = 0; i < bmb2.getPiecePlaceEnum().pieceNumber(); i++)
+            bmb2.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+
+        bmb3.setButtonEnum(ButtonEnum.TextInsideCircle);
+        bmb3.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
+        bmb3.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
+        for (int i = 0; i < bmb3.getPiecePlaceEnum().pieceNumber(); i++)
+            bmb3.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+
+        bmb4.setButtonEnum(ButtonEnum.TextInsideCircle);
+        bmb4.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
+        bmb4.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
+        for (int i = 0; i < bmb4.getPiecePlaceEnum().pieceNumber(); i++)
+            bmb4.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+
+        bmb5.setButtonEnum(ButtonEnum.TextInsideCircle);
+        bmb5.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
+        bmb5.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
+        for (int i = 0; i < bmb5.getPiecePlaceEnum().pieceNumber(); i++)
+            bmb5.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+
+
+        //status button from center selection FAB
+        initShowOut(bmb1);
+        initShowOut(bmb2);
+        initShowOut(bmb3);
+        initShowOut(bmb4);
+        initShowOut(bmb5);
+
+        fabStatusLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rotate = rotateFab(view, !rotate);
                 if (rotate) {
-                    showIn(fabOption1);
-                    showIn(fabOption2);
-                    showIn(fabOption3);
+                    showIn(bmb1);
+                    showIn(bmb2);
+                    showIn(bmb3);
+                    showIn(bmb4);
+                    showIn(bmb5);
                 } else {
-                    showOut(fabOption1);
-                    showOut(fabOption2);
-                    showOut(fabOption3);
+                    showOut(bmb1);
+                    showOut(bmb2);
+                    showOut(bmb3);
+                    showOut(bmb4);
+                    showOut(bmb5);
                 }
             }
         });
-
+        /*
         fabOption1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -532,6 +597,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 Toast.makeText(Live.this, "option3 clicked", Toast.LENGTH_SHORT).show();
             }
         });
+
+         */
 //////////------------working on center status buttons---------
 
 
@@ -581,8 +648,6 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         //////////-----------/////check socre construction button------------------------------
 
         //view user's own status history
-
-
         btncurrentUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1373,7 +1438,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                         super.onAnimationEnd(animation);
                     }
                 })
-                .rotation(rotate ? 135f : 0f);
+                .rotation(rotate ? 180f : 0f);
         return rotate;
     }
     //FAB button selection functions

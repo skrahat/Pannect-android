@@ -17,19 +17,20 @@
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu" />
 
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="453dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayout4"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:background="#F0F8FF"
-            android:theme="@style/MyMaterialTheme"
-            tools:context="com.example.bondhu.Users"
-            tools:viewBindingIgnore="true">
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="#67bef5"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="453dp">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -45,153 +46,31 @@
             </androidx.appcompat.widget.Toolbar>
 
             <TextView
-                android:id="@+id/noUsersText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no_users_found"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/currentUser"
+                android:layout_width="100dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="12dp"
+                android:cursorVisible="false"
+                android:gravity="center"
+                android:text="TextView"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="99dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="Current Status :"
+                android:textStyle="italic" />
 
 
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/currentStatusGif"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
                 android:layout_marginTop="12dp"
-                android:src="@drawable/profile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.737"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/friend1Gif"
-                android:layout_width="52dp"
-                android:layout_height="55dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/friend1"
-                app:layout_constraintEnd_toEndOf="@+id/friend1"
-                app:layout_constraintHorizontal_bias="0.481"
-                app:layout_constraintStart_toStartOf="@+id/friend1" />
-
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/friend2Gif"
-                android:layout_width="59dp"
-                android:layout_height="56dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/friend2"
-                app:layout_constraintEnd_toEndOf="@+id/friend2"
-                app:layout_constraintHorizontal_bias="0.431"
-                app:layout_constraintStart_toStartOf="@+id/friend2" />
-
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/friend5Gif"
-                android:layout_width="71dp"
-                android:layout_height="63dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/friend5"
-                app:layout_constraintEnd_toEndOf="@+id/friend5"
-                app:layout_constraintStart_toStartOf="@+id/friend5" />
-
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/friend6Gif"
-                android:layout_width="77dp"
-                android:layout_height="61dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/friend6"
-                app:layout_constraintEnd_toEndOf="@+id/friend6"
-                app:layout_constraintStart_toStartOf="@+id/friend6" />
-
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/friend4Gif"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/friend4"
-                app:layout_constraintEnd_toEndOf="@+id/friend4"
-                app:layout_constraintHorizontal_bias="0.468"
-                app:layout_constraintStart_toStartOf="@+id/friend4" />
-
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/friend3Gif"
-                android:layout_width="61dp"
-                android:layout_height="56dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/friend3"
-                app:layout_constraintEnd_toEndOf="@+id/friend3"
-                app:layout_constraintHorizontal_bias="0.535"
-                app:layout_constraintStart_toStartOf="@+id/friend3" />
-
-            <EditText
-                android:id="@+id/etLiveStatus"
-                android:layout_width="83dp"
-                android:layout_height="33dp"
-                android:layout_marginTop="636dp"
-                android:hint="add new Status!"
-                android:text=""
-                android:textSize="10sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.048"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/spinnerStatus"
-                android:layout_width="150dp"
+                android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="636dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.758"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btnLiveStatusSelectAdd"
-                android:layout_width="36dp"
-                android:layout_height="38dp"
-                android:layout_marginTop="636dp"
-                android:layout_marginEnd="8dp"
-                android:background="#82868c"
-                android:text="update"
-                android:textColor="#ffffff"
-                android:textSize="8sp"
-
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/currentUser"
-                android:layout_width="100dp"
-                android:layout_height="33dp"
-                android:layout_marginTop="16dp"
-                android:cursorVisible="false"
-                android:gravity="center"
-                android:text="TextView"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.209"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btnLiveStatusData2"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="4dp"
-                android:background="#82868c"
-                android:text="add Status"
-
-                android:textColor="#ffffff"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/etLiveStatus"
-                app:layout_constraintTop_toTopOf="@+id/etLiveStatus" />
-
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/currentStatusView"
@@ -200,305 +79,475 @@
                 android:layout_marginTop="12dp"
                 android:backgroundTint="#ece3ff"
                 android:gravity="center"
-                android:text=""
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="99dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="12dp"
-                android:background="#ece3ff"
-                android:gravity="center"
-                android:text="Current Status :"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.56"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btncurrentUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="304dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:textSize="8dp"
-                app:backgroundTint="#eb5834"
-                app:srcCompat="@drawable/connect_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="#ffffff"
-                app:strokeWidth="1dp"
-                tools:ignore="RtlCompat" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabOption1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="8dp"
-                android:backgroundTint="#adf5a9"
-                android:clickable="true"
-                android:focusable="true"
-                app:fabSize="mini"
-                app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
-                app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
-                app:layout_constraintHorizontal_bias="0.466"
-                app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
-                app:rippleColor="@android:color/white"
-                app:srcCompat="@drawable/happy_icon" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabOption2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="4dp"
-                android:backgroundTint="#5590ed"
-                android:clickable="true"
-                android:focusable="true"
-                app:fabSize="mini"
-                app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
-                app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
-                app:layout_constraintTop_toTopOf="@+id/btncurrentUser"
-                app:rippleColor="@android:color/white"
-                app:srcCompat="@drawable/sad_icon" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabOption3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="#faf4b1"
-                android:clickable="true"
-                android:focusable="true"
-                app:fabSize="mini"
-                app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
-                app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
-                app:layout_constraintTop_toTopOf="@+id/btncurrentUser"
-                app:rippleColor="@android:color/white"
-                app:srcCompat="@drawable/normal_icon" />
-
-            <ListView
-                android:id="@+id/totalStatusList"
-                android:layout_width="108dp"
-                android:layout_height="156dp"
-                android:layout_marginBottom="56dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
-                app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
-                app:layout_constraintHorizontal_bias="0.507"
-                app:layout_constraintStart_toStartOf="@+id/btncurrentUser">
-
-            </ListView>
-
-            <Button
-                android:id="@+id/friend1"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginEnd="28dp"
-                android:layout_marginBottom="84dp"
-                android:background="@drawable/mybutton"
-                android:clickable="true"
-                android:gravity="center"
-                android:hint="friend1"
-                android:textAppearance="?attr/buttonStyleSmall"
-                android:textSize="10dp"
-                android:visibility="invisible"
-                app:backgroundTint="#9ce3ff"
-                app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
-                app:layout_constraintEnd_toStartOf="@+id/btncurrentUser" />
-
-            <Button
-                android:id="@+id/friend2"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="64dp"
-                android:background="@drawable/mybutton"
-                android:clickable="true"
-                android:gravity="center"
-                android:hint="friend2"
-                android:textAppearance="?attr/buttonStyleSmall"
-                android:textSize="10dp"
-                android:visibility="invisible"
-                app:backgroundTint="#9ce3ff"
-                app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
-                app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
-
-            <Button
-
-                android:id="@+id/friend3"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginBottom="84dp"
-                android:clickable="true"
-                android:gravity="center"
-                android:hint="friend3"
-                android:textAppearance="?attr/buttonStyleSmall"
-                android:textSize="10dp"
-                android:visibility="invisible"
-                app:backgroundTint="#9ce3ff"
-                android:background="@drawable/mybutton"
-                app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
-                app:layout_constraintStart_toEndOf="@+id/btncurrentUser" />
-
-            <Button
-
-                android:id="@+id/friend4"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="80dp"
-                android:background="@drawable/mybutton"
-                android:clickable="true"
-                android:gravity="center"
-                android:hint="friend4"
-                android:textAppearance="?attr/buttonStyleSmall"
-                android:textSize="10dp"
-                android:visibility="invisible"
-                app:backgroundTint="#9ce3ff"
-                app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
-                app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
-
-            <Button
-
-                android:id="@+id/friend5"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginTop="192dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/mybutton"
-                android:clickable="true"
-                android:gravity="center"
-                android:hint="friend5"
-                android:textAppearance="?attr/buttonStyleSmall"
-                android:textSize="10dp"
-                android:visibility="invisible"
-                app:backgroundTint="#9ce3ff"
-                app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
-                app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
-
-            <Button
-
-                android:id="@+id/friend6"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="136dp"
-                android:background="@drawable/mybutton"
-                android:clickable="true"
-                android:gravity="center"
-                android:hint="friend6"
-                android:textAppearance="?attr/buttonStyleSmall"
-                android:textSize="10dp"
-                android:visibility="invisible"
-                app:backgroundTint="#9ce3ff"
-                app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
-                app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabCheckScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:clickable="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.938"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/stat_notify_sync" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F0F8FF"
+                android:theme="@style/MyMaterialTheme"
+                tools:context="com.example.bondhu.Users"
+                tools:viewBindingIgnore="true">
 
 
-            <TextView
-                android:id="@+id/friend1Score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="score"
-                app:layout_constraintEnd_toEndOf="@+id/friend1"
-                app:layout_constraintHorizontal_bias="0.452"
-                app:layout_constraintStart_toStartOf="@+id/friend1"
-                app:layout_constraintTop_toBottomOf="@+id/friend1" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                android:indeterminate="false"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/friend1"
-                app:layout_constraintStart_toStartOf="@+id/friend1"
-                app:layout_constraintTop_toBottomOf="@+id/friend1" />
-            <ProgressBar
-                android:id="@+id/progressBar2"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                android:indeterminate="false"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/friend2"
-                app:layout_constraintStart_toStartOf="@+id/friend2"
-                app:layout_constraintTop_toBottomOf="@+id/friend2" />
-
-            <ProgressBar
-                android:id="@+id/progressBar3"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                android:indeterminate="false"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/friend3"
-                app:layout_constraintStart_toStartOf="@+id/friend3"
-                app:layout_constraintTop_toBottomOf="@+id/friend3" />
-
-            <ProgressBar
-                android:id="@+id/progressBar4"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                android:indeterminate="false"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/friend4"
-                app:layout_constraintStart_toStartOf="@+id/friend4"
-                app:layout_constraintTop_toBottomOf="@+id/friend4" />
-
-            <ProgressBar
-                android:id="@+id/progressBar5"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                android:indeterminate="false"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/friend5"
-                app:layout_constraintStart_toStartOf="@+id/friend5"
-                app:layout_constraintTop_toBottomOf="@+id/friend5" />
-
-            <ProgressBar
-                android:id="@+id/progressBar6"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                android:indeterminate="false"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/friend6"
-                app:layout_constraintStart_toStartOf="@+id/friend6"
-                app:layout_constraintTop_toBottomOf="@+id/friend6" />
+                <TextView
+                    android:id="@+id/noUsersText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_users_found"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/friend1Gif"
+                    android:layout_width="52dp"
+                    android:layout_height="55dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/friend1"
+                    app:layout_constraintEnd_toEndOf="@+id/friend1"
+                    app:layout_constraintHorizontal_bias="0.481"
+                    app:layout_constraintStart_toStartOf="@+id/friend1" />
 
-    </ScrollView>
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/friend2Gif"
+                    android:layout_width="59dp"
+                    android:layout_height="56dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/friend2"
+                    app:layout_constraintEnd_toEndOf="@+id/friend2"
+                    app:layout_constraintHorizontal_bias="0.431"
+                    app:layout_constraintStart_toStartOf="@+id/friend2" />
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/friend5Gif"
+                    android:layout_width="71dp"
+                    android:layout_height="63dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/friend5"
+                    app:layout_constraintEnd_toEndOf="@+id/friend5"
+                    app:layout_constraintStart_toStartOf="@+id/friend5" />
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/friend6Gif"
+                    android:layout_width="77dp"
+                    android:layout_height="61dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/friend6"
+                    app:layout_constraintEnd_toEndOf="@+id/friend6"
+                    app:layout_constraintStart_toStartOf="@+id/friend6" />
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/friend4Gif"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/friend4"
+                    app:layout_constraintEnd_toEndOf="@+id/friend4"
+                    app:layout_constraintHorizontal_bias="0.468"
+                    app:layout_constraintStart_toStartOf="@+id/friend4" />
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/friend3Gif"
+                    android:layout_width="61dp"
+                    android:layout_height="56dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/friend3"
+                    app:layout_constraintEnd_toEndOf="@+id/friend3"
+                    app:layout_constraintHorizontal_bias="0.535"
+                    app:layout_constraintStart_toStartOf="@+id/friend3" />
+
+                <EditText
+                    android:id="@+id/etLiveStatus"
+                    android:layout_width="83dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="add new Status!"
+                    android:text=""
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.042"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <Spinner
+                    android:id="@+id/spinnerStatus"
+                    android:layout_width="150dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.601"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btnLiveStatusSelectAdd"
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:background="#67bef5"
+                    android:text="update"
+                    android:textColor="#ffffff"
+                    android:textSize="8sp"
+
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/spinnerStatus"
+                    app:layout_constraintStart_toEndOf="@+id/spinnerStatus" />
+
+
+                <Button
+                    android:id="@+id/btnLiveStatusData2"
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="8dp"
+                    android:background="#67bef5"
+                    android:text="add Status"
+                    android:textColor="#ffffff"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/etLiveStatus"
+                    app:layout_constraintStart_toEndOf="@+id/etLiveStatus" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btncurrentUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="304dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="8dp"
+                    app:backgroundTint="#eb5834"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/connect_icon"
+                    app:strokeColor="#ffffff"
+                    app:strokeWidth="1dp"
+                    tools:ignore="RtlCompat" />
+
+
+
+                <ListView
+                    android:id="@+id/totalStatusList"
+                    android:layout_width="108dp"
+                    android:layout_height="156dp"
+                    android:layout_marginBottom="56dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
+                    app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+                    app:layout_constraintHorizontal_bias="0.507"
+                    app:layout_constraintStart_toStartOf="@+id/btncurrentUser">
+
+                </ListView>
+
+                <Button
+                    android:id="@+id/friend1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginBottom="84dp"
+                    android:background="@drawable/mybutton"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:hint="friend1"
+                    android:textAppearance="?attr/buttonStyleSmall"
+                    android:textSize="10dp"
+                    android:visibility="invisible"
+                    app:backgroundTint="#9ce3ff"
+                    app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
+                    app:layout_constraintEnd_toStartOf="@+id/btncurrentUser" />
+
+                <Button
+                    android:id="@+id/friend2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="56dp"
+                    android:layout_marginEnd="60dp"
+                    android:background="@drawable/mybutton"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:hint="friend2"
+                    android:textAppearance="?attr/buttonStyleSmall"
+                    android:textSize="10dp"
+                    android:visibility="invisible"
+                    app:backgroundTint="#9ce3ff"
+                    app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
+                    app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+
+                <Button
+
+                    android:id="@+id/friend3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginBottom="84dp"
+                    android:background="@drawable/mybutton"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:hint="friend3"
+                    android:textAppearance="?attr/buttonStyleSmall"
+                    android:textSize="10dp"
+                    android:visibility="invisible"
+                    app:backgroundTint="#9ce3ff"
+                    app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
+                    app:layout_constraintStart_toEndOf="@+id/btncurrentUser" />
+
+                <Button
+
+                    android:id="@+id/friend4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="64dp"
+                    android:background="@drawable/mybutton"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:hint="friend4"
+                    android:textAppearance="?attr/buttonStyleSmall"
+                    android:textSize="10dp"
+                    android:visibility="invisible"
+                    app:backgroundTint="#9ce3ff"
+                    app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
+                    app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+
+                <Button
+
+                    android:id="@+id/friend5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="156dp"
+                    android:layout_marginEnd="64dp"
+                    android:background="@drawable/mybutton"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:hint="friend5"
+                    android:textAppearance="?attr/buttonStyleSmall"
+                    android:textSize="10dp"
+                    android:visibility="invisible"
+                    app:backgroundTint="#9ce3ff"
+                    app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+                    app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+
+
+                <Button
+
+                    android:id="@+id/friend6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="100dp"
+                    android:background="@drawable/mybutton"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:hint="friend6"
+                    android:textAppearance="?attr/buttonStyleSmall"
+                    android:textSize="10dp"
+                    android:visibility="invisible"
+                    app:backgroundTint="#9ce3ff"
+                    app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
+                    app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabCheckScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="116dp"
+                    android:clickable="true"
+                    app:fabSize="mini"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.997"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/stat_notify_sync" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/updateScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#faf4b1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:fabSize="mini"
+                    app:layout_constraintBottom_toTopOf="@+id/fabCheckScore"
+                    app:layout_constraintEnd_toEndOf="@+id/fabCheckScore"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/fabCheckScore"
+                    app:rippleColor="@android:color/white" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:indeterminate="false"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="@+id/friend1"
+                    app:layout_constraintStart_toStartOf="@+id/friend1"
+                    app:layout_constraintTop_toBottomOf="@+id/friend1" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar2"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:indeterminate="false"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="@+id/friend2"
+                    app:layout_constraintStart_toStartOf="@+id/friend2"
+                    app:layout_constraintTop_toBottomOf="@+id/friend2" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar3"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:indeterminate="false"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="@+id/friend3"
+                    app:layout_constraintStart_toStartOf="@+id/friend3"
+                    app:layout_constraintTop_toBottomOf="@+id/friend3" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar4"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:indeterminate="false"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="@+id/friend4"
+                    app:layout_constraintStart_toStartOf="@+id/friend4"
+                    app:layout_constraintTop_toBottomOf="@+id/friend4" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar5"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:indeterminate="false"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="@+id/friend5"
+                    app:layout_constraintStart_toStartOf="@+id/friend5"
+                    app:layout_constraintTop_toBottomOf="@+id/friend5" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar6"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:indeterminate="false"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="@+id/friend6"
+                    app:layout_constraintStart_toStartOf="@+id/friend6"
+                    app:layout_constraintTop_toBottomOf="@+id/friend6" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabStatusLevel1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="608dp"
+                    android:clickable="true"
+                    android:contentDescription="fabButton"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    app:backgroundTint="#1b5285"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.478"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:maxImageSize="56dp"
+                    app:srcCompat="@drawable/panda_paw_icon"
+                    app:strokeColor="#ffffff"
+                    app:strokeWidth="1dp"
+                    app:tint="@null"
+                    tools:ignore="RtlCompat" />
+
+                <com.nightonke.boommenu.BoomMenuButton
+                    android:id="@+id/bmb1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="24dp"
+                    app:bmb_buttonRadius="20dp"
+                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_rippleEffect="true"
+                    app:bmb_unableColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
+                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1" />
+
+                <com.nightonke.boommenu.BoomMenuButton
+                    android:id="@+id/bmb2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="73dp"
+                    app:bmb_buttonRadius="20dp"
+                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_rippleEffect="true"
+                    app:bmb_unableColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
+                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1" />
+
+                <com.nightonke.boommenu.BoomMenuButton
+                    android:id="@+id/bmb3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="28dp"
+                    app:bmb_buttonRadius="20dp"
+                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_rippleEffect="true"
+                    app:bmb_unableColor="@android:color/white"
+                    app:layout_constraintBottom_toTopOf="@+id/fabStatusLevel1"
+                    app:layout_constraintEnd_toEndOf="@+id/fabStatusLevel1"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/fabStatusLevel1" />
+
+                <com.nightonke.boommenu.BoomMenuButton
+                    android:id="@+id/bmb4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="72dp"
+                    app:bmb_buttonRadius="20dp"
+                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_rippleEffect="true"
+                    app:bmb_unableColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
+                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1" />
+
+                <com.nightonke.boommenu.BoomMenuButton
+                    android:id="@+id/bmb5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginBottom="24dp"
+                    app:bmb_buttonRadius="20dp"
+                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_rippleEffect="true"
+                    app:bmb_unableColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
+                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+    </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

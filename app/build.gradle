@@ -85,4 +85,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
 
+    //card view
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    implementation 'com.nightonke:boommenu:2.1.1'
+
+
+
 }
