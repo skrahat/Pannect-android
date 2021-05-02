@@ -91,12 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                 String uid = user.getUid();
                 UserDetails.id=uid;
 
-                    //UserDetails.username = user;
-                    //UserDetails.password = pass;
 
                 if (task.isSuccessful()){
-                    Toast.makeText(LoginActivity.this, "Update the profile " +
-                            "for better expereince", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Pannect: Online", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this , Live.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);

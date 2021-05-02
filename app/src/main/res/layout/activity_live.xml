@@ -227,7 +227,6 @@
                     android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
-                    android:textSize="8dp"
                     app:backgroundTint="#eb5834"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.501"
@@ -262,11 +261,10 @@
                     android:background="@drawable/mybutton"
                     android:clickable="true"
                     android:gravity="center"
-                    android:hint="friend1"
                     android:textAppearance="?attr/buttonStyleSmall"
                     android:textSize="10dp"
                     android:visibility="invisible"
-                    app:backgroundTint="#9ce3ff"
+                    app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
                     app:layout_constraintEnd_toStartOf="@+id/btncurrentUser" />
 
@@ -279,11 +277,10 @@
                     android:background="@drawable/mybutton"
                     android:clickable="true"
                     android:gravity="center"
-                    android:hint="friend2"
                     android:textAppearance="?attr/buttonStyleSmall"
                     android:textSize="10dp"
                     android:visibility="invisible"
-                    app:backgroundTint="#9ce3ff"
+                    app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
                     app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
 
@@ -297,11 +294,10 @@
                     android:background="@drawable/mybutton"
                     android:clickable="true"
                     android:gravity="center"
-                    android:hint="friend3"
                     android:textAppearance="?attr/buttonStyleSmall"
                     android:textSize="10dp"
                     android:visibility="invisible"
-                    app:backgroundTint="#9ce3ff"
+                    app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
                     app:layout_constraintStart_toEndOf="@+id/btncurrentUser" />
 
@@ -315,11 +311,10 @@
                     android:background="@drawable/mybutton"
                     android:clickable="true"
                     android:gravity="center"
-                    android:hint="friend4"
                     android:textAppearance="?attr/buttonStyleSmall"
                     android:textSize="10dp"
                     android:visibility="invisible"
-                    app:backgroundTint="#9ce3ff"
+                    app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
                     app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
 
@@ -333,11 +328,10 @@
                     android:background="@drawable/mybutton"
                     android:clickable="true"
                     android:gravity="center"
-                    android:hint="friend5"
                     android:textAppearance="?attr/buttonStyleSmall"
                     android:textSize="10dp"
                     android:visibility="invisible"
-                    app:backgroundTint="#9ce3ff"
+                    app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
                     app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
 
@@ -352,11 +346,10 @@
                     android:background="@drawable/mybutton"
                     android:clickable="true"
                     android:gravity="center"
-                    android:hint="friend6"
                     android:textAppearance="?attr/buttonStyleSmall"
                     android:textSize="10dp"
                     android:visibility="invisible"
-                    app:backgroundTint="#9ce3ff"
+                    app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
                     app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />
 
@@ -383,6 +376,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     app:fabSize="mini"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/fabCheckScore"
                     app:layout_constraintEnd_toEndOf="@+id/fabCheckScore"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -484,12 +478,29 @@
                     android:layout_marginBottom="24dp"
                     app:bmb_buttonRadius="20dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
+                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1" />
+                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1" >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/happy_icon"
+                        android:layout_gravity="center"/>
 
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:text="Positive"
+                        android:textSize="5sp"
+                        android:textColor="@android:color/white"/>
+
+                </com.nightonke.boommenu.BoomMenuButton>
                 <com.nightonke.boommenu.BoomMenuButton
                     android:id="@+id/bmb2"
                     android:layout_width="wrap_content"
@@ -497,11 +508,30 @@
                     android:layout_marginBottom="73dp"
                     app:bmb_buttonRadius="20dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
+                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1" />
+                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/sad_icon" />
+
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:text="Negative"
+                        android:textSize="5sp"
+                        android:textColor="@android:color/white"/>
+
+                </com.nightonke.boommenu.BoomMenuButton>
 
                 <com.nightonke.boommenu.BoomMenuButton
                     android:id="@+id/bmb3"
@@ -510,13 +540,31 @@
                     android:layout_marginBottom="28dp"
                     app:bmb_buttonRadius="20dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
+                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toTopOf="@+id/fabStatusLevel1"
                     app:layout_constraintEnd_toEndOf="@+id/fabStatusLevel1"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/fabStatusLevel1" />
+                    app:layout_constraintStart_toStartOf="@+id/fabStatusLevel1" >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/most_usage_icon"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:text="Commonly Used"
+                        android:textSize="5sp"
+                        android:textColor="@android:color/white"/>
+
+                </com.nightonke.boommenu.BoomMenuButton>
 
                 <com.nightonke.boommenu.BoomMenuButton
                     android:id="@+id/bmb4"
@@ -525,12 +573,29 @@
                     android:layout_marginBottom="72dp"
                     app:bmb_buttonRadius="20dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
+                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1" />
+                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1" >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/normal_icon"
+                        android:layout_gravity="center"/>
 
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:text="Normal"
+                        android:textSize="5sp"
+                        android:textColor="@android:color/white"/>
+
+                </com.nightonke.boommenu.BoomMenuButton>
                 <com.nightonke.boommenu.BoomMenuButton
                     android:id="@+id/bmb5"
                     android:layout_width="wrap_content"
@@ -539,11 +604,30 @@
                     android:layout_marginBottom="24dp"
                     app:bmb_buttonRadius="20dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@android:color/black"
+                    app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
+                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1" />
+                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1" >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/panda_paw_icon"
+                        app:tint="@android:color/white"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:text="Activity"
+                        android:textSize="5sp"
+                        android:textColor="@android:color/white"/>
+
+                </com.nightonke.boommenu.BoomMenuButton>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

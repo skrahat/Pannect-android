@@ -28,7 +28,13 @@
         <item>cooking</item>
         <item>withfamily</item>
         <item>working</item>
-
+        <item>music</item>
+        <item>walking</item>
+        <item>reading</item>
+        <item>yoga</item>
+        <item>swimming</item>
+        <item>singing</item>
+        <item>painting</item>
 
         <item>happy</item>
         <item>sad</item>
@@ -38,13 +44,8 @@
         <item>romantic</item>
 
 
-        <item>music</item>
-        <item>walking</item>
-        <item>reading</item>
-        <item>yoga</item>
-        <item>swimming</item>
-        <item>singing</item>
-        <item>painting</item>
+
+
         <item>playingguitar</item>
         <item>playingfootball</item>
         <item>sporting</item>
@@ -53,6 +54,36 @@
 
 
     </array>
+
+    <string name="happy">happy</string>
+    <string name="friendship">friendship</string>
+    <string name="blushing">blushing</string>
+    <string name="interest">interest</string>
+    <string name="satisfaction">satisfaction</string>
+    <string name="romantic">romantic</string>
+    <string name="awww">awww</string>
+    <string name="surprise">surprise</string>
+    <string name="trust">trust</string>
+
+    <string name="fighting">fighting</string>
+    <string name="sad">sad</string>
+    <string name="scared">scared</string>
+    <string name="disgust">disgust</string>
+    <string name="lonely">lonely</string>
+    <string name="angry">angry</string>
+    <string name="awkwardness">awkwardness</string>
+    <string name="annoyed">shame</string>
+    <string name="anxiety">anxiety</string>
+
+    <string name="cooking">cooking</string>
+    <string name="withfamily">withfamily</string>
+    <string name="music">music</string>
+    <string name="walking">walking</string>
+    <string name="reading">reading</string>
+    <string name="yoga">yoga</string>
+    <string name="swimming">swimming</string>
+    <string name="singing">singing</string>
+    <string name="painting">painting</string>
 
     <string name="bath">bath</string>
     <string name="bored">bored</string>
@@ -63,15 +94,7 @@
     <string name="cycling">cycling</string>
     <string name="eating">eating</string>
     <string name="sleeping">sleeping</string>
-    <string name="cooking">cooking</string>
-    <string name="withfamily">withfamily</string>
-    <string name="music">music</string>
-    <string name="walking">walking</string>
-    <string name="reading">reading</string>
-    <string name="yoga">yoga</string>
-    <string name="swimming">swimming</string>
-    <string name="singing">singing</string>
-    <string name="painting">painting</string>
+
 
     <string name="simple_circle_button_example">Simple Circle Button Example</string>
     <string name="text_inside_circle_button_example">Text Inside Circle Button Example</string>

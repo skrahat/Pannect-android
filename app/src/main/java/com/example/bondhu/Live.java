@@ -55,6 +55,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 import com.nightonke.boommenu.BoomMenuButton;
@@ -519,38 +520,93 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         });
 //////////------------working on center status buttons---------
         //working on BMB button----------------------
-        assert bmb1 != null;
 
         bmb1.setButtonEnum(ButtonEnum.TextInsideCircle);
         bmb1.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
         bmb1.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
         for (int i = 0; i < bmb1.getPiecePlaceEnum().pieceNumber(); i++)
-            bmb1.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+            bmb1.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder1()
+                    .listener(new OnBMClickListener() {
+                        @Override
+                        public void onBoomButtonClick(int index) {
+                            int[] textResources = BuilderManager.getTextResourceArray1();
+                            //currentUser.setText("No." + index + " boom-button is clicked!");
+                            int x = textResources[index];
+                            String description = getString(x);
+                            //currentUser.setText("No." + description + " boom-button is clicked!");
+                            addPreSelectedStatus(description);
+                        }
+                    }));
 
         bmb2.setButtonEnum(ButtonEnum.TextInsideCircle);
         bmb2.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
         bmb2.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
         for (int i = 0; i < bmb2.getPiecePlaceEnum().pieceNumber(); i++)
-            bmb2.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+            bmb2.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder2()
+                    .listener(new OnBMClickListener() {
+                        @Override
+                        public void onBoomButtonClick(int index) {
+                            int[] textResources = BuilderManager.getTextResourceArray2();
+                            //currentUser.setText("No." + index + " boom-button is clicked!");
+                            int x = textResources[index];
+                            String description = getString(x);
+                            //currentUser.setText("No." + description + " boom-button is clicked!");
+                            addPreSelectedStatus(description);
+                        }
+                    }));
 
         bmb3.setButtonEnum(ButtonEnum.TextInsideCircle);
         bmb3.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
         bmb3.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
         for (int i = 0; i < bmb3.getPiecePlaceEnum().pieceNumber(); i++)
-            bmb3.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+            bmb3.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder3()
+                    .listener(new OnBMClickListener() {
+                        @Override
+                        public void onBoomButtonClick(int index) {
+                            int[] textResources = BuilderManager.getTextResourceArray3();
+                            //currentUser.setText("No." + index + " boom-button is clicked!");
+                            int x = textResources[index];
+                            String description = getString(x);
+                            //currentUser.setText("No." + description + " boom-button is clicked!");
+                            addPreSelectedStatus(description);
+                        }
+                    }));
 
         bmb4.setButtonEnum(ButtonEnum.TextInsideCircle);
         bmb4.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
         bmb4.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
         for (int i = 0; i < bmb4.getPiecePlaceEnum().pieceNumber(); i++)
-            bmb4.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+            bmb4.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder4()
+                    .listener(new OnBMClickListener() {
+                        @Override
+                        public void onBoomButtonClick(int index) {
+                            int[] textResources = BuilderManager.getTextResourceArray4();
+                            //currentUser.setText("No." + index + " boom-button is clicked!");
+                            int x = textResources[index];
+                            String description = getString(x);
+                            //currentUser.setText("No." + description + " boom-button is clicked!");
+                            addPreSelectedStatus(description);
+                        }
+                    }));
 
         bmb5.setButtonEnum(ButtonEnum.TextInsideCircle);
-        bmb5.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_3);
-        bmb5.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_3);
+        bmb5.setPiecePlaceEnum(PiecePlaceEnum.DOT_9_2);
+        bmb5.setButtonPlaceEnum(ButtonPlaceEnum.SC_9_2);
         for (int i = 0; i < bmb5.getPiecePlaceEnum().pieceNumber(); i++)
-            bmb5.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+            bmb5.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder5()
+                    .listener(new OnBMClickListener() {
+                        @Override
+                        public void onBoomButtonClick(int index) {
+                            int[] textResources = BuilderManager.getTextResourceArray5();
+                            //currentUser.setText("No." + index + " boom-button is clicked!");
+                            int x = textResources[index];
+                            String description = getString(x);
+                            //currentUser.setText("No." + description + " boom-button is clicked!");
+                            addPreSelectedStatus(description);
+                        }
+                    }));
 
+        //working on BMB button----------------------
 
         //status button from center selection FAB
         initShowOut(bmb1);
@@ -1474,5 +1530,26 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                     }
                 }).alpha(0f)
                 .start();
+    }
+    public void addPreSelectedStatus(String updateLiveStatus){
+        Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
+        reference2.child(UserDetails.id).child("currentStatus").setValue(updateLiveStatus);
+
+        String currentDateandTime = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
+
+        //adding it to totalStatus list with timestamp
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("time", currentDateandTime);
+        map.put("status",updateLiveStatus);
+        map.put("newNotification","true");
+        reference2.child(UserDetails.id).child("totalStatus").push().setValue(map);
+
+        String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
+        int idX = getResources().getIdentifier("com.example.bondhu:drawable/" + updateLiveStatus, null, null);
+        currentStatusGif.setImageResource(idX);
+
+        currentStatusView.setText(updateLiveStatus);
+        UserDetails.currentStatus= updateLiveStatus;
+        Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
     }
 }
