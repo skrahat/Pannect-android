@@ -84,7 +84,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout4"
@@ -229,14 +230,13 @@
                     android:textColor="#ffffff"
                     app:backgroundTint="#eb5834"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/connect_icon"
                     app:strokeColor="#ffffff"
                     app:strokeWidth="1dp"
                     tools:ignore="RtlCompat" />
-
 
 
                 <ListView
@@ -375,8 +375,8 @@
                     android:backgroundTint="#faf4b1"
                     android:clickable="true"
                     android:focusable="true"
-                    app:fabSize="mini"
                     android:visibility="invisible"
+                    app:fabSize="mini"
                     app:layout_constraintBottom_toTopOf="@+id/fabCheckScore"
                     app:layout_constraintEnd_toEndOf="@+id/fabCheckScore"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -453,14 +453,14 @@
                     android:id="@+id/fabStatusLevel1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="608dp"
+                    android:layout_marginTop="704dp"
                     android:clickable="true"
                     android:contentDescription="fabButton"
                     android:focusable="true"
                     android:gravity="center_vertical"
                     app:backgroundTint="#1b5285"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.478"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:maxImageSize="56dp"
@@ -476,19 +476,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="24dp"
-                    app:bmb_buttonRadius="20dp"
+                    app:bmb_buttonRadius="25dp"
+                    app:bmb_dotRadius="0dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
                     app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
-                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1" >
+                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1">
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        app:srcCompat="@drawable/happy_icon"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/happy_icon" />
 
                     <TextView
                         android:layout_width="40dp"
@@ -497,23 +498,24 @@
                         android:layout_marginTop="15dp"
                         android:gravity="center"
                         android:text="Positive"
-                        android:textSize="5sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp" />
 
                 </com.nightonke.boommenu.BoomMenuButton>
+
                 <com.nightonke.boommenu.BoomMenuButton
                     android:id="@+id/bmb2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="73dp"
-                    app:bmb_buttonRadius="20dp"
+                    app:bmb_buttonRadius="25dp"
+                    app:bmb_dotRadius="0dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
                     app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
-                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1" >
+                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -528,8 +530,8 @@
                         android:layout_marginTop="15dp"
                         android:gravity="center"
                         android:text="Negative"
-                        android:textSize="5sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp" />
 
                 </com.nightonke.boommenu.BoomMenuButton>
 
@@ -538,21 +540,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="28dp"
-                    app:bmb_buttonRadius="20dp"
+                    app:bmb_buttonRadius="25dp"
+                    app:bmb_dotRadius="0dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
                     app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
-                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toTopOf="@+id/fabStatusLevel1"
                     app:layout_constraintEnd_toEndOf="@+id/fabStatusLevel1"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/fabStatusLevel1" >
+                    app:layout_constraintStart_toStartOf="@+id/fabStatusLevel1">
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        app:srcCompat="@drawable/most_usage_icon"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/most_usage_icon" />
 
                     <TextView
                         android:layout_width="40dp"
@@ -561,8 +564,8 @@
                         android:layout_marginTop="15dp"
                         android:gravity="center"
                         android:text="Commonly Used"
-                        android:textSize="5sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp" />
 
                 </com.nightonke.boommenu.BoomMenuButton>
 
@@ -571,19 +574,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="72dp"
-                    app:bmb_buttonRadius="20dp"
+                    app:bmb_buttonRadius="25dp"
+                    app:bmb_dotRadius="0dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
                     app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
-                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1" >
+                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1">
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        app:srcCompat="@drawable/normal_icon"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/normal_icon" />
 
                     <TextView
                         android:layout_width="40dp"
@@ -592,30 +596,32 @@
                         android:layout_marginTop="15dp"
                         android:gravity="center"
                         android:text="Normal"
-                        android:textSize="5sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp" />
 
                 </com.nightonke.boommenu.BoomMenuButton>
+
                 <com.nightonke.boommenu.BoomMenuButton
                     android:id="@+id/bmb5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginBottom="24dp"
-                    app:bmb_buttonRadius="20dp"
+                    app:bmb_buttonRadius="25dp"
+                    app:bmb_dotRadius="0dp"
                     app:bmb_highlightedColor="@android:color/holo_blue_dark"
                     app:bmb_normalColor="@color/dark_blue_panda"
                     app:bmb_rippleEffect="true"
                     app:bmb_unableColor="@android:color/white"
-                    app:bmb_dotRadius="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1" >
+                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1">
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:layout_gravity="center"
                         app:srcCompat="@drawable/panda_paw_icon"
-                        app:tint="@android:color/white"
-                        android:layout_gravity="center"/>
+                        app:tint="@android:color/white" />
 
                     <TextView
                         android:layout_width="40dp"
@@ -624,8 +630,8 @@
                         android:layout_marginTop="15dp"
                         android:gravity="center"
                         android:text="Activity"
-                        android:textSize="5sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp" />
 
                 </com.nightonke.boommenu.BoomMenuButton>
 
