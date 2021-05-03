@@ -86,12 +86,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     TextView noUsersText;
     TextView currentUser;
     TextView currentStatusView;
-    TextView friend1Score;
-    TextView friend2Score;
-    TextView friend3Score;
-    TextView friend4Score;
-    TextView friend5Score;
-    TextView friend6Score;
+    TextView friend1TimeStamp;
+    TextView friend2TimeStamp;
+    TextView friend3TimeStamp;
+    TextView friend4TimeStamp;
+    TextView friend5TimeStamp;
+    TextView friend6TimeStamp;
 
     TextView testing2;
     Button friend1;
@@ -111,7 +111,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     ArrayList<String> al2 = new ArrayList<>();
     ArrayList<String> friendsArray = new ArrayList<>();
     ArrayList<String> friendsStatusArray = new ArrayList<>();
-    ArrayList<String> gifListArray = new ArrayList<>();
+    ArrayList<String> friendTimeStampArray = new ArrayList<>();
     ArrayList<String> totalStatus = new ArrayList<>();
     List<List<String>> totalStatusMultipleFriendsList = new ArrayList<List<String>>();
     ArrayList<String> currentUserTotalStatus = new ArrayList<>();
@@ -119,7 +119,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     List<Button> friendBtnList = new ArrayList<>();
     List<ProgressBar> friendProgressList = new ArrayList<>();
     List<GifImageView> friendGifList = new ArrayList<>();
-    List<TextView> friendScoreList = new ArrayList<>();
+    List<TextView> friendTimeStampList = new ArrayList<>();
 
     List<List> statusFriendsArraylist2D = new ArrayList<List>();
     ArrayList<String> friend1StatusArray = new ArrayList<>();
@@ -185,12 +185,13 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         totalStatusList = (ListView)findViewById(R.id.totalStatusList);
         noUsersText = (TextView)findViewById(R.id.noUsersText);
         currentUser = (TextView)findViewById(R.id.currentUser);
-        /*friend2Score = (TextView)findViewById(R.id.friend2Score);
-        friend3Score = (TextView)findViewById(R.id.friend3Score);
-        friend4Score = (TextView)findViewById(R.id.friend4Score);
-        friend5Score = (TextView)findViewById(R.id.friend5Score);
-        friend6Score = (TextView)findViewById(R.id.friend6Score);
-         */
+        friend1TimeStamp = (TextView)findViewById(R.id.timeStamp1);
+        friend2TimeStamp = (TextView)findViewById(R.id.timeStamp2);
+        friend3TimeStamp = (TextView)findViewById(R.id.timeStamp3);
+        friend4TimeStamp = (TextView)findViewById(R.id.timeStamp4);
+        friend5TimeStamp = (TextView)findViewById(R.id.timeStamp5);
+        friend6TimeStamp = (TextView)findViewById(R.id.timeStamp6);
+
 
 
         //testing2 = (TextView)findViewById(R.id.testing2);
@@ -243,7 +244,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         List<ProgressBar> friendProgressList = Arrays.asList(progressBar, progressBar2, progressBar3, progressBar4, progressBar5,progressBar6);
         List<GifImageView> friendGifList = Arrays.asList(friend1Gif, friend2Gif, friend3Gif, friend4Gif, friend5Gif,friend6Gif);
         friendBtnList = Arrays.asList(friend1, friend2, friend3, friend4, friend5,friend6);
-        List<TextView> friendScoreList = Arrays.asList(friend1Score, friend2Score, friend3Score, friend4Score, friend5Score,friend6Score);
+        friendTimeStampList = Arrays.asList(friend1TimeStamp, friend2TimeStamp, friend3TimeStamp, friend4TimeStamp, friend5TimeStamp,friend6TimeStamp);
 
         BoomMenuButton bmb1 = (BoomMenuButton) findViewById(R.id.bmb1);
         BoomMenuButton bmb2 = (BoomMenuButton) findViewById(R.id.bmb2);
@@ -261,7 +262,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         nav_view = findViewById(R.id.nav_view);
         toolbar =  findViewById(R.id.toolbar);
 
-        String currentDateandTimeGeneral = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
+        String currentDateandTimeGeneral = new SimpleDateFormat(" yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(new Date());
 
 
         statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
@@ -277,6 +278,9 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         toggle.syncState();
 
         nav_view.setNavigationItemSelectedListener(this);
+
+
+
 
         //nav_view.setCheckedItem(R.id.nav_home);
 
@@ -415,8 +419,26 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                             friendsStatusArray.clear();
                             int friendsArrayStatusCounter = 0;
                             while(friendsArray.size()> friendsArrayStatusCounter){
-                                String valuex = task.getResult().child(friendsArrayID.get(friendsArrayStatusCounter)).child("currentStatus").getValue(String.class);
+                                String valuex = task.getResult().child(friendsArrayID.get(friendsArrayStatusCounter)).child("currentStatus").child("status").getValue(String.class);
+                                String value2 = task.getResult().child(friendsArrayID.get(friendsArrayStatusCounter)).child("currentStatus").child("time").getValue(String.class);
                                 friendsStatusArray.add(valuex);
+                                friendTimeStampArray.add(value2);
+                                if(friendTimeStampArray.get(friendsArrayStatusCounter) != null) {
+                                    Log.i("timeStamp working",friendTimeStampArray.get(friendsArrayStatusCounter));
+                                    // time format and adding status updated timeStamp
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Dhaka"));
+                                    long time = 0;
+                                    try {
+                                        time = sdf.parse(friendTimeStampArray.get(friendsArrayStatusCounter)).getTime();
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                    long now = System.currentTimeMillis();
+                                    CharSequence ago = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+                                    friendTimeStampList.get(friendsArrayStatusCounter).setText(ago);
+                                    friendTimeStampList.get(friendsArrayStatusCounter).setVisibility(View.VISIBLE);
+                                }
 
                                 friendBtnList.get(friendsArrayStatusCounter).setText(friendsArray.get(friendsArrayStatusCounter) + ":" + friendsStatusArray.get(friendsArrayStatusCounter));
                                 int id1 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(friendsArrayStatusCounter), null, null);
@@ -424,11 +446,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                                 friendBtnList.get(friendsArrayStatusCounter).setVisibility(View.VISIBLE);
                                 friendGifList.get(friendsArrayStatusCounter).setVisibility(View.VISIBLE);
                                 friendProgressList.get(friendsArrayStatusCounter).setVisibility(View.VISIBLE);
-                                if (friendsStatusArray.get(friendsArrayStatusCounter).equals(UserDetails.currentStatus)) {
-                                    friendBtnList.get(friendsArrayStatusCounter).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
-                                } else {
-                                    friendBtnList.get(friendsArrayStatusCounter).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
-                                }
+
+                                    if (friendsStatusArray.get(friendsArrayStatusCounter) != null &&  friendsStatusArray.get(friendsArrayStatusCounter).equals(UserDetails.currentStatus)) {
+                                        friendBtnList.get(friendsArrayStatusCounter).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
+                                    } else {
+                                        friendBtnList.get(friendsArrayStatusCounter).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
+                                    }
 
                                 friendsArrayStatusCounter++;
                             }
@@ -508,20 +531,41 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                     friendsStatusArray.clear();
                     int count = 0;
                     while (friendsArray.size() > count) {
-                        String value = dataSnapshot.child(friendsArrayID.get(count)).child("currentStatus").getValue(String.class);
+                        String value = dataSnapshot.child(friendsArrayID.get(count)).child("currentStatus").child("status").getValue(String.class);
+                        String value2 = dataSnapshot.child(friendsArrayID.get(count)).child("currentStatus").child("time").getValue(String.class);
                         friendsStatusArray.add(value);
-                        //Log.i( "xxxxxxx--btn test", String.valueOf(count));
+                        friendTimeStampArray.add(value2);
+
+                        if(friendTimeStampArray.get(count) != null) {
+                            // time format and adding status updated timeStamp
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                            sdf.setTimeZone(TimeZone.getTimeZone("Asia/Dhaka"));
+                            long time = 0;
+                            try {
+                                time = sdf.parse(friendTimeStampArray.get(count)).getTime();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            long now = System.currentTimeMillis();
+                            CharSequence ago = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+                            friendTimeStampList.get(count).setText(ago);
+                            friendTimeStampList.get(count).setVisibility(View.VISIBLE);
+                        }
+
                         friendBtnList.get(count).setText(friendsArray.get(count) + ":" + friendsStatusArray.get(count));
                         int id1 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(count), null, null);
                         friendGifList.get(count).setImageResource(id1);
                         friendBtnList.get(count).setVisibility(View.VISIBLE);
                         friendGifList.get(count).setVisibility(View.VISIBLE);
                         friendProgressList.get(count).setVisibility(View.VISIBLE);
-                        if (friendsStatusArray.get(count).equals(UserDetails.currentStatus)) {
+
+                        if (friendsStatusArray.get(count) != null && friendsStatusArray.get(count).equals(UserDetails.currentStatus)) {
                             friendBtnList.get(count).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
                         } else {
                             friendBtnList.get(count).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
                         }
+
+
 
                         count++;
                     }
@@ -683,17 +727,23 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             public void onClick(View view) {
                 Query queryCurrentUser = databaseReference.child(UserDetails.id).child("totalStatus").orderByChild("time").limitToLast(10);
 
+
+
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Dhaka"));
                 try {
-                    long time = sdf.parse("2021-05-02T16:00:00.000Z").getTime();
+                    long time = sdf.parse("2021-05-02T00:00:00.000Z").getTime();
                     long now = System.currentTimeMillis();
                     CharSequence ago =
                             DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
                     currentUser.setText(ago);
+                    Log.i("timeCheck---time", String.valueOf(time));
+                    Log.i("timeCheck---time", String.valueOf(now));
+                    Log.i("timeCheck---time", String.valueOf(sdf));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
 
                 queryCurrentUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -824,12 +874,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                     List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
 
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
-                    Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
+                    //Log.i("testing Z value", String.valueOf(totalStatus.size()));
+                    //Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
-                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
+                    //Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(0).setProgress(totalStatusTemp.size() * 10);
                     totalStatus.clear();
@@ -882,12 +932,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 if(currentUserTotalStatus != null) {
                     List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
-                    Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
+                    //Log.i("testing Z value", String.valueOf(totalStatus.size()));
+                    //Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
-                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
+                    //Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(1).setProgress(totalStatusTemp.size() * 10);
                     totalStatus.clear();
@@ -941,12 +991,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 if(currentUserTotalStatus != null) {
                     List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
-                    Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
+                    //Log.i("testing Z value", String.valueOf(totalStatus.size()));
+                    //Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
-                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
+                    //Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(2).setProgress(totalStatusTemp.size() * 10);
                     totalStatus.clear();
@@ -1000,12 +1050,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 if(currentUserTotalStatus != null) {
                     List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
-                    Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
+                    //Log.i("testing Z value", String.valueOf(totalStatus.size()));
+                    //Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
-                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
+                    //Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(3).setProgress(totalStatusTemp.size() * 10);
                     totalStatus.clear();
@@ -1059,12 +1109,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 if(currentUserTotalStatus != null) {
                     List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
-                    Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
+                    //Log.i("testing Z value", String.valueOf(totalStatus.size()));
+                    //Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
-                    Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
+                    //Log.i("tst totalStatusTemp", String.valueOf(totalStatusTemp.size()));
                     //friendBtnList.get(0).setText("score:" + totalStatusTemp.size() + "/10");
                     friendProgressList.get(4).setProgress(totalStatusTemp.size() * 10);
                     totalStatus.clear();
@@ -1118,8 +1168,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 if(currentUserTotalStatus != null) {
                     List<String> totalStatusTemp = new ArrayList<>(currentUserTotalStatus);
                     //Log.i("testing Z valueXXXXXX", String.valueOf(0));
-                    Log.i("testing Z value", String.valueOf(totalStatus.size()));
-                    Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
+                    //Log.i("testing Z value", String.valueOf(totalStatus.size()));
+                    //Log.i("tst curntUserTolStus", String.valueOf(currentUserTotalStatus.size()));
 
                     totalStatusTemp.retainAll(totalStatus);
 
@@ -1168,6 +1218,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
                 Firebase statusRef = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/status");
                 String liveStatus = etLiveStatus.getText().toString();
+
                 String currentDateandTime = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
 
                 //inserting status seperately under status
@@ -1178,7 +1229,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 statusRef.push().setValue(mapStatus);
 
                 //adding currentstatus under user
-                reference2.child(UserDetails.id).child("currentStatus").setValue(liveStatus);
+                reference2.child(UserDetails.id).child("currentStatus").child("status").setValue(liveStatus);
 
 
                 //adding it to totalStatus list with timestamp under users
@@ -1254,14 +1305,14 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             while(i.hasNext()){
                 key = i.next().toString();
                 if(!key.equals(UserDetails.id)) {
-                    String key2 = obj.getJSONObject(key).getString("currentStatus");
+                    String key2 = obj.getJSONObject(key).getJSONObject("currentStatus").getString("status");
                     String nameT = obj.getJSONObject(key).getString("userName");
                     al2.add(key2);
                     al.add(nameT);
                 }
                 if(key.equals(UserDetails.id)){
                     UserDetails.username=obj.getJSONObject(key).getString("userName");
-                    UserDetails.currentStatus=obj.getJSONObject(key).getString("currentStatus");
+                    UserDetails.currentStatus=obj.getJSONObject(key).getJSONObject("currentStatus").getString("status");
                 }
 
                 totalUsers++;
@@ -1421,13 +1472,16 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
 
                     if(key.equals(friendsArrayID.get(countX))) {
-                        String key2 = obj.getJSONObject(key).getString("currentStatus");
+                        String key2 = obj.getJSONObject(key).getJSONObject("currentStatus").getString("status");
+                        String key3 = obj.getJSONObject(key).getJSONObject("currentStatus").getString("time");
                         friendsStatusArray.add(key2);
+                        friendTimeStampArray.add(key3);
                         //Log.i("friend stat testID", friendsArrayID.get(countX));
                         //Log.i("friend stat testStat", key2);
                     }
                     if(key.equals(UserDetails.id)){
                         UserDetails.username=obj.getJSONObject(key).getString("userName");
+                        UserDetails.time =  obj.getJSONObject(key).getJSONObject("currentStatus").getString("time");
                     }
                     countX++;
                 }
@@ -1440,7 +1494,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 friendBtnList.get(z).setVisibility(View.VISIBLE);
                 friendGifList.get(z).setVisibility(View.VISIBLE);
                 friendProgressList.get(z).setVisibility(View.VISIBLE);
-                if (friendsStatusArray.get(z).equals(UserDetails.currentStatus)) {
+                if (friendsStatusArray.get(z) != null && friendsStatusArray.get(z).equals(UserDetails.currentStatus)) {
                     friendBtnList.get(z).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.red));
                 } else {
                     friendBtnList.get(z).setBackgroundTintList(ContextCompat.getColorStateList(Live.this, R.color.light_blue));
@@ -1561,17 +1615,19 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 }).alpha(0f)
                 .start();
     }
-    public void addPreSelectedStatus(String updateLiveStatus){
+    public void addPreSelectedStatus(String updateLiveStatus) {
         Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
-        reference2.child(UserDetails.id).child("currentStatus").setValue(updateLiveStatus);
+        reference2.child(UserDetails.id).child("currentStatus").child("status").setValue(updateLiveStatus);
 
-        String currentDateandTime = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
+        //adding timestamp to current status
+        String currentDateandTime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(new Date());
 
+        reference2.child(UserDetails.id).child("currentStatus").child("time").setValue(currentDateandTime);
         //adding it to totalStatus list with timestamp
         Map<String, String> map = new HashMap<String, String>();
         map.put("time", currentDateandTime);
         map.put("status",updateLiveStatus);
-        map.put("newNotification","true");
+        //map.put("newNotification","true");
         reference2.child(UserDetails.id).child("totalStatus").push().setValue(map);
 
         String url2 = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
