@@ -3,16 +3,26 @@ package com.example.bondhu;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.format.DateUtils;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
@@ -76,8 +86,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -130,6 +142,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
     ArrayList<String> friend6StatusArray = new ArrayList<>();
 
     CountDownTimer timer;
+
+    private static final int timeLimitMinutes = 5 * 60 * 1000;
 
     private boolean rotate = false;
     int totalFriends = 0;
@@ -253,7 +267,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         BoomMenuButton bmb5 = (BoomMenuButton) findViewById(R.id.bmb5);
 
         swiperefresh = findViewById(R.id.swiperefresh);
-        //progressBar.setSecondaryProgress(50);
+
+        //progressBar.setSecondaryProgress(100);
         //progressBar.setMax(100);
 
 
@@ -262,7 +277,9 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         nav_view = findViewById(R.id.nav_view);
         toolbar =  findViewById(R.id.toolbar);
 
-        String currentDateandTimeGeneral = new SimpleDateFormat(" yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(new Date());
+        //timezone reference
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Dhaka"));
 
 
         statusDbRef = FirebaseDatabase.getInstance().getReference().child("status");
@@ -358,9 +375,21 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onResponse(String s) {
                 doOnSuccess(s);
-                //displaying current username and display gif
+
+                long time = 0;
+                try {
+                    time = sdf.parse(UserDetails.time).getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long now = System.currentTimeMillis();
+                CharSequence ago = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+
+
+
+                //displaying current username , time and display gif
                 currentUser.setText(UserDetails.username);
-                currentStatusView.setText(UserDetails.currentStatus);
+                currentStatusView.setText(UserDetails.currentStatus+ "\n" +ago);
                 int idX = getResources().getIdentifier("com.example.bondhu:drawable/" + UserDetails.currentStatus, null, null);
                 currentStatusGif.setImageResource(idX);
             }
@@ -471,52 +500,38 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         RequestQueue rQueueF = Volley.newRequestQueue(Live.this);
         rQueueF.add(requestF);
 
-        //get all friends status ONCE INITIALLY
-        String urlS = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
-        StringRequest requestS = new StringRequest(Request.Method.GET, urlS, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String s) {
+        statusDbRef2.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("firebase", "Error getting data", task.getException());
+                        }
+                        else {
+                            if (task.getResult().exists()) {
+                                for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                                    //Log.i("friends string ----", String.valueOf(snapshot.child("key").getValue()));
+                                    /*String userID = snapshot.getValue(String.class);
+                                    if(userID == UserDetails.id){
+                                        UserDetails.username = snapshot.child("userName").getValue(String.class);
+                                    }
 
-                //getAllFriendsStatus(s);
+                                     */
 
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                System.out.println("" + volleyError);
-            }
-        });
-        RequestQueue rQueueS = Volley.newRequestQueue(Live.this);
-        rQueueS.add(requestS);
+                                }
 
-
-
-        //realtime updating colours of friends if linked
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
-        myRef.addValueEventListener(new ValueEventListener() {
-
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-
-
+                            }
+                        }
+                    }
+                });
 
 
 
         //realtime updating friends name and status
         //FirebaseDatabase database = FirebaseDatabase.getInstance();
         //DatabaseReference myRef = database.getReference("users");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
         myRef.addValueEventListener(new ValueEventListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -593,11 +608,9 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                         @Override
                         public void onBoomButtonClick(int index) {
                             int[] textResources = BuilderManager.getTextResourceArray1();
-                            //currentUser.setText("No." + index + " boom-button is clicked!");
                             int x = textResources[index];
                             String description = getString(x);
-                            //currentUser.setText("No." + description + " boom-button is clicked!");
-                            addPreSelectedStatus(description);
+                            confirmationDialog(description);
                         }
                     }));
 
@@ -610,11 +623,9 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                         @Override
                         public void onBoomButtonClick(int index) {
                             int[] textResources = BuilderManager.getTextResourceArray2();
-                            //currentUser.setText("No." + index + " boom-button is clicked!");
                             int x = textResources[index];
                             String description = getString(x);
-                            //currentUser.setText("No." + description + " boom-button is clicked!");
-                            addPreSelectedStatus(description);
+                            confirmationDialog(description);
                         }
                     }));
 
@@ -627,11 +638,9 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                         @Override
                         public void onBoomButtonClick(int index) {
                             int[] textResources = BuilderManager.getTextResourceArray3();
-                            //currentUser.setText("No." + index + " boom-button is clicked!");
                             int x = textResources[index];
                             String description = getString(x);
-                            //currentUser.setText("No." + description + " boom-button is clicked!");
-                            addPreSelectedStatus(description);
+                            confirmationDialog(description);
                         }
                     }));
 
@@ -644,11 +653,9 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                         @Override
                         public void onBoomButtonClick(int index) {
                             int[] textResources = BuilderManager.getTextResourceArray4();
-                            //currentUser.setText("No." + index + " boom-button is clicked!");
                             int x = textResources[index];
                             String description = getString(x);
-                            //currentUser.setText("No." + description + " boom-button is clicked!");
-                            addPreSelectedStatus(description);
+                            confirmationDialog(description);
                         }
                     }));
 
@@ -661,11 +668,9 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                         @Override
                         public void onBoomButtonClick(int index) {
                             int[] textResources = BuilderManager.getTextResourceArray5();
-                            //currentUser.setText("No." + index + " boom-button is clicked!");
                             int x = textResources[index];
                             String description = getString(x);
-                            //currentUser.setText("No." + description + " boom-button is clicked!");
-                            addPreSelectedStatus(description);
+                            confirmationDialog(description);
                         }
                     }));
 
@@ -727,22 +732,6 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             public void onClick(View view) {
                 Query queryCurrentUser = databaseReference.child(UserDetails.id).child("totalStatus").orderByChild("time").limitToLast(10);
 
-
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Dhaka"));
-                try {
-                    long time = sdf.parse("2021-05-02T00:00:00.000Z").getTime();
-                    long now = System.currentTimeMillis();
-                    CharSequence ago =
-                            DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
-                    currentUser.setText(ago);
-                    Log.i("timeCheck---time", String.valueOf(time));
-                    Log.i("timeCheck---time", String.valueOf(now));
-                    Log.i("timeCheck---time", String.valueOf(sdf));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
 
 
                 queryCurrentUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -1215,10 +1204,13 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         btnLiveStatusData2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String liveStatus = etLiveStatus.getText().toString();
+                confirmationDialog(liveStatus);
+                etLiveStatus.setText("");
+/*
                 Firebase reference2 = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/users");
                 Firebase statusRef = new Firebase("https://bondhu-2021-default-rtdb.firebaseio.com/status");
-                String liveStatus = etLiveStatus.getText().toString();
-
                 String currentDateandTime = new SimpleDateFormat(" yyyy-MM-dd HH:mm").format(new Date());
 
                 //inserting status seperately under status
@@ -1246,10 +1238,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 currentStatusView.setText(liveStatus +"\n"+ currentDateandTime);
                 UserDetails.currentStatus= liveStatus;
                 Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
-                etLiveStatus.setText("");
+
+ */
 
 
             }});
+        /*
         // update status from spinner list
         btnLiveStatusSelectAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1283,6 +1277,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
             }});
 
+         */
+
 
 
 
@@ -1300,7 +1296,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
             Iterator i = obj.keys();
             String key = "";
-            //Log.i(TAG, i.toString());
+            Log.i("xxxxx-xxx---","working now1");
 
             while(i.hasNext()){
                 key = i.next().toString();
@@ -1311,8 +1307,10 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                     al.add(nameT);
                 }
                 if(key.equals(UserDetails.id)){
+                    Log.i("xxxxx-xxx---","working now2");
                     UserDetails.username=obj.getJSONObject(key).getString("userName");
                     UserDetails.currentStatus=obj.getJSONObject(key).getJSONObject("currentStatus").getString("status");
+                    UserDetails.time=obj.getJSONObject(key).getJSONObject("currentStatus").getString("time");
                 }
 
                 totalUsers++;
@@ -1429,14 +1427,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
             while(i.hasNext()){
                 key = i.next().toString();
-                String key2 =obj.getString(key);
 
                 friendsArray.add(key);
-                //friendsArrayID.add(key2);
-                //Log.i("testing friend array",key);
-                //Log.i("testing friend array",key2);
-
-
 
 
                 totalFriends++;
@@ -1542,6 +1534,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         //Log.i("notification ", "checking");
     }
 
+    //navigation bar items selection
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -1634,8 +1627,80 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         int idX = getResources().getIdentifier("com.example.bondhu:drawable/" + updateLiveStatus, null, null);
         currentStatusGif.setImageResource(idX);
 
-        currentStatusView.setText(updateLiveStatus);
         UserDetails.currentStatus= updateLiveStatus;
+        UserDetails.time= currentDateandTime;
+
+        //update current user display timeStamp
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Dhaka"));
+
+        long time = 0;
+        try {
+            time = sdf.parse(UserDetails.time).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long now = System.currentTimeMillis();
+        CharSequence ago = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS);
+
+
+        currentStatusView.setText(updateLiveStatus+ "\n" +ago);
         Toast.makeText(Live.this, "status added successfully", Toast.LENGTH_LONG).show();
+    }
+
+    // checks time limit first
+    //  followed by dialog confirmation
+    //  if goes positive calls  addPreSelectedStatus() method to update status
+    public void confirmationDialog(String description) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Dhaka"));
+        long time = 0;
+        try {
+            time = sdf.parse(UserDetails.time).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long fiveAgo = System.currentTimeMillis() - timeLimitMinutes;
+        if (time < fiveAgo) {
+
+
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setTitle("Panda Status")
+                        .setMessage("confirm Status Update?")
+                        .setPositiveButton("Revert", null)
+                        .create();
+
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    private static final int AUTO_DISMISS_MILLIS = 3000;
+                    @Override
+                    public void onShow(final DialogInterface dialog) {
+                        final Button defaultButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                        final CharSequence negativeButtonText = defaultButton.getText();
+                        new CountDownTimer(AUTO_DISMISS_MILLIS, 100) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                defaultButton.setText(String.format(
+                                        Locale.getDefault(), "%s (%d)",
+                                        negativeButtonText,
+                                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) + 1 //add one so it never displays zero
+                                ));
+                            }
+                            @Override
+                            public void onFinish() {
+                                addPreSelectedStatus(description);
+
+                                if (((AlertDialog) dialog).isShowing()) {
+                                    dialog.dismiss();
+                                }
+                            }
+                        }.start();
+                    }
+                });
+                dialog.show();
+        }else{
+
+            System.out.println("please wait at least 5 minutes after last status update");
+        }
     }
 }

@@ -79,6 +79,9 @@
                 android:backgroundTint="#ece3ff"
                 android:gravity="center"
                 android:text="" />
+
+
+
         </LinearLayout>
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefresh"
@@ -114,62 +117,62 @@
 
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/friend1Gif"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/friend1"
                     app:layout_constraintEnd_toEndOf="@+id/friend1"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.526"
                     app:layout_constraintStart_toStartOf="@+id/friend1" />
 
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/friend2Gif"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/friend2"
                     app:layout_constraintEnd_toEndOf="@+id/friend2"
-                    app:layout_constraintHorizontal_bias="0.068"
+                    app:layout_constraintHorizontal_bias="0.606"
                     app:layout_constraintStart_toStartOf="@+id/friend2" />
 
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/friend5Gif"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/friend5"
                     app:layout_constraintEnd_toEndOf="@+id/friend5"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.454"
                     app:layout_constraintStart_toStartOf="@+id/friend5" />
 
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/friend6Gif"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/friend6"
                     app:layout_constraintEnd_toEndOf="@+id/friend6"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.393"
                     app:layout_constraintStart_toStartOf="@+id/friend6" />
 
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/friend4Gif"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/friend4"
                     app:layout_constraintEnd_toEndOf="@+id/friend4"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.393"
                     app:layout_constraintStart_toStartOf="@+id/friend4" />
 
                 <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/friend3Gif"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@+id/friend3"
                     app:layout_constraintEnd_toEndOf="@+id/friend3"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="0.606"
                     app:layout_constraintStart_toStartOf="@+id/friend3" />
 
                 <EditText
@@ -191,6 +194,7 @@
                     android:layout_width="150dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="16dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.812"
                     app:layout_constraintStart_toStartOf="parent"
@@ -204,7 +208,7 @@
                     android:text="update"
                     android:textColor="#ffffff"
                     android:textSize="8sp"
-
+                    android:visibility="gone"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/spinnerStatus"
                     app:layout_constraintStart_toEndOf="@+id/spinnerStatus" />
@@ -267,7 +271,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="10dp"
+                    android:textSize="15dp"
                     android:visibility="invisible"
                     app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
@@ -283,7 +287,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="10dp"
+                    android:textSize="15dp"
                     android:visibility="invisible"
                     app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
@@ -300,7 +304,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="10dp"
+                    android:textSize="15dp"
                     android:visibility="invisible"
                     app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
@@ -317,7 +321,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="10dp"
+                    android:textSize="15dp"
                     android:visibility="invisible"
                     app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
@@ -334,7 +338,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="10dp"
+                    android:textSize="15dp"
                     android:visibility="invisible"
                     app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
@@ -352,7 +356,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="10dp"
+                    android:textSize="15dp"
                     android:visibility="invisible"
                     app:backgroundTint="@color/base_blue_button"
                     app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
@@ -391,8 +395,8 @@
                 <ProgressBar
                     android:id="@+id/progressBar"
                     style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="5dp"
+                    android:layout_width="65dp"
+                    android:layout_height="3dp"
                     android:indeterminate="false"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="@+id/friend1"
@@ -402,8 +406,8 @@
                 <ProgressBar
                     android:id="@+id/progressBar2"
                     style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="5dp"
+                    android:layout_width="65dp"
+                    android:layout_height="3dp"
                     android:indeterminate="false"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="@+id/friend2"
@@ -413,8 +417,8 @@
                 <ProgressBar
                     android:id="@+id/progressBar3"
                     style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="5dp"
+                    android:layout_width="65dp"
+                    android:layout_height="3dp"
                     android:indeterminate="false"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="@+id/friend3"
@@ -424,8 +428,8 @@
                 <ProgressBar
                     android:id="@+id/progressBar4"
                     style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="5dp"
+                    android:layout_width="65dp"
+                    android:layout_height="3dp"
                     android:indeterminate="false"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="@+id/friend4"
@@ -435,8 +439,8 @@
                 <ProgressBar
                     android:id="@+id/progressBar5"
                     style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="5dp"
+                    android:layout_width="65dp"
+                    android:layout_height="3dp"
                     android:indeterminate="false"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="@+id/friend5"
@@ -446,8 +450,8 @@
                 <ProgressBar
                     android:id="@+id/progressBar6"
                     style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="5dp"
+                    android:layout_width="65dp"
+                    android:layout_height="3dp"
                     android:indeterminate="false"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="@+id/friend6"
@@ -462,10 +466,10 @@
                     android:contentDescription="fabButton"
                     android:focusable="true"
                     android:gravity="center_vertical"
-                    app:backgroundTint="#1b5285"
+                    app:backgroundTint="@color/dark_blue_panda"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintHorizontal_bias="0.504"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.974"
@@ -642,10 +646,10 @@
                 </com.nightonke.boommenu.BoomMenuButton>
 
 
-                <EditText
+                <TextView
                     android:id="@+id/timeStamp1"
                     android:layout_width="wrap_content"
-                    android:layout_height="8dp"
+                    android:layout_height="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rounded_corner"
                     android:gravity="center"
@@ -654,97 +658,102 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:text="x hours ago"
                     android:textColor="@android:color/black"
-                    android:textSize="5sp"
+                    android:textSize="8sp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/friend1"
                     app:layout_constraintEnd_toEndOf="@+id/friend1"
                     app:layout_constraintHorizontal_bias="0.847"
                     app:layout_constraintStart_toStartOf="@+id/friend1" />
 
-                <EditText
+                <TextView
                     android:id="@+id/timeStamp2"
-                    android:layout_width="31dp"
-                    android:layout_height="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rounded_corner"
-                    android:ems="10"
                     android:gravity="center"
                     android:inputType="time"
-                    android:text="5 hours ago"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="x hours ago"
                     android:textColor="@android:color/black"
-                    android:textSize="5sp"
+                    android:textSize="8sp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/friend2"
                     app:layout_constraintEnd_toEndOf="@+id/friend2"
                     app:layout_constraintHorizontal_bias="0.912"
                     app:layout_constraintStart_toStartOf="@+id/friend2" />
 
-                <EditText
+                <TextView
                     android:id="@+id/timeStamp3"
-                    android:layout_width="31dp"
-                    android:layout_height="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rounded_corner"
-                    android:ems="10"
                     android:gravity="center"
                     android:inputType="time"
-                    android:text="5 hours ago"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="x hours ago"
                     android:textColor="@android:color/black"
-                    android:textSize="5sp"
+                    android:textSize="8sp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/friend3"
                     app:layout_constraintEnd_toEndOf="@+id/friend3"
                     app:layout_constraintHorizontal_bias="0.877"
                     app:layout_constraintStart_toStartOf="@+id/friend3" />
 
-                <EditText
+                <TextView
                     android:id="@+id/timeStamp4"
-                    android:layout_width="31dp"
-                    android:layout_height="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rounded_corner"
-                    android:ems="10"
                     android:gravity="center"
                     android:inputType="time"
-                    android:text="5 hours ago"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="x hours ago"
                     android:textColor="@android:color/black"
-                    android:textSize="5sp"
+                    android:textSize="8sp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/friend4"
                     app:layout_constraintEnd_toEndOf="@+id/friend4"
                     app:layout_constraintHorizontal_bias="0.976"
                     app:layout_constraintStart_toStartOf="@+id/friend1" />
 
-                <EditText
+                <TextView
                     android:id="@+id/timeStamp5"
-                    android:layout_width="31dp"
-                    android:layout_height="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rounded_corner"
-                    android:ems="10"
                     android:gravity="center"
                     android:inputType="time"
-                    android:text="5 hours ago"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="x hours ago"
                     android:textColor="@android:color/black"
-                    android:textSize="5sp"
+                    android:textSize="8sp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/friend5"
                     app:layout_constraintEnd_toEndOf="@+id/friend5"
                     app:layout_constraintHorizontal_bias="0.877"
                     app:layout_constraintStart_toStartOf="@+id/friend5" />
 
-                <EditText
+                <TextView
                     android:id="@+id/timeStamp6"
-                    android:layout_width="31dp"
-                    android:layout_height="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/rounded_corner"
-                    android:ems="10"
                     android:gravity="center"
                     android:inputType="time"
-                    android:text="5 hours ago"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="x hours ago"
                     android:textColor="@android:color/black"
-                    android:textSize="5sp"
+                    android:textSize="8sp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/friend6"
                     app:layout_constraintEnd_toEndOf="@+id/friend6"

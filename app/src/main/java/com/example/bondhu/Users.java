@@ -235,11 +235,15 @@ public class Users extends AppCompatActivity {
 
             }
         });
-        friendsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        friendsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserDetails.chatWith =friendsArray.get(position);
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+                UserDetails.chatWith =friendsArray.get(pos);
                 startActivity(new Intent(Users.this, Chat.class));
+
+                return true;
             }
         });
         // display friends
