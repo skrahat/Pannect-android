@@ -3,6 +3,8 @@
     package="com.example.bondhu">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:name=".Home"
@@ -13,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:largeHeap="true">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDFLhkPvnk_LLT2lExA0Kt6qVd8umHOU4Y"/>
 
         <activity android:name=".RegisterActivity">
 
@@ -32,6 +37,7 @@
         </activity>
         <activity android:name=".Chat" />
         <activity android:name=".Users" />
+        <activity android:name=".LocationActivity" />
         <service
             android:name=".NotificationService"
             android:exported="true">

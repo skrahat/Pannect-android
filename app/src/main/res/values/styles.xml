@@ -24,5 +24,13 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    !-- theme form bottom app nav -->
+    <style name="AppThemeMaterial" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/base_blue_button</item>
+        <item name="colorPrimaryDark">@color/dark_blue_panda</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
 
 </resources>

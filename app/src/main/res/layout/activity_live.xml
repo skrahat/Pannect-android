@@ -27,12 +27,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="#D5E4ED"
             android:orientation="horizontal"
-            android:background="#67bef5"
             tools:layout_editor_absoluteX="85dp"
             tools:layout_editor_absoluteY="453dp">
 
-            <androidx.appcompat.widget.Toolbar
+            <!--<androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="46dp"
                 android:layout_height="42dp"
@@ -43,13 +43,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-            </androidx.appcompat.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>-->
 
             <TextView
                 android:id="@+id/currentUser"
                 android:layout_width="100dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:hint="UserName"
                 android:textStyle="bold" />
@@ -59,711 +59,1609 @@
                 android:id="@+id/textView4"
                 android:layout_width="99dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="Status :"
                 android:textStyle="italic" />
 
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/currentStatusGif"
-                android:layout_marginTop="12dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_marginTop="10dp"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/currentStatusView"
                 android:layout_width="102dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:backgroundTint="#ece3ff"
                 android:gravity="center"
                 android:text="" />
 
 
-
         </LinearLayout>
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swiperefresh"
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/linearLayout4"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swiperefresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#F0F8FF"
-                android:theme="@style/MyMaterialTheme"
-                tools:context="com.example.bondhu.Users"
-                tools:viewBindingIgnore="true">
+                app:layout_anchor="@+id/swiperefresh"
+                app:layout_anchorGravity="center">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#F0F8FF"
+                        android:theme="@style/MyMaterialTheme"
+                        tools:context="com.example.bondhu.Users"
+                        tools:viewBindingIgnore="true">
+
+                        <androidx.appcompat.widget.Toolbar
+                            android:id="@+id/toolbar"
+                            android:layout_width="46dp"
+                            android:layout_height="42dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:minHeight="?attr/actionBarSize"
+                            android:theme="?attr/actionBarTheme"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        </androidx.appcompat.widget.Toolbar>
+
+                        <TextView
+                            android:id="@+id/noUsersText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_users_found"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
-                    android:id="@+id/noUsersText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_users_found"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/friend1Gif"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/friend1"
+                            app:layout_constraintEnd_toEndOf="@+id/friend1"
+                            app:layout_constraintHorizontal_bias="0.526"
+                            app:layout_constraintStart_toStartOf="@+id/friend1" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/friend2Gif"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/friend2"
+                            app:layout_constraintEnd_toEndOf="@+id/friend2"
+                            app:layout_constraintHorizontal_bias="0.606"
+                            app:layout_constraintStart_toStartOf="@+id/friend2" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/friend5Gif"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/friend5"
+                            app:layout_constraintEnd_toEndOf="@+id/friend5"
+                            app:layout_constraintHorizontal_bias="0.454"
+                            app:layout_constraintStart_toStartOf="@+id/friend5" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/friend6Gif"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/friend6"
+                            app:layout_constraintEnd_toEndOf="@+id/friend6"
+                            app:layout_constraintHorizontal_bias="0.393"
+                            app:layout_constraintStart_toStartOf="@+id/friend6" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/friend4Gif"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/friend4"
+                            app:layout_constraintEnd_toEndOf="@+id/friend4"
+                            app:layout_constraintHorizontal_bias="0.393"
+                            app:layout_constraintStart_toStartOf="@+id/friend4" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/friend3Gif"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/friend3"
+                            app:layout_constraintEnd_toEndOf="@+id/friend3"
+                            app:layout_constraintHorizontal_bias="0.606"
+                            app:layout_constraintStart_toStartOf="@+id/friend3" />
 
 
-                <pl.droidsonroids.gif.GifImageView
-                    android:id="@+id/friend1Gif"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/friend1"
-                    app:layout_constraintEnd_toEndOf="@+id/friend1"
-                    app:layout_constraintHorizontal_bias="0.526"
-                    app:layout_constraintStart_toStartOf="@+id/friend1" />
+                        <EditText
+                            android:id="@+id/etLiveStatus"
+                            android:layout_width="83dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="16dp"
+                            android:hint="add new Status!"
+                            android:text=""
+                            android:textSize="10sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.835"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <pl.droidsonroids.gif.GifImageView
-                    android:id="@+id/friend2Gif"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/friend2"
-                    app:layout_constraintEnd_toEndOf="@+id/friend2"
-                    app:layout_constraintHorizontal_bias="0.606"
-                    app:layout_constraintStart_toStartOf="@+id/friend2" />
+                        <Spinner
+                            android:id="@+id/spinnerStatus"
+                            android:layout_width="150dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="16dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.812"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <pl.droidsonroids.gif.GifImageView
-                    android:id="@+id/friend5Gif"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/friend5"
-                    app:layout_constraintEnd_toEndOf="@+id/friend5"
-                    app:layout_constraintHorizontal_bias="0.454"
-                    app:layout_constraintStart_toStartOf="@+id/friend5" />
-
-                <pl.droidsonroids.gif.GifImageView
-                    android:id="@+id/friend6Gif"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/friend6"
-                    app:layout_constraintEnd_toEndOf="@+id/friend6"
-                    app:layout_constraintHorizontal_bias="0.393"
-                    app:layout_constraintStart_toStartOf="@+id/friend6" />
-
-                <pl.droidsonroids.gif.GifImageView
-                    android:id="@+id/friend4Gif"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/friend4"
-                    app:layout_constraintEnd_toEndOf="@+id/friend4"
-                    app:layout_constraintHorizontal_bias="0.393"
-                    app:layout_constraintStart_toStartOf="@+id/friend4" />
-
-                <pl.droidsonroids.gif.GifImageView
-                    android:id="@+id/friend3Gif"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/friend3"
-                    app:layout_constraintEnd_toEndOf="@+id/friend3"
-                    app:layout_constraintHorizontal_bias="0.606"
-                    app:layout_constraintStart_toStartOf="@+id/friend3" />
-
-                <EditText
-                    android:id="@+id/etLiveStatus"
-                    android:layout_width="83dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="16dp"
-                    android:hint="add new Status!"
-                    android:text=""
-                    android:textSize="10sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.042"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                        <Button
+                            android:id="@+id/btnLiveStatusSelectAdd"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:background="#67bef5"
+                            android:text="update"
+                            android:textColor="#ffffff"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/spinnerStatus"
+                            app:layout_constraintStart_toEndOf="@+id/spinnerStatus" />
 
 
-                <Spinner
-                    android:id="@+id/spinnerStatus"
-                    android:layout_width="150dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="16dp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.812"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                        <Button
+                            android:id="@+id/btnLiveStatusData2"
+                            android:layout_width="40dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="8dp"
+                            android:background="#67bef5"
+                            android:text="add Status"
+                            android:textColor="#ffffff"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/etLiveStatus"
+                            app:layout_constraintStart_toEndOf="@+id/etLiveStatus" />
 
-                <Button
-                    android:id="@+id/btnLiveStatusSelectAdd"
-                    android:layout_width="40dp"
-                    android:layout_height="35dp"
-                    android:background="#67bef5"
-                    android:text="update"
-                    android:textColor="#ffffff"
-                    android:textSize="8sp"
-                    android:visibility="gone"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/spinnerStatus"
-                    app:layout_constraintStart_toEndOf="@+id/spinnerStatus" />
+                        <!--Base CardView-->
 
+                        <!--Base CardView-->
 
-                <Button
-                    android:id="@+id/btnLiveStatusData2"
-                    android:layout_width="40dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="8dp"
-                    android:background="#67bef5"
-                    android:text="add Status"
-                    android:textColor="#ffffff"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/etLiveStatus"
-                    app:layout_constraintStart_toEndOf="@+id/etLiveStatus" />
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/currentUserDisplay"
+                            style="@style/Base.CardView"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="10dp"
+                            android:backgroundTint="#eb5834"
+                            android:visibility="visible"
+                            app:cardCornerRadius="50dp"
+                            app:cardElevation="0dp"
+                            app:contentPadding="2dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.508"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.469"
+                            app:strokeColor="@color/base_blue_button"
+                            app:strokeWidth="1dp">
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btncurrentUser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="304dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff"
-                    app:backgroundTint="#eb5834"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/connect_icon"
-                    app:strokeColor="#ffffff"
-                    app:strokeWidth="1dp"
-                    tools:ignore="RtlCompat" />
+                            <!--This is a ConstraintLayout for the entire CardView
+                                       including the expandable portion-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="35dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/currentUserDisplay"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.511"
+                                tools:layout_editor_absoluteX="-55dp">
 
+                                <!--This is a ConstraintLayout for the fixed portion
+                                    of the CardView. The elements
+                                    that lie within the fixed portion of the CardView
+                                    can be constrained to this layout.-->
 
-                <ListView
-                    android:id="@+id/totalStatusList"
-                    android:layout_width="108dp"
-                    android:layout_height="156dp"
-                    android:layout_marginBottom="56dp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
-                    app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
-                    app:layout_constraintHorizontal_bias="0.507"
-                    app:layout_constraintStart_toStartOf="@+id/btncurrentUser">
+                                <!--The following is the expandable portion whose
+                                    visibility is initially set to 'gone'.
+                                    The parent LinearLayout contains 3 child LinearLayouts
+                                    that hold a subject name and an icon each.-->
 
-                </ListView>
-
-                <Button
-                    android:id="@+id/friend1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginBottom="84dp"
-                    android:background="@drawable/mybutton"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    app:backgroundTint="@color/base_blue_button"
-                    app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
-                    app:layout_constraintEnd_toStartOf="@+id/btncurrentUser" />
-
-                <Button
-                    android:id="@+id/friend2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="56dp"
-                    android:layout_marginEnd="60dp"
-                    android:background="@drawable/mybutton"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    app:backgroundTint="@color/base_blue_button"
-                    app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
-                    app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
-
-                <Button
-
-                    android:id="@+id/friend3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginBottom="84dp"
-                    android:background="@drawable/mybutton"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    app:backgroundTint="@color/base_blue_button"
-                    app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
-                    app:layout_constraintStart_toEndOf="@+id/btncurrentUser" />
-
-                <Button
-
-                    android:id="@+id/friend4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="64dp"
-                    android:background="@drawable/mybutton"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    app:backgroundTint="@color/base_blue_button"
-                    app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
-                    app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
-
-                <Button
-
-                    android:id="@+id/friend5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="156dp"
-                    android:layout_marginEnd="64dp"
-                    android:background="@drawable/mybutton"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    app:backgroundTint="@color/base_blue_button"
-                    app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
-                    app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/currentUserConstraint"
+                                    android:layout_width="100dp"
+                                    android:layout_height="25dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0">
 
 
-                <Button
+                                    <TextView
+                                        android:id="@+id/textCurrentUser"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="23dp"
+                                        android:text="sleeping"
+                                        android:textSize="15dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    android:id="@+id/friend6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="100dp"
-                    android:background="@drawable/mybutton"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:textAppearance="?attr/buttonStyleSmall"
-                    android:textSize="15dp"
-                    android:visibility="invisible"
-                    app:backgroundTint="@color/base_blue_button"
-                    app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
-                    app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />
+                                <LinearLayout
+                                    android:id="@+id/currentUserHidden_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/currentUserConstraint">
+
+                                    <!--Child LinearLayout 1-->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="name"
+                                            android:textColor="#000000"
+                                            android:textSize="10dp" />
+                                    </LinearLayout>
 
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabCheckScore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="116dp"
-                    android:clickable="true"
-                    app:fabSize="mini"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.997"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/stat_notify_sync" />
+                                </LinearLayout>
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/updateScore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="#faf4b1"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:visibility="invisible"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toTopOf="@+id/fabCheckScore"
-                    app:layout_constraintEnd_toEndOf="@+id/fabCheckScore"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/fabCheckScore"
-                    app:rippleColor="@android:color/white" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="65dp"
-                    android:layout_height="3dp"
-                    android:indeterminate="false"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="@+id/friend1"
-                    app:layout_constraintStart_toStartOf="@+id/friend1"
-                    app:layout_constraintTop_toBottomOf="@+id/friend1" />
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/friend1"
+                            style="@style/Base.CardView"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp"
+                            app:cardCornerRadius="10dp"
+                            android:visibility="visible"
+                            app:contentPadding="2dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias=".35"
+                            android:backgroundTint="@color/base_blue_button"
+                            app:strokeColor="@color/base_blue_button"
+                            app:strokeWidth="1dp">
 
-                <ProgressBar
-                    android:id="@+id/progressBar2"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="65dp"
-                    android:layout_height="3dp"
-                    android:indeterminate="false"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="@+id/friend2"
-                    app:layout_constraintStart_toStartOf="@+id/friend2"
-                    app:layout_constraintTop_toBottomOf="@+id/friend2" />
+                            <!--This is a ConstraintLayout for the entire CardView
+                                       including the expandable portion-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="@+id/friend1"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.511"
+                                tools:layout_editor_absoluteX="-55dp">
 
-                <ProgressBar
-                    android:id="@+id/progressBar3"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="65dp"
-                    android:layout_height="3dp"
-                    android:indeterminate="false"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="@+id/friend3"
-                    app:layout_constraintStart_toStartOf="@+id/friend3"
-                    app:layout_constraintTop_toBottomOf="@+id/friend3" />
+                                <!--This is a ConstraintLayout for the fixed portion
+                                    of the CardView. The elements
+                                    that lie within the fixed portion of the CardView
+                                    can be constrained to this layout.-->
+                                <TextView
+                                    android:id="@+id/textFriend1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="23dp"
+                                    android:text="sleeping"
+                                    android:textSize="15dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar4"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="65dp"
-                    android:layout_height="3dp"
-                    android:indeterminate="false"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="@+id/friend4"
-                    app:layout_constraintStart_toStartOf="@+id/friend4"
-                    app:layout_constraintTop_toBottomOf="@+id/friend4" />
+                                <!--The following is the expandable portion whose
+                                    visibility is initially set to 'gone'.
+                                    The parent LinearLayout contains 3 child LinearLayouts
+                                    that hold a subject name and an icon each.-->
 
-                <ProgressBar
-                    android:id="@+id/progressBar5"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="65dp"
-                    android:layout_height="3dp"
-                    android:indeterminate="false"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="@+id/friend5"
-                    app:layout_constraintStart_toStartOf="@+id/friend5"
-                    app:layout_constraintTop_toBottomOf="@+id/friend5" />
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/friendConstraint1"
+                                    android:layout_width="100dp"
+                                    android:layout_height="25dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0">
 
-                <ProgressBar
-                    android:id="@+id/progressBar6"
-                    style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="65dp"
-                    android:layout_height="3dp"
-                    android:indeterminate="false"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="@+id/friend6"
-                    app:layout_constraintStart_toStartOf="@+id/friend6"
-                    app:layout_constraintTop_toBottomOf="@+id/friend6" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabStatusLevel1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:contentDescription="fabButton"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    app:backgroundTint="@color/dark_blue_panda"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.504"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.974"
-                    app:maxImageSize="56dp"
-                    app:srcCompat="@drawable/panda_paw_icon"
-                    app:strokeColor="#ffffff"
-                    app:strokeWidth="1dp"
-                    app:tint="@null"
-                    tools:ignore="RtlCompat" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.nightonke.boommenu.BoomMenuButton
-                    android:id="@+id/bmb1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="24dp"
-                    app:bmb_buttonRadius="25dp"
-                    app:bmb_dotRadius="0dp"
-                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@color/dark_blue_panda"
-                    app:bmb_rippleEffect="true"
-                    app:bmb_unableColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1">
+                                <LinearLayout
+                                    android:id="@+id/hidden_view1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/friendConstraint1">
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                                    <!--Child LinearLayout 1-->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="name"
+                                            android:textColor="#000000"
+                                            android:textSize="10dp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!--Base CardView-->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/friend2"
+                            style="@style/Base.CardView"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.05"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias=".5"
+                            app:strokeColor="@color/base_blue_button"
+                            app:strokeWidth="1dp">
+
+                            <!--This is a ConstraintLayout for the entire CardView
+                                       including the expandable portion-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/base_blue_button"
+                                app:layout_constraintBottom_toBottomOf="@+id/base_cardview"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.511"
+                                tools:layout_editor_absoluteX="-55dp">
+
+                                <!--This is a ConstraintLayout for the fixed portion
+                                    of the CardView. The elements
+                                    that lie within the fixed portion of the CardView
+                                    can be constrained to this layout.-->
+                                <TextView
+                                    android:id="@+id/textFriend2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="23dp"
+                                    android:text="sleeping"
+                                    android:textSize="15dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
+
+                                <!--The following is the expandable portion whose
+                                    visibility is initially set to 'gone'.
+                                    The parent LinearLayout contains 3 child LinearLayouts
+                                    that hold a subject name and an icon each.-->
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/friendConstraint2"
+                                    android:layout_width="100dp"
+                                    android:layout_height="25dp"
+
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.333"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0">
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/hidden_view2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/friendConstraint2">
+
+                                    <!--Child LinearLayout 1-->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="name"
+                                            android:textColor="#000000"
+                                            android:textSize="10dp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                        <!--Base CardView-->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/friend3"
+                            style="@style/Base.CardView"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias=".65"
+                            app:strokeColor="@color/base_blue_button"
+                            app:strokeWidth="1dp">
+
+                            <!--This is a ConstraintLayout for the entire CardView
+                                       including the expandable portion-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/base_blue_button"
+                                app:layout_constraintBottom_toBottomOf="@+id/base_cardview"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.511"
+                                tools:layout_editor_absoluteX="-55dp">
+
+                                <!--This is a ConstraintLayout for the fixed portion
+                                    of the CardView. The elements
+                                    that lie within the fixed portion of the CardView
+                                    can be constrained to this layout.-->
+                                <TextView
+                                    android:id="@+id/textFriend3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="23dp"
+                                    android:text="sleeping"
+                                    android:textSize="15dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
+
+                                <!--The following is the expandable portion whose
+                                    visibility is initially set to 'gone'.
+                                    The parent LinearLayout contains 3 child LinearLayouts
+                                    that hold a subject name and an icon each.-->
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/friendConstraint3"
+                                    android:layout_width="100dp"
+                                    android:layout_height="25dp"
+
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.333"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0">
+
+
+                                    <!--This is ImageButton for the expansion icon.-->
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/hidden_view3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/friendConstraint3">
+
+                                    <!--Child LinearLayout 1-->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="name"
+                                            android:textColor="#000000"
+                                            android:textSize="10dp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                        <!--Base CardView-->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/friend4"
+                            style="@style/Base.CardView"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.9"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias=".35"
+                            app:strokeColor="@color/base_blue_button"
+                            app:strokeWidth="1dp">
+
+                            <!--This is a ConstraintLayout for the entire CardView
+                                       including the expandable portion-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/base_blue_button"
+                                app:layout_constraintBottom_toBottomOf="@+id/base_cardview"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.511"
+                                tools:layout_editor_absoluteX="-55dp">
+
+                                <!--This is a ConstraintLayout for the fixed portion
+                                    of the CardView. The elements
+                                    that lie within the fixed portion of the CardView
+                                    can be constrained to this layout.-->
+                                <TextView
+                                    android:id="@+id/textFriend4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="23dp"
+                                    android:text="sleeping"
+                                    android:textSize="15dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
+
+                                <!--The following is the expandable portion whose
+                                    visibility is initially set to 'gone'.
+                                    The parent LinearLayout contains 3 child LinearLayouts
+                                    that hold a subject name and an icon each.-->
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/friendConstraint4"
+                                    android:layout_width="100dp"
+                                    android:layout_height="25dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.333"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0">
+
+
+                                    <!--This is ImageButton for the expansion icon.-->
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/hidden_view4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/friendConstraint4">
+
+                                    <!--Child LinearLayout 1-->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="name"
+                                            android:textColor="#000000"
+                                            android:textSize="10dp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                        <!--Base CardView-->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/friend5"
+                            style="@style/Base.CardView"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.95"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias=".5"
+                            app:strokeColor="@color/base_blue_button"
+                            app:strokeWidth="1dp">
+
+                            <!--This is a ConstraintLayout for the entire CardView
+                                       including the expandable portion-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/base_blue_button"
+                                app:layout_constraintBottom_toBottomOf="@+id/base_cardview"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.511"
+                                tools:layout_editor_absoluteX="-55dp">
+
+                                <!--This is a ConstraintLayout for the fixed portion
+                                    of the CardView. The elements
+                                    that lie within the fixed portion of the CardView
+                                    can be constrained to this layout.-->
+                                <TextView
+                                    android:id="@+id/textFriend5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="23dp"
+                                    android:text="sleeping"
+                                    android:textSize="15dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
+
+                                <!--The following is the expandable portion whose
+                                    visibility is initially set to 'gone'.
+                                    The parent LinearLayout contains 3 child LinearLayouts
+                                    that hold a subject name and an icon each.-->
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/friendConstraint5"
+                                    android:layout_width="100dp"
+                                    android:layout_height="25dp"
+
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.333"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0">
+
+
+                                    <!--This is ImageButton for the expansion icon.-->
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/hidden_view5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/friendConstraint5">
+
+                                    <!--Child LinearLayout 1-->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="name"
+                                            android:textColor="#000000"
+                                            android:textSize="10dp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!--Base CardView-->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/friend6"
+                            style="@style/Base.CardView"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            app:cardElevation="0dp"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.8"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias=".65"
+                            app:strokeColor="@color/base_blue_button"
+                            app:strokeWidth="1dp">
+
+                            <!--This is a ConstraintLayout for the entire CardView
+                                       including the expandable portion-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/base_blue_button"
+                                app:layout_constraintBottom_toBottomOf="@+id/base_cardview"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.511"
+                                tools:layout_editor_absoluteX="-55dp">
+
+                                <!--This is a ConstraintLayout for the fixed portion
+                                    of the CardView. The elements
+                                    that lie within the fixed portion of the CardView
+                                    can be constrained to this layout.-->
+                                <TextView
+                                    android:id="@+id/textFriend6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="23dp"
+                                    android:text="sleeping"
+                                    android:textSize="15dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0" />
+
+                                <!--The following is the expandable portion whose
+                                    visibility is initially set to 'gone'.
+                                    The parent LinearLayout contains 3 child LinearLayouts
+                                    that hold a subject name and an icon each.-->
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/friendConstraint6"
+                                    android:layout_width="100dp"
+                                    android:layout_height="25dp"
+
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.333"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_bias="0.0">
+
+
+                                    <!--This is ImageButton for the expansion icon.-->
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/hidden_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/friendConstraint6">
+
+                                    <!--Child LinearLayout 1-->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="name"
+                                            android:textColor="#000000"
+                                            android:textSize="10dp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <ListView
+                            android:id="@+id/totalStatusList"
+                            android:layout_width="108dp"
+                            android:layout_height="156dp"
+                            android:layout_marginBottom="56dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/currentUserDisplay"
+                            app:layout_constraintEnd_toEndOf="@+id/currentUserDisplay"
+                            app:layout_constraintHorizontal_bias="0.507"
+                            app:layout_constraintStart_toStartOf="@+id/currentUserDisplay">
+
+                        </ListView>
+
+                        <!--<Button
+                            android:id="@+id/friend1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="40dp"
+                            android:layout_marginBottom="84dp"
+                            android:background="@drawable/mybutton"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:textAppearance="?attr/buttonStyleSmall"
+                            android:textSize="15dp"
+                            android:visibility="invisible"
+                            app:backgroundTint="@color/base_blue_button"
+                            app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
+                            app:layout_constraintEnd_toStartOf="@+id/btncurrentUser" />
+
+                        <Button
+                            android:id="@+id/friend2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="56dp"
+                            android:layout_marginEnd="60dp"
+                            android:background="@drawable/mybutton"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:textAppearance="?attr/buttonStyleSmall"
+                            android:textSize="15dp"
+                            android:visibility="invisible"
+                            app:backgroundTint="@color/base_blue_button"
+                            app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
+                            app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+
+                        <Button
+
+                            android:id="@+id/friend3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginBottom="84dp"
+                            android:background="@drawable/mybutton"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:textAppearance="?attr/buttonStyleSmall"
+                            android:textSize="15dp"
+                            android:visibility="invisible"
+                            app:backgroundTint="@color/base_blue_button"
+                            app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
+                            app:layout_constraintStart_toEndOf="@+id/btncurrentUser" />
+
+                        <Button
+
+                            android:id="@+id/friend4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="64dp"
+                            android:background="@drawable/mybutton"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:textAppearance="?attr/buttonStyleSmall"
+                            android:textSize="15dp"
+                            android:visibility="invisible"
+                            app:backgroundTint="@color/base_blue_button"
+                            app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
+                            app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+
+                        <Button
+
+                            android:id="@+id/friend5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="156dp"
+                            android:layout_marginEnd="64dp"
+                            android:background="@drawable/mybutton"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:textAppearance="?attr/buttonStyleSmall"
+                            android:textSize="15dp"
+                            android:visibility="invisible"
+                            app:backgroundTint="@color/base_blue_button"
+                            app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+                            app:layout_constraintTop_toTopOf="@+id/btncurrentUser" />
+
+
+                        <Button
+
+                            android:id="@+id/friend6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="28dp"
+                            android:layout_marginTop="100dp"
+                            android:background="@drawable/mybutton"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:textAppearance="?attr/buttonStyleSmall"
+                            android:textSize="15dp"
+                            android:visibility="invisible"
+                            app:backgroundTint="@color/base_blue_button"
+                            app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
+                            app:layout_constraintTop_toBottomOf="@+id/btncurrentUser" />-->
+
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabCheckScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="448dp"
+                            android:clickable="true"
+                            app:fabSize="mini"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@android:drawable/stat_notify_sync" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btnTest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:backgroundTint="#faf4b1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:visibility="invisible"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toTopOf="@+id/fabCheckScore"
+                            app:layout_constraintEnd_toEndOf="@+id/fabCheckScore"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/fabCheckScore"
+                            app:rippleColor="@android:color/white" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="65dp"
+                            android:layout_height="3dp"
+                            android:indeterminate="false"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@+id/friend1"
+                            app:layout_constraintStart_toStartOf="@+id/friend1"
+                            app:layout_constraintTop_toBottomOf="@+id/friend1" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBar2"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="65dp"
+                            android:layout_height="3dp"
+                            android:indeterminate="false"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@+id/friend2"
+                            app:layout_constraintStart_toStartOf="@+id/friend2"
+                            app:layout_constraintTop_toBottomOf="@+id/friend2" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBar3"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="65dp"
+                            android:layout_height="3dp"
+                            android:indeterminate="false"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@+id/friend3"
+                            app:layout_constraintStart_toStartOf="@+id/friend3"
+                            app:layout_constraintTop_toBottomOf="@+id/friend3" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBar4"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="65dp"
+                            android:layout_height="3dp"
+                            android:indeterminate="false"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@+id/friend4"
+                            app:layout_constraintStart_toStartOf="@+id/friend4"
+                            app:layout_constraintTop_toBottomOf="@+id/friend4" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBar5"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="65dp"
+                            android:layout_height="3dp"
+                            android:indeterminate="false"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@+id/friend5"
+                            app:layout_constraintStart_toStartOf="@+id/friend5"
+                            app:layout_constraintTop_toBottomOf="@+id/friend5" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBar6"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="65dp"
+                            android:layout_height="3dp"
+                            android:indeterminate="false"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@+id/friend6"
+                            app:layout_constraintStart_toStartOf="@+id/friend6"
+                            app:layout_constraintTop_toBottomOf="@+id/friend6" />
+
+                        <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabStatusLevel1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:contentDescription="fabButton"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            app:backgroundTint="@color/dark_blue_panda"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.073"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.798"
+                            app:maxImageSize="56dp"
+                            app:srcCompat="@drawable/panda_paw_icon"
+                            app:strokeColor="#ffffff"
+                            app:strokeWidth="1dp"
+                            app:tint="@null"
+                            tools:ignore="RtlCompat" />-->
+
+
+                        <com.nightonke.boommenu.BoomMenuButton
+                            android:id="@+id/bmb1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="80dp"
+                            android:layout_marginBottom="56dp"
+                            app:bmb_buttonRadius="25dp"
+                            app:bmb_dotRadius="0dp"
+                            app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                            app:bmb_normalColor="@color/dark_blue_panda"
+                            app:bmb_rippleEffect="true"
+                            app:bmb_unableColor="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/happy_icon" />
+
+                            <TextView
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="15dp"
+                                android:gravity="center"
+                                android:text="Positive"
+                                android:textColor="@android:color/white"
+                                android:textSize="10sp" />
+
+                        </com.nightonke.boommenu.BoomMenuButton>
+
+                        <com.nightonke.boommenu.BoomMenuButton
+                            android:id="@+id/bmb2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="116dp"
+                            android:layout_marginBottom="104dp"
+                            app:bmb_buttonRadius="25dp"
+                            app:bmb_dotRadius="0dp"
+                            app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                            app:bmb_normalColor="@color/dark_blue_panda"
+                            app:bmb_rippleEffect="true"
+                            app:bmb_unableColor="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/sad_icon" />
+
+                            <TextView
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="15dp"
+                                android:gravity="center"
+                                android:text="Negative"
+                                android:textColor="@android:color/white"
+                                android:textSize="10sp" />
+
+                        </com.nightonke.boommenu.BoomMenuButton>
+
+                        <com.nightonke.boommenu.BoomMenuButton
+                            android:id="@+id/bmb3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="128dp"
+                            app:bmb_buttonRadius="25dp"
+                            app:bmb_dotRadius="0dp"
+                            app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                            app:bmb_normalColor="@color/dark_blue_panda"
+                            app:bmb_rippleEffect="true"
+                            app:bmb_unableColor="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/panda_paw_icon" />
+
+                            <TextView
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="15dp"
+                                android:gravity="center"
+                                android:text="Bamboo"
+                                android:textColor="@android:color/white"
+                                android:textSize="10sp" />
+
+                        </com.nightonke.boommenu.BoomMenuButton>
+
+                        <com.nightonke.boommenu.BoomMenuButton
+                            android:id="@+id/bmb4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="116dp"
+                            android:layout_marginBottom="104dp"
+                            app:bmb_buttonRadius="25dp"
+                            app:bmb_dotRadius="0dp"
+                            app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                            app:bmb_normalColor="@color/dark_blue_panda"
+                            app:bmb_rippleEffect="true"
+                            app:bmb_unableColor="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/normal_icon" />
+
+                            <TextView
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="15dp"
+                                android:gravity="center"
+                                android:text="Normal"
+                                android:textColor="@android:color/white"
+                                android:textSize="10sp" />
+
+                        </com.nightonke.boommenu.BoomMenuButton>
+
+                        <com.nightonke.boommenu.BoomMenuButton
+                            android:id="@+id/bmb5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="80dp"
+                            android:layout_marginBottom="56dp"
+                            app:bmb_buttonRadius="25dp"
+                            app:bmb_dotRadius="0dp"
+                            app:bmb_highlightedColor="@android:color/holo_blue_dark"
+                            app:bmb_normalColor="@color/dark_blue_panda"
+                            app:bmb_rippleEffect="true"
+                            app:bmb_unableColor="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/activity_icon" />
+
+                            <TextView
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="15dp"
+                                android:gravity="center"
+                                android:text="Activity"
+                                android:textColor="@android:color/white"
+                                android:textSize="10sp" />
+
+                        </com.nightonke.boommenu.BoomMenuButton>
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btncustomStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="80dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            app:backgroundTint="@color/dark_blue_panda"
+                            app:fabCustomSize="25dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.501"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:srcCompat="@drawable/add_icon"
+                            app:strokeColor="#ffffff"
+                            app:strokeWidth="1dp"
+                            tools:ignore="RtlCompat" />
+
+                        <TextView
+                            android:id="@+id/timeStamp1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"
+                            android:background="@drawable/rounded_corner"
+                            android:gravity="center"
+                            android:inputType="time"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            android:text="x hours ago"
+                            android:textColor="@android:color/black"
+                            android:textSize="8sp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="@+id/friend1Gif"
+                            app:layout_constraintEnd_toEndOf="@+id/friend1"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/friend1" />
+
+                        <TextView
+                            android:id="@+id/timeStamp2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"
+                            android:background="@drawable/rounded_corner"
+                            android:gravity="center"
+                            android:inputType="time"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            android:text="x hours ago"
+                            android:textColor="@android:color/black"
+                            android:textSize="8sp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/friend2"
+                            app:layout_constraintEnd_toEndOf="@+id/friend2"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/friend2" />
+
+                        <TextView
+                            android:id="@+id/timeStamp3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"
+                            android:background="@drawable/rounded_corner"
+                            android:gravity="center"
+                            android:inputType="time"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            android:text="x hours ago"
+                            android:textColor="@android:color/black"
+                            android:textSize="8sp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/friend3"
+                            app:layout_constraintEnd_toEndOf="@+id/friend3"
+                            app:layout_constraintHorizontal_bias="0.981"
+                            app:layout_constraintStart_toStartOf="@+id/friend3" />
+
+                        <TextView
+                            android:id="@+id/timeStamp4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"
+                            android:background="@drawable/rounded_corner"
+                            android:gravity="center"
+                            android:inputType="time"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            android:text="x hours ago"
+                            android:textColor="@android:color/black"
+                            android:textSize="8sp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="@+id/friend4Gif"
+                            app:layout_constraintEnd_toEndOf="@+id/friend4"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/friend1" />
+
+                        <TextView
+                            android:id="@+id/timeStamp5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"
+                            android:background="@drawable/rounded_corner"
+                            android:gravity="center"
+                            android:inputType="time"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            android:text="x hours ago"
+                            android:textColor="@android:color/black"
+                            android:textSize="8sp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="@+id/friend5Gif"
+                            app:layout_constraintEnd_toEndOf="@+id/friend5"
+                            app:layout_constraintHorizontal_bias="0.981"
+                            app:layout_constraintStart_toStartOf="@+id/friend5" />
+
+                        <TextView
+                            android:id="@+id/timeStamp6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"
+                            android:background="@drawable/rounded_corner"
+                            android:gravity="center"
+                            android:inputType="time"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            android:text="x hours ago"
+                            android:textColor="@android:color/black"
+                            android:textSize="8sp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="@+id/friend6Gif"
+                            app:layout_constraintEnd_toEndOf="@+id/friend6"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="@+id/friend6" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btncurrentUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_vertical"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            app:backgroundTint="#eb5834"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/connect_icon"
+                            app:strokeColor="#ffffff"
+                            app:strokeWidth="1dp"
+                            tools:ignore="RtlCompat" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:backgroundTint="@color/dark_blue_panda"
+                android:contentInsetStart="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetEnd="0dp"
+                android:contentInsetRight="0dp"
+                android:gravity="center"
+                android:theme="@style/AppThemeMaterial"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:fabAlignmentMode="center"
+                app:hideOnScroll="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/emptyTab"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/happy_icon" />
-
-                    <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="15dp"
+                        android:layout_weight="3"
+                        android:background="?attr/selectableItemBackground"
                         android:gravity="center"
-                        android:text="Positive"
-                        android:textColor="@android:color/white"
-                        android:textSize="10sp" />
+                        android:onClick="onClick"
+                        android:orientation="vertical"
+                        tools:ignore="OnClick">
 
-                </com.nightonke.boommenu.BoomMenuButton>
 
-                <com.nightonke.boommenu.BoomMenuButton
-                    android:id="@+id/bmb2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="73dp"
-                    app:bmb_buttonRadius="25dp"
-                    app:bmb_dotRadius="0dp"
-                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@color/dark_blue_panda"
-                    app:bmb_rippleEffect="true"
-                    app:bmb_unableColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintEnd_toStartOf="@+id/fabStatusLevel1">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:padding="0dp"
+                            app:srcCompat="@drawable/panda_paw_icon_svg" />
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        <TextView
+                            android:id="@+id/tv_users"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="EMPTY"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/locationTab"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/sad_icon" />
-
-                    <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="15dp"
+                        android:layout_weight="3"
+                        android:background="?attr/selectableItemBackground"
                         android:gravity="center"
-                        android:text="Negative"
-                        android:textColor="@android:color/white"
-                        android:textSize="10sp" />
+                        android:onClick="onClick"
+                        android:orientation="vertical"
+                        tools:ignore="OnClick">
 
-                </com.nightonke.boommenu.BoomMenuButton>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:padding="0dp"
+                            app:srcCompat="@drawable/location_icon" />
 
-                <com.nightonke.boommenu.BoomMenuButton
-                    android:id="@+id/bmb3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="28dp"
-                    app:bmb_buttonRadius="25dp"
-                    app:bmb_dotRadius="0dp"
-                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@color/dark_blue_panda"
-                    app:bmb_rippleEffect="true"
-                    app:bmb_unableColor="@android:color/white"
-                    app:layout_constraintBottom_toTopOf="@+id/fabStatusLevel1"
-                    app:layout_constraintEnd_toEndOf="@+id/fabStatusLevel1"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/fabStatusLevel1">
+                        <TextView
+                            android:id="@+id/tv_products"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Location"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/panda_paw_icon" />
-
-                    <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="15dp"
+                        android:layout_weight="3"
                         android:gravity="center"
-                        android:text="Bamboo"
-                        android:textColor="@android:color/white"
-                        android:textSize="10sp" />
+                        android:orientation="vertical">
 
-                </com.nightonke.boommenu.BoomMenuButton>
+                    </LinearLayout>
 
-                <com.nightonke.boommenu.BoomMenuButton
-                    android:id="@+id/bmb4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="72dp"
-                    app:bmb_buttonRadius="25dp"
-                    app:bmb_dotRadius="0dp"
-                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@color/dark_blue_panda"
-                    app:bmb_rippleEffect="true"
-                    app:bmb_unableColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                    <LinearLayout
+                        android:id="@+id/messageTab"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/normal_icon" />
-
-                    <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="15dp"
+                        android:layout_weight="3"
+                        android:background="?attr/selectableItemBackground"
                         android:gravity="center"
-                        android:text="Normal"
-                        android:textColor="@android:color/white"
-                        android:textSize="10sp" />
+                        android:onClick="onClick"
+                        android:orientation="vertical"
+                        tools:ignore="OnClick">
 
-                </com.nightonke.boommenu.BoomMenuButton>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:padding="0dp"
+                            app:srcCompat="@drawable/message_icon" />
 
-                <com.nightonke.boommenu.BoomMenuButton
-                    android:id="@+id/bmb5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginBottom="24dp"
-                    app:bmb_buttonRadius="25dp"
-                    app:bmb_dotRadius="0dp"
-                    app:bmb_highlightedColor="@android:color/holo_blue_dark"
-                    app:bmb_normalColor="@color/dark_blue_panda"
-                    app:bmb_rippleEffect="true"
-                    app:bmb_unableColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/fabStatusLevel1"
-                    app:layout_constraintStart_toEndOf="@+id/fabStatusLevel1">
+                        <TextView
+                            android:id="@+id/tv_transactions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Message"
+                            android:textColor="#000"
+                            android:textSize="12sp" />
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/embarrassmentTab"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/activity_icon"
-                         />
-
-                    <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="15dp"
+                        android:layout_weight="3"
+                        android:background="?attr/selectableItemBackground"
                         android:gravity="center"
-                        android:text="Activity"
-                        android:textColor="@android:color/white"
-                        android:textSize="10sp" />
+                        android:onClick="onClick"
+                        android:orientation="vertical"
+                        tools:ignore="OnClick">
 
-                </com.nightonke.boommenu.BoomMenuButton>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:padding="0dp"
+                            app:srcCompat="@drawable/friends_icon" />
 
+                        <TextView
+                            android:id="@+id/tv_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="embarrassment"
+                            android:textColor="#000"
+                            android:textSize="11sp" />
 
-                <TextView
-                    android:id="@+id/timeStamp1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rounded_corner"
-                    android:gravity="center"
-                    android:inputType="time"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="x hours ago"
-                    android:textColor="@android:color/black"
-                    android:textSize="8sp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/friend1"
-                    app:layout_constraintEnd_toEndOf="@+id/friend1"
-                    app:layout_constraintHorizontal_bias="0.847"
-                    app:layout_constraintStart_toStartOf="@+id/friend1" />
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/timeStamp2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rounded_corner"
-                    android:gravity="center"
-                    android:inputType="time"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="x hours ago"
-                    android:textColor="@android:color/black"
-                    android:textSize="8sp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/friend2"
-                    app:layout_constraintEnd_toEndOf="@+id/friend2"
-                    app:layout_constraintHorizontal_bias="0.912"
-                    app:layout_constraintStart_toStartOf="@+id/friend2" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/timeStamp3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rounded_corner"
-                    android:gravity="center"
-                    android:inputType="time"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="x hours ago"
-                    android:textColor="@android:color/black"
-                    android:textSize="8sp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/friend3"
-                    app:layout_constraintEnd_toEndOf="@+id/friend3"
-                    app:layout_constraintHorizontal_bias="0.877"
-                    app:layout_constraintStart_toStartOf="@+id/friend3" />
-
-                <TextView
-                    android:id="@+id/timeStamp4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rounded_corner"
-                    android:gravity="center"
-                    android:inputType="time"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="x hours ago"
-                    android:textColor="@android:color/black"
-                    android:textSize="8sp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/friend4"
-                    app:layout_constraintEnd_toEndOf="@+id/friend4"
-                    app:layout_constraintHorizontal_bias="0.976"
-                    app:layout_constraintStart_toStartOf="@+id/friend1" />
-
-                <TextView
-                    android:id="@+id/timeStamp5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rounded_corner"
-                    android:gravity="center"
-                    android:inputType="time"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="x hours ago"
-                    android:textColor="@android:color/black"
-                    android:textSize="8sp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/friend5"
-                    app:layout_constraintEnd_toEndOf="@+id/friend5"
-                    app:layout_constraintHorizontal_bias="0.877"
-                    app:layout_constraintStart_toStartOf="@+id/friend5" />
-
-                <TextView
-                    android:id="@+id/timeStamp6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rounded_corner"
-                    android:gravity="center"
-                    android:inputType="time"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:text="x hours ago"
-                    android:textColor="@android:color/black"
-                    android:textSize="8sp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/friend6"
-                    app:layout_constraintEnd_toEndOf="@+id/friend6"
-                    app:layout_constraintHorizontal_bias="0.877"
-                    app:layout_constraintStart_toStartOf="@+id/friend6" />
+            </com.google.android.material.bottomappbar.BottomAppBar>
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabStatusLevel1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:contentDescription="fabButton"
+                android:elevation="20dp"
+                android:focusable="true"
+                app:backgroundTint="@color/dark_blue_panda"
+                app:layout_anchor="@+id/bar"
+                app:layout_anchorGravity="top|center"
+                app:maxImageSize="56dp"
+                app:srcCompat="@drawable/panda_paw_icon"
+                app:strokeColor="#ffffff"
+                app:strokeWidth="1dp"
+                app:tint="@null" />
 
-        </ScrollView>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
