@@ -24,64 +24,7 @@
         tools:layout_editor_absoluteX="85dp"
         tools:layout_editor_absoluteY="453dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#D5E4ED"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="85dp"
-            tools:layout_editor_absoluteY="453dp">
 
-            <!--<androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="46dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </androidx.appcompat.widget.Toolbar>-->
-
-            <TextView
-                android:id="@+id/currentUser"
-                android:layout_width="100dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:hint="UserName"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="99dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="Status :"
-                android:textStyle="italic" />
-
-            <pl.droidsonroids.gif.GifImageView
-                android:id="@+id/currentStatusGif"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/currentStatusView"
-                android:layout_width="102dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#ece3ff"
-                android:gravity="center"
-                android:text="" />
-
-
-        </LinearLayout>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -124,6 +67,16 @@
 
                         </androidx.appcompat.widget.Toolbar>
 
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="409dp"
+                            android:layout_height="631dp"
+                            android:layout_gravity="center"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/circle_background" />
                         <TextView
                             android:id="@+id/noUsersText"
                             android:layout_width="wrap_content"
@@ -252,32 +205,36 @@
 
                         <!--Base CardView-->
 
+                        <!--Base CardView-->
+
+                        <!--Base CardView-->
+
                         <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/currentUserDisplay"
+                            android:id="@+id/btncurrentUser"
                             style="@style/Base.CardView"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_width="87dp"
+                            android:layout_height="78dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="#eb5834"
+                            android:backgroundTint="#FA5151"
+                            android:foregroundGravity="center"
                             android:visibility="visible"
-                            app:cardCornerRadius="50dp"
+                            app:cardCornerRadius="30dp"
                             app:cardElevation="0dp"
                             app:contentPadding="2dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.508"
+                            app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.469"
-                            app:strokeColor="@color/base_blue_button"
-                            app:strokeWidth="1dp">
+                            app:layout_constraintVertical_bias="0.5"
+                            app:strokeColor="@color/base_blue_button">
 
                             <!--This is a ConstraintLayout for the entire CardView
                                        including the expandable portion-->
                             <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="35dp"
+                                android:layout_width="85dp"
+                                android:layout_height="72dp"
+
                                 app:layout_constraintBottom_toBottomOf="@+id/currentUserDisplay"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_bias="0.511"
@@ -295,26 +252,42 @@
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/currentUserConstraint"
-                                    android:layout_width="100dp"
-                                    android:layout_height="25dp"
+                                    android:layout_width="80dp"
+                                    android:layout_height="69dp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.0"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintVertical_bias="0.0">
 
 
                                     <TextView
-                                        android:id="@+id/textCurrentUser"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="23dp"
-                                        android:text="sleeping"
+                                        android:id="@+id/currentUser"
+                                        android:layout_width="74dp"
+                                        android:layout_height="24dp"
+                                        android:gravity="center"
+                                        android:text=""
                                         android:textSize="15dp"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.288" />
+
+                                    <TextView
+                                        android:id="@+id/currentStatusView"
+                                        android:layout_width="67dp"
+                                        android:layout_height="27dp"
+                                        android:layout_marginTop="8dp"
+                                        android:backgroundTint="#ece3ff"
+                                        android:gravity="center"
+                                        android:text=""
+                                        android:textSize="8dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.875" />
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                                 <LinearLayout
@@ -351,20 +324,19 @@
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/friend1"
                             style="@style/Base.CardView"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            app:cardElevation="0dp"
-                            app:cardCornerRadius="10dp"
-                            android:visibility="visible"
-                            app:contentPadding="2dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias=".35"
+                            android:layout_width="102dp"
+                            android:layout_height="33dp"
+                            android:layout_marginEnd="104dp"
+                            android:layout_marginBottom="64dp"
                             android:backgroundTint="@color/base_blue_button"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp"
+                            app:contentPadding="2dp"
+                            app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
+                            app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+                            app:layout_constraintVertical_bias="0.5"
+                            app:layout_constraintHorizontal_bias="0.5"
                             app:strokeColor="@color/base_blue_button"
                             app:strokeWidth="1dp">
 
@@ -446,21 +418,24 @@
                         </com.google.android.material.card.MaterialCardView>
 
                         <!--Base CardView-->
+                        <!--Base CardView-->
+
+                        <!--Base CardView-->
+
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/friend2"
                             style="@style/Base.CardView"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            app:cardElevation="0dp"
+                            android:layout_width="105dp"
+                            android:layout_height="25dp"
+                            android:layout_marginEnd="36dp"
                             android:visibility="invisible"
                             app:cardCornerRadius="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.05"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias=".5"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
+                            app:layout_constraintEnd_toStartOf="@+id/btncurrentUser"
+                            app:layout_constraintTop_toTopOf="@+id/btncurrentUser"
+                            app:layout_constraintVertical_bias="0.5"
+                            app:layout_constraintHorizontal_bias="0.5"
                             app:strokeColor="@color/base_blue_button"
                             app:strokeWidth="1dp">
 
@@ -498,7 +473,7 @@
                                     that hold a subject name and an icon each.-->
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/friendConstraint2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="104dp"
                                     android:layout_height="25dp"
 
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -541,22 +516,20 @@
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </com.google.android.material.card.MaterialCardView>
-                        <!--Base CardView-->
+
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/friend3"
                             style="@style/Base.CardView"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            app:cardElevation="0dp"
+                            android:layout_width="105dp"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="60dp"
+                            android:layout_marginEnd="104dp"
+
                             android:visibility="invisible"
                             app:cardCornerRadius="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.2"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias=".65"
+                            app:cardElevation="0dp"
+                            app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+                            app:layout_constraintTop_toBottomOf="@+id/btncurrentUser"
                             app:strokeColor="@color/base_blue_button"
                             app:strokeWidth="1dp">
 
@@ -640,22 +613,20 @@
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </com.google.android.material.card.MaterialCardView>
-                        <!--Base CardView-->
+
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/friend4"
                             style="@style/Base.CardView"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            app:cardElevation="0dp"
+                            android:layout_width="104dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="100dp"
+                            android:layout_marginBottom="64dp"
                             android:visibility="invisible"
+
                             app:cardCornerRadius="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.9"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias=".35"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
+                            app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
                             app:strokeColor="@color/base_blue_button"
                             app:strokeWidth="1dp">
 
@@ -738,22 +709,23 @@
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </com.google.android.material.card.MaterialCardView>
-                        <!--Base CardView-->
+
+
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/friend5"
                             style="@style/Base.CardView"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            app:cardElevation="0dp"
+                            android:layout_width="106dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="36dp"
                             android:visibility="invisible"
                             app:cardCornerRadius="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.95"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias=".5"
+
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/btncurrentUser"
+                            app:layout_constraintStart_toEndOf="@+id/btncurrentUser"
+                            app:layout_constraintTop_toTopOf="@+id/btncurrentUser"
+                            app:layout_constraintVertical_bias="0.5"
+                            app:layout_constraintHorizontal_bias="0.5"
                             app:strokeColor="@color/base_blue_button"
                             app:strokeWidth="1dp">
 
@@ -838,22 +810,18 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!--Base CardView-->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/friend6"
                             style="@style/Base.CardView"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            app:cardElevation="0dp"
+                            android:layout_width="106dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="96dp"
+                            android:layout_marginTop="60dp"
                             android:visibility="invisible"
                             app:cardCornerRadius="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.8"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias=".65"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="@+id/btncurrentUser"
+                            app:layout_constraintTop_toBottomOf="@+id/btncurrentUser"
                             app:strokeColor="@color/base_blue_button"
                             app:strokeWidth="1dp">
 
@@ -938,17 +906,16 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </com.google.android.material.card.MaterialCardView>
 
-
                         <ListView
                             android:id="@+id/totalStatusList"
                             android:layout_width="108dp"
                             android:layout_height="156dp"
                             android:layout_marginBottom="56dp"
                             android:visibility="gone"
-                            app:layout_constraintBottom_toTopOf="@+id/currentUserDisplay"
-                            app:layout_constraintEnd_toEndOf="@+id/currentUserDisplay"
+                            app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
+                            app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
                             app:layout_constraintHorizontal_bias="0.507"
-                            app:layout_constraintStart_toStartOf="@+id/currentUserDisplay">
+                            app:layout_constraintStart_toStartOf="@+id/btncurrentUser">
 
                         </ListView>
 
@@ -1058,11 +1025,11 @@
                             android:id="@+id/fabCheckScore"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="448dp"
+                            android:layout_marginTop="520dp"
                             android:clickable="true"
                             app:fabSize="mini"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintHorizontal_bias="0.983"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@android:drawable/stat_notify_sync" />
@@ -1176,16 +1143,16 @@
                             android:id="@+id/bmb1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="80dp"
-                            android:layout_marginBottom="56dp"
+                            android:layout_marginTop="68dp"
+                            android:layout_marginEnd="44dp"
                             app:bmb_buttonRadius="25dp"
                             app:bmb_dotRadius="0dp"
                             app:bmb_highlightedColor="@android:color/holo_blue_dark"
                             app:bmb_normalColor="@color/dark_blue_panda"
                             app:bmb_rippleEffect="true"
                             app:bmb_unableColor="@android:color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent">
+                            app:layout_constraintEnd_toStartOf="@+id/bmb3"
+                            app:layout_constraintTop_toTopOf="@+id/bmb3">
 
                             <ImageView
                                 android:layout_width="25dp"
@@ -1209,16 +1176,16 @@
                             android:id="@+id/bmb2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="116dp"
-                            android:layout_marginBottom="104dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="4dp"
                             app:bmb_buttonRadius="25dp"
                             app:bmb_dotRadius="0dp"
                             app:bmb_highlightedColor="@android:color/holo_blue_dark"
                             app:bmb_normalColor="@color/dark_blue_panda"
                             app:bmb_rippleEffect="true"
                             app:bmb_unableColor="@android:color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent">
+                            app:layout_constraintEnd_toStartOf="@+id/bmb3"
+                            app:layout_constraintTop_toTopOf="@+id/bmb3">
 
                             <ImageView
                                 android:layout_width="25dp"
@@ -1276,16 +1243,16 @@
                             android:id="@+id/bmb4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="116dp"
-                            android:layout_marginBottom="104dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="20dp"
                             app:bmb_buttonRadius="25dp"
                             app:bmb_dotRadius="0dp"
                             app:bmb_highlightedColor="@android:color/holo_blue_dark"
                             app:bmb_normalColor="@color/dark_blue_panda"
                             app:bmb_rippleEffect="true"
                             app:bmb_unableColor="@android:color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
+                            app:layout_constraintStart_toEndOf="@+id/bmb3"
+                            app:layout_constraintTop_toTopOf="@+id/bmb3">
 
                             <ImageView
                                 android:layout_width="25dp"
@@ -1309,16 +1276,16 @@
                             android:id="@+id/bmb5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="80dp"
-                            android:layout_marginBottom="56dp"
+                            android:layout_marginStart="44dp"
+                            android:layout_marginTop="68dp"
                             app:bmb_buttonRadius="25dp"
                             app:bmb_dotRadius="0dp"
                             app:bmb_highlightedColor="@android:color/holo_blue_dark"
                             app:bmb_normalColor="@color/dark_blue_panda"
                             app:bmb_rippleEffect="true"
                             app:bmb_unableColor="@android:color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
+                            app:layout_constraintStart_toEndOf="@+id/bmb3"
+                            app:layout_constraintTop_toTopOf="@+id/bmb3">
 
                             <ImageView
                                 android:layout_width="25dp"
@@ -1465,10 +1432,22 @@
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="@+id/friend6" />
 
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/currentStatusGif"
+                            android:layout_width="53dp"
+                            android:layout_height="52dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toTopOf="@+id/btncurrentUser"
+                            app:layout_constraintEnd_toEndOf="@+id/btncurrentUser"
+                            app:layout_constraintStart_toStartOf="@+id/btncurrentUser" />
+
+
+
+                        <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
                             android:id="@+id/btncurrentUser"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="28dp"
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center_vertical"
@@ -1476,12 +1455,13 @@
                             android:textColor="#ffffff"
                             app:backgroundTint="#eb5834"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.45"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/connect_icon"
                             app:strokeColor="#ffffff"
                             app:strokeWidth="1dp"
-                            tools:ignore="RtlCompat" />
+                            tools:ignore="RtlCompat" />-->
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1590,7 +1570,6 @@
                         android:layout_weight="3"
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center"
-                        android:onClick="onClick"
                         android:orientation="vertical"
                         tools:ignore="OnClick">
 
@@ -1661,6 +1640,8 @@
                 app:strokeColor="#ffffff"
                 app:strokeWidth="1dp"
                 app:tint="@null" />
+
+
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>

@@ -9,20 +9,13 @@ import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.Typeface;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
+
 import android.text.format.DateUtils;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
+
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.Log;
@@ -74,12 +67,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
-import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
-import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
+
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.ButtonEnum;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
-import com.nightonke.boommenu.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -171,13 +162,12 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
     CountDownTimer timer;
 
-    private static final int timeLimitMinutes = 5 * 60 * 1000;
+    private static final int timeLimitMinutes = 5 * 60 * 1000 ;
 
     private boolean rotate = false;
     int totalFriends = 0;
     int totalUsers = 0;
-    int scoreCheckCounter = 0;
-    int counter;
+
     ProgressDialog pd;
     Button btnLiveStatusData2;
     Button btnLiveStatusSelectAdd;
@@ -202,11 +192,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
     Boolean clicked;
     Boolean starter = false;
-    String status1;
-    String status2;
-    String status3;
-    String status4;
-    String status5;
+
 
     SwipeRefreshLayout swiperefresh;
     private ArrayList<Pair> piecesAndButtons = new ArrayList<>();
@@ -253,12 +239,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         //FloatingActionButton fabOption1 = findViewById(R.id.fabOption1);
-        //FloatingActionButton fabOption2 = findViewById(R.id.fabOption2);
-        //FloatingActionButton fabOption3 = findViewById(R.id.fabOption3);
-        //FloatingActionButton fabOption4 = findViewById(R.id.fabOption4);
-        //FloatingActionButton fabOption5 = findViewById(R.id.fabOption5);
-        //FloatingActionButton fabOption6 = findViewById(R.id.fabOption6);
-        FloatingActionButton btncurrentUser = findViewById(R.id.btncurrentUser);
+
+        MaterialCardView btncurrentUser = findViewById(R.id.btncurrentUser);
         FloatingActionButton fabCheckScore = findViewById(R.id.fabCheckScore);
         FloatingActionButton btnTest = (FloatingActionButton) findViewById(R.id.btnTest);
         FloatingActionButton fabStatusLevel1 = (FloatingActionButton) findViewById(R.id.fabStatusLevel1);
@@ -402,11 +384,14 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
         swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 swiperefresh.setRefreshing(false);
+
             }
         });
 
-
+        //generates all users in list
+        
         //generates all users in list
         String url = "https://bondhu-2021-default-rtdb.firebaseio.com/users.json";
 
@@ -576,6 +561,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
+
 
                 //if condition to make sure friend array is obtained first
                 if (starter == true) {
@@ -1512,6 +1498,8 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 friendsArray.add(key);
 
 
+
+
                 totalFriends++;
             }
 
@@ -1564,6 +1552,7 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
                 friendStatusList.get(z).setText(friendsArray.get(z) + ":" + friendsStatusArray.get(z));
                 int id1 = getResources().getIdentifier("com.example.bondhu:drawable/" + friendsStatusArray.get(z), null, null);
                 friendGifList.get(z).setImageResource(id1);
+                friendCardList.get(z).setVisibility(View.VISIBLE);
                 friendStatusList.get(z).setVisibility(View.VISIBLE);
                 friendGifList.get(z).setVisibility(View.VISIBLE);
                 friendProgressList.get(z).setVisibility(View.VISIBLE);
@@ -1763,8 +1752,15 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setTitle("Panda Status")
-                    .setMessage("confirm Status Update?")
-                    .setPositiveButton("Revert", null)
+                    .setMessage("Status Updating!")
+                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int id)
+                        {
+                            addPreSelectedStatus(description);
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
                     .create();
 
             dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -1786,7 +1782,6 @@ public class Live extends AppCompatActivity implements NavigationView.OnNavigati
 
                         @Override
                         public void onFinish() {
-                            addPreSelectedStatus(description);
 
                             if (((AlertDialog) dialog).isShowing()) {
                                 dialog.dismiss();
